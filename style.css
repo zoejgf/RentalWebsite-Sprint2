@@ -1,0 +1,398 @@
+h1, h2 {
+    font-family: adobe-garamond-pro,serif;
+    font-weight: 400;
+    font-style: normal;
+
+    color: #d5b6ae;
+}
+a {
+    font-family: raleway,sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+p, h4, h5 {
+    font-family: raleway,sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+p {
+    padding: 10px 50px 0 50px;
+}
+
+button.navbar-toggler {
+    border: none;
+    padding-right: 25px;
+}
+
+div#navbarOffcanvasLg {
+    width: 300px;
+    text-align: center;
+}
+
+a.nav-link {
+    color: white;
+    border-radius: 20px;
+}
+
+a.nav-link:hover {
+    background-color: rgba(205, 203, 203, 0.5);
+    border-radius: 20px;
+    color: white;
+}
+
+a.nav-link:active, a.nav-link:visited {
+    color: white;
+}
+
+#avail {
+    /* background-color: rgba(213,182,174,.87); */
+    border-radius: 20px;
+    margin-right: 10px;
+}
+a#avail.nav-link:hover {
+    background-color: rgba(205, 203, 203, 0.5);
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+#header-img {
+    width: 100%;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.package-link {
+    background-color: rgba(213,182,174,.87);
+    border-radius: 35px;
+    padding: 20px 35px 20px 35px;
+    color: rgb(240, 240, 240);
+    text-decoration: none;
+    font-size: small;
+}
+a.package-link:hover {
+    background-color: rgba(219, 196, 189, 0.87);
+    border-radius: 30px;
+    color: white;
+}
+
+hr {
+    width: 90%;
+}
+
+#home-images img {
+    width: 250px;
+    height: 200px;
+    display: inline;
+    object-fit: cover;
+    padding: 20px 10px 0 10px;
+}
+
+.carousel .carousel-item {
+    max-height:550px;
+}
+
+.carousel-item img {
+    object-fit: contain;
+    max-height:550px;
+    background-color: rgba(219, 218, 218, 0.6);
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(191, 189, 189, 0.6);
+}
+
+.accordion {
+    width: 70%;
+}
+
+button.accordion-button, .button {
+    font-family: raleway,sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+button.accordion-button:not(.collapsed) {
+    color: black;
+    background-color: rgba(200, 166, 156,0.2);
+}
+
+footer {
+    width: 100%;
+    background-color: #d5b6ae;
+    color: white;
+
+    /*padding: 55px 0 55px 0;*/
+    padding: 25px 0;
+}
+
+footer a {
+    font-family: raleway,sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.25rem;
+
+    color:white;
+    text-decoration: none;
+}
+footer a:hover {
+    color: rgb(240, 240, 240);
+}
+
+div#gallery label:active {
+    box-shadow: 0px 0px 5px 2px rgb(112, 110, 110) !important;
+}
+
+div#gallery label:hover {
+    background-color: rgb(65, 64, 64);
+}
+
+div#gallery label.selected {
+    background-color: rgb(65, 64, 64);
+}
+
+div#gallery label.default {
+    background-color: #6C757D;
+}
+
+
+
+
+.row {
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.carousel-item {
+    height: 300px;
+}
+
+.carousel-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 300px;
+}
+
+h1, h2, h3{
+    font-family: adobe-garamond-pro, serif;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    color: #d5b6ae;
+}
+
+.text{
+    font-family: adobe-garamond-pro, serif;
+    font-weight: 500;
+    font-style: normal;
+    text-align: center;
+    color: grey;
+}
+.content{
+    font-size: 20px;
+}
+p{
+    text-align: center;
+    color: grey;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.color_description p {
+    font-family: adobe-garamond-pro, serif;
+    font-weight: 900;
+    font-size: 25px;
+    font-style: normal;
+    color: #d5b6ae;
+}
+
+.carousel-item {
+    height: 400px;
+    width: 100px;
+
+}
+
+.collapsible {
+    background-color: #d5b6ae;
+    color: black;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: #755e6a;
+}
+
+.collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f5dfec;
+}
+
+/*BUTTON https://www.w3schools.com/css/tryit.asp?filename=trycss_buttons_font*/
+.button {
+    background-color: rgb(213,182,174);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 30px;
+
+
+}
+.button:hover {
+    background-color: rgba(213,182,174, 0.8);
+    color: rgb(232, 228, 228);
+}
+
+
+
+/*Header styling*/
+logo {
+    position: relative;
+    width: auto;
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.navbar {
+    background-color: rgba(187, 181, 181);
+}
+
+a.nav-link {
+    color: white;
+    border-radius: 20px;
+}
+
+a.nav-link:hover {
+    background-color: rgba(205, 203, 203, 0.5);
+    border-radius: 20px;
+    color: white;
+}
+
+a.nav-link:active, a.nav-link:visited {
+    color: white;
+}
+
+#avail {
+    
+    background-color: rgba(213,182,174,.87);
+    border-radius: 20px;
+    margin-right: 10px;
+}
+a#avail.nav-link:hover {
+    background-color: rgba(205, 203, 203, 0.5);
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+#header-img {
+    width: 100%;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+hr {
+    width: 90%;
+}
+
+/*stying imgs*/
+
+#arch-images img {
+    width: 420px;
+    height: 350px;
+    display: inline;
+    object-fit: cover;
+    padding: 0 15px 0 15px;
+}
+
+#extras-images img{
+    width: 420px;
+    height: 350px;
+    display: inline;
+    object-fit: cover;
+    padding: 0 15px 0 15px;
+}
+
+.center-block, img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*styling footer*/
+
+footer{
+    background-color: rgba(187, 181, 181);
+    color:white;
+}
+
+footer>p{
+    color: white;
+    padding: 0px;
+}
+
+.fa {
+    padding: 15px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook, .fa-instagram {
+    background: rgb(241, 204, 194);
+    color: white;
+}
+
+button.accordion-button:focus {
+    box-shadow: 0px 0px 5px 2px rgba(219, 196, 189, 0.87) !important;
+}
+
+div#gallery-accordion .carousel-item {
+    height: 450px;
+    max-height: 500px;
+}
+
+div#gallery-accordion img {
+    height: 450px;
+    max-height: 500px;
+    object-fit: scale-down;
+}
+
+.carousel-center {
+    margin: 0 auto;
+}
