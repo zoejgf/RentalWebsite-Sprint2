@@ -10,7 +10,7 @@ a {
     font-weight: 600;
     font-style: normal;
 }
-p, h4, h5 {
+p, h4, h5, label.form-check-label {
     font-family: raleway,sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -395,4 +395,16 @@ div#gallery-accordion img {
 
 .carousel-center {
     margin: 0 auto;
+}
+
+label.btn.btn-primary {
+    padding: 7px 70px 7px 70px;
+    background-color: rgb(219, 196, 189);
+    border-color: rgb(219, 196, 189);
+    --bs-btn-active-bg: rgb(221, 161, 146);
+    --bs-btn-active-border-color: rgb(221, 161, 146);
+}
+label.btn.btn-primary:hover {
+    background-color: rgb(221, 169, 156);
+    border-color: rgb(221, 169, 156);
 }

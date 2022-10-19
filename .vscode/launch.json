@@ -7,8 +7,8 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open checkAvail.html",
-            "file": "/Users/zozo/Desktop/GRC Fall '22/SDEV 305/RentalWebsite-Sprint2/checkAvail.html"
+            "name": "Open chooseExtras.html",
+            "file": "/Users/zozo/Desktop/GRC Fall '22/SDEV 305/RentalWebsite-Sprint2/chooseExtras.html"
         }
     ]
 }
