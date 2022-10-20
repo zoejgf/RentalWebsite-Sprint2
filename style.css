@@ -409,7 +409,7 @@ label.btn.btn-primary:hover {
     border-color: rgb(221, 169, 156);
 }
 
-div#vintageMirrorPriceSelect {
+/* div#vintageMirrorPriceSelect {
     visibility: hidden;
     display:none;
 }
@@ -427,5 +427,29 @@ div#modernRoundPriceSelect{
 div#layeredArchPriceSelect{
     visibility: hidden;
     display:none;
+} */
+/* div#vintageCouch {
+    visibility: hidden;
+    display: none;
 }
+div#antiqueJugs {
+    visibility: hidden;
+    display: none;
+}
+div#wineJugs {
+    visibility: hidden;
+    display: none;
+}
+div#clearBall {
+    visibility: hidden;
+    display: none;
+}
+div#blueBall {
+    visibility: hidden;
+    display: none;
+}
+div#delivery {
+    visibility: hidden;
+    display: none;
+} */
 
