@@ -35,5 +35,7 @@
     echo $_GET[name];
     echo $_GET[email];
     echo $_GET[phone];
+
+    echo '<form action = "vardump.php" method = "POST">';
  </body>
 </html>
