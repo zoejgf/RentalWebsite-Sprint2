@@ -1,4 +1,101 @@
 
+    <?php
+            // DISPLAY CODE ERRORS!
+            ini_set('display_errors', 1);
+            ini_set('display_startup_errors', 1);
+            error_reporting(E_ALL);
+
+            date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
+            $dateNow = new DateTime;                            // Create a new DateTime object
+            //echo $dateNow->format("Y-m-d") . "<br>";          // Format the DateTime object for printing with given format
+
+            //echo "Todays Date: " . date("Y-m-d") . "<br><br>";  // prints unix timestamp w/ given format, diff from DateTime
+
+            /* 
+             * Check for prior values/errors, display if required
+             * if 1st visit, and no error, then continue
+            */
+
+            //print_r($_POST);
+
+            if (count($_POST) > 0) {
+                // we have post variables
+                //echo "We have POST Variables";
+
+                if (!isset($_POST["date"])) {           // Is a value NOT set for "date", if so, that's an error
+                    $dateErr = 0;
+                    // echo "date not set 1<br>";
+                } else {
+                    if (empty($_POST["date"])) {
+                        //echo "date is set, but empty";
+                        $dateErr = 0;
+                        // echo "date not set 2<br>";
+                    } else {                
+                        // echo "we have a date<br>";
+                        $date = new DateTime($_POST["date"]);
+                        $dateStr = $date->format("Y-m-d");
+    
+                        //echo "Date submitted via calendar: " . $date->format("Y-m-d") . "<br>";
+    
+                        if ($dateNow >= $date) {        // Is the entered date earlier than required, if so, error
+                            $dateErr = -1;
+                            //echo "InCorrect, date " . $date->format("Y-m-d") . " is not later than " . $dateNow->format("Y-m-d") . "<br>";
+                        } 
+                    }
+                }
+    
+                if (!isset($_POST["option"])) {         // is a value NOT set for "option", if so, error
+                                                        // 
+                    $optionErr = "Please select a rental option.";
+                    //echo "<br>" . "NO _POST[option] value";
+                    $optionStr = "0";
+                } else {
+                    //echo "We have a POST element \"option\"" . "<br>";
+                    if (empty($_POST["option"])) {
+                        $optionErr = "Please select a rental option.";
+                        //echo "<br>" . "Have _POST[option], but is empty";
+                        // Was hitting on this error when option not selected
+                        $optionStr = "0";
+                    } else {
+                        if ($_POST["option"] == 0) {
+                            $optionErr = "Please select a rental option.";
+                            //echo "<br>" . "Option value is 0";
+                            $optionStr = "0";
+                        } else {
+                            $optionStr = $_POST["option"];
+                        }
+                    }
+                }
+
+                if (isset($optionErr) || isset($dateErr)) { 
+                    // We have an error in one or more form elements
+                    
+                    if (isset($optionErr)) 
+                        $responseText .= "option=0";
+                    else    
+                        $responseText .= "option=$optionStr";
+
+                    if (isset($dateErr))
+                        $responseText .= "&date=$dateErr";
+                    else
+                        $responseText .= "&date=$dateStr";
+
+                    //echo $responseText;
+                    
+                    header("Location: checkAvail.php?$responseText");
+
+                 } /* else {
+                    echo "SUCCESS";
+                    echo "<br>$optionStr";
+                    echo "<br>$dateStr";
+                 } */
+
+            } else {
+                // echo "We have NO post variables, first visit to page";
+                
+                $optionStr = 0;
+            }
+        ?>
 
 <!DOCTYPE html>
 <html lang="en-US">
@@ -9,6 +106,7 @@
         <title></title>
     
         <link href="style.css" rel="stylesheet" type="text/css"/>
+        <link href="styles.css" rel="stylesheet" type="text/css"/>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://use.typekit.net/kir2pvu.css">
@@ -22,6 +120,7 @@
 
     </head>
     <body>
+
 
         <!-- Image Header-->
         <div class="container text-center">
@@ -39,7 +138,7 @@
         <div class="container text-center">
 
         
-            <div hidden id="layeredArchPriceSelect">
+            <div id="layeredArchPriceSelect" <?php if ($optionStr == "1") echo "style=\"display: block;\"";?>> <!-- PARENT DIV -->
                 <div class="row">
                     <div class="col-12">
                         <h1>LAYERED ARCH RENTAL PACKAGES</h1>
@@ -166,7 +265,7 @@
             </div>
         
 
-            <div hidden id="modernRoundPriceSelect">
+            <div id="modernRoundPriceSelect" <?php if ($optionStr == "2") echo "style=\"display: block;\"";?>>
                 <h1>Modern Round</h1>
                 <div class="row">
                     <div class="col-12">
@@ -320,7 +419,7 @@
 
             <!--Next package-->
 
-            <div hidden id="vintageMirrorPriceSelect">
+            <div id="vintageMirrorPriceSelect" <?php if ($optionStr == "3") echo "style=\"display: block;\"";?>>
                 <h1>Vintage Mirror</h1>
                 <div class="row">
                     <div class="col-12">
@@ -493,7 +592,7 @@
 
             <!--Next package-->
 
-            <div hidden id="darkWalnutPriceSelect">
+            <div id="darkWalnutPriceSelect" <?php if ($optionStr == "4") echo "style=\"display: block;\"";?>>
                 <div class="row">
                     <h1>Dark Walnut</h1>
                     <div class="col-12">
@@ -632,7 +731,7 @@
 
             </div>
 
-            <div hidden id="rusticWoodPriceSelect">
+            <div id="rusticWoodPriceSelect" <?php if ($optionStr == "5") echo "style=\"display: block;\"";?>>
                 <div class="row">
                 
                     <h1>Rustic Wood</h1>
