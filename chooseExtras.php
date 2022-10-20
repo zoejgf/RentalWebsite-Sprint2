@@ -28,7 +28,7 @@
             <h1>Choose Your Extras</h1>
         </div>
         <div class="container text-center">
-            <div class="form-check form-check-inline p-3" id="extrasCheck">
+            <div class="form-check form-check-inline p-3" id="vintageCouch">
                 <input class="form-check-input" type="checkbox" value="" id="vintageCouch">
                 <label class="form-check-label" for="vintageCouch">
                   Vintage Couch
@@ -36,7 +36,7 @@
                   $99 add on
                 </label>
             </div>
-            <div class="form-check form-check-inline p-3" id="extrasCheck">
+            <div class="form-check form-check-inline p-3" id="antiqueJugs">
                 <input class="form-check-input" type="checkbox" value="" id="antiqueJugs">
                 <label class="form-check-label" for="antiqueJugs">
                   Antique Gallon Jugs
@@ -44,7 +44,7 @@
                   $4 each
                 </label>
             </div>
-            <div class="form-check form-check-inline p-3" id="extrasCheck">
+            <div class="form-check form-check-inline p-3" id="wineJugs">
                 <input class="form-check-input" type="checkbox" value="" id="wineJugs">
                 <label class="form-check-label" for="wineJugs">
                   XL Wine Jugs
@@ -53,7 +53,7 @@
                 </label>
             </div>
             <br>
-            <div class="form-check form-check-inline p-3" id="extrasCheck">
+            <div class="form-check form-check-inline p-3" id="clearBall">
                 <input class="form-check-input" type="checkbox" value="" id="clearBall">
                 <label class="form-check-label" for="clearBall">
                   Clear Antique Ball Jars
@@ -61,7 +61,7 @@
                   $30/50 Jars (Assorted)
                 </label>
             </div>
-            <div class="form-check form-check-inline p-3" id="extrasCheck">
+            <div class="form-check form-check-inline p-3" id="blueBall">
                 <input class="form-check-input" type="checkbox" value="" id="blueBall">
                 <label class="form-check-label" for="blueBall">
                   Blue Antique Ball Jars
@@ -71,14 +71,21 @@
             </div>
         </div>
 
+        <div class="container text-center">
+            <div class="form-check form-check-inline p-3" id="delivery">
+                <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+                <label class="btn btn-primary" for="btn-check">Add Delivery</label>
+            </div>
+        </div>
+
         <div class="p-2">
             <hr class="mx-auto">
         </div>
 
-        <div class="container text-center">
-            <div class="form-check form-check-inline p-3" id="delivery">
-                <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
-                <label class="btn btn-primary" for="btn-check">Delivery</label>
+        <div class="row mx-auto text-center">
+            <div class="col-12">
+                <input type="submit" class="button" value="Submit" style="margin: auto; padding: 0.3em 1em;">
+                <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
             </div>
         </div>
     </body>

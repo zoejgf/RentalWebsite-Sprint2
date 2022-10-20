@@ -261,7 +261,7 @@ p{
     display: inline-block;
     margin: 4px 2px;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 20px;
     border-radius: 30px;
 
 
@@ -408,3 +408,48 @@ label.btn.btn-primary:hover {
     background-color: rgb(221, 169, 156);
     border-color: rgb(221, 169, 156);
 }
+
+/* div#vintageMirrorPriceSelect {
+    visibility: hidden;
+    display:none;
+}
+
+div#darkWalnutPriceSelect{
+    visibility: hidden;
+    display:none;
+}
+
+div#modernRoundPriceSelect{
+    visibility: hidden;
+    display:none;
+}
+
+div#layeredArchPriceSelect{
+    visibility: hidden;
+    display:none;
+} */
+/* div#vintageCouch {
+    visibility: hidden;
+    display: none;
+}
+div#antiqueJugs {
+    visibility: hidden;
+    display: none;
+}
+div#wineJugs {
+    visibility: hidden;
+    display: none;
+}
+div#clearBall {
+    visibility: hidden;
+    display: none;
+}
+div#blueBall {
+    visibility: hidden;
+    display: none;
+}
+div#delivery {
+    visibility: hidden;
+    display: none;
+} */
+

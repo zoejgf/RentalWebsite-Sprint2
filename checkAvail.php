@@ -77,6 +77,60 @@
         </div>
 
         <div class="container text-center">
+        <header>
+            <!--Responsive Offcanvas Navbar-->
+            <nav class="navbar navbar-expand-lg" style="background-color:rgba(187, 181, 181);">
+                <a class="navbar-brand"  href="index.html">
+                    <img src="walnut-ridge-images/wr-logo.png" alt="Walnut Ridge Rentals" width="220px" height="100px">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
+                    <div class="offcanvas-header justify-content-end">
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body justify-content-end">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Our Service</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Meet the Owners</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="avail" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Wedding Rentals
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="layered-arch.html">Layered Arch</a></li>
+                              <li><a class="dropdown-item" href="modern-round.html">Modern Round</a></li>
+                              <li><a class="dropdown-item" href="vintage-mirror.html">Vintage Mirror</a></li>
+                              <li><a class="dropdown-item" href="dark-walnut.html">Dark Walnut</a></li>
+                              <li><a class="dropdown-item" href="rustic-wood.html">Rustic Wood</a></li>
+                              <li><a class="dropdown-item" href="extras.html">Extras</a></li>
+                            </ul>
+                          </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="gallery.html">Photo Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="checkAvail.html">Check Availability</a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+              </nav>
+        </header>
+
+        <!-- Logo Header-->
+        <!-- 
+            <div class="container text-center">
+            <img src="walnut-ridge-images/wr-logo.png" style="width:230px;height:150px; object-fit:contain">
+        </div> 
+        -->
+
+        <div class="container text-center pt-4">
             <h1>Check Availability</h1>
         </div>
 
@@ -100,6 +154,10 @@
                             echo "<div class=\"invalid-feedback\">$dateErr</div>";
                             ?>
                     
+            <form>
+                <div class="col-12 col-md-6 col-lg-4 mx-auto">
+                    <label class="form-label">Wedding Date</label>
+                    <input type="date" class="form-control" id="date" name="date">
                 </div>
 
                 <div>
@@ -149,6 +207,16 @@
                     <?php if (isset($optionErr)) 
                             echo "<div class=\"invalid-feedback\">Please select an option</div>";
                             ?>
+                            
+                <div class="col-12 col-lg-4 mx-auto">
+                    <select class="form-select" id="option" name="option">
+                        <option selected>Please select a rental option</option>
+                        <option value="1">Layered Arch Wedding Set</option>
+                        <option value="2">Modern Round Wedding Set</option>
+                        <option value="3">Vintage Mirrors Wedding Set</option>
+                        <option value="4">Rustic Wood Wedding Set</option>
+                        <option value="5">Dark Walnut Wedding Set</option>
+                    </select>
                 </div>
 
                 <div>

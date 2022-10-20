@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title></title>
+    
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="https://use.typekit.net/kir2pvu.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+       <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>    
+
+    </head>
+    <body>
+        <!------- Logo Header ------>
+        <div class="container text-center">
+            <img src="walnut-ridge-images/wr-logo.png" style="width:230px;height:150px; object-fit:contain">
+        </div>
+
+        <!------ Previously selected information will be shown FROM php ------>
+
+        <div class="container" style="width:70%">
+            <form class="px-4 mt-3 g-3">
+                <div class="row">
+                    <div class="col-6 col-md-6 mt-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input class="form-control" type="text" id="name" name="name">
+                    </div>
+                
+                    <div class="col-6 col-md-6 mt-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input class="form-control" type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input class="form-control" type="email" id="email" name="email">
+                    </div>
+
+                </div>
+
+                <div class="row mx-auto text-center">
+                    <div class="col-12">
+                        <input type="submit" class="button" value="Reserve" style="margin: auto; padding: 0.3em 1em;">
+                        <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
