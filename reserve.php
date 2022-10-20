@@ -26,8 +26,11 @@
         echo '<p>Rustic Wood</p>';
     }
     
-    echo $_GET[date];
+    echo $_GET[date]
+    echo [date];
     echo $_GET[subpackage];
+    echo [subpackage];
     echo $_GET[delivery];
+    echo [delivery];
  </body>
 </html>
