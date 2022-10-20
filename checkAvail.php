@@ -22,6 +22,61 @@
 
     </head>
     <body>
+
+        <?php
+            // DISPLAY CODE ERRORS!
+            ini_set('display_errors', 1);
+            ini_set('display_startup_errors', 1);
+            error_reporting(E_ALL);
+
+            date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
+            $dateNow = new DateTime;                            // Create a new DateTime object
+            //echo $dateNow->format("Y-m-d") . "<br>";          // Format the DateTime object for printing with given format
+
+            //echo "Todays Date: " . date("Y-m-d") . "<br><br>";  // prints unix timestamp w/ given format, diff from DateTime
+
+            /* 
+             * Check for prior values/errors, display if required
+             * if 1st visit, and no error, then continue
+            */
+
+            $optionStr = "7";   // Dummy value for now, used to re-populate options if returned from pricepackage
+
+            //print_r($_POST);
+            //print_r($_GET);
+            if (isset($_GET["date"])) { 
+                // 0 - no date selected, -1 prior date selected
+                $dateStr = $_GET["date"];
+                // dateStr can be -1 (prior date), 0 no date selected, or prior selected date
+                //echo "date string: $dateStr <br>";
+
+                if ($dateStr == "-1") {
+                    $dateErr = "Please select a date after today.";
+                } elseif ($dateStr == "0") {
+                    $dateErr = "Please select a date.";
+                }
+
+            }
+            if (isset($_GET["option"])) {
+                $optionStr = $_GET["option"];
+                // optionStr can be 0 no option selected, or selected option
+                //echo "option string: $optionStr <br>";
+                if ($optionStr == "0") {
+                    $optionErr = "1";
+                    //echo "Setting optionErr<br>";
+                }
+            } else {
+                $optionStr = "0";
+            }
+
+        ?>
+
+        <!-- Logo Header-->
+        <div class="container text-center">
+            <img src="walnut-ridge-images/wr-logo.png" style="width:230px;height:150px; object-fit:contain">
+        </div>
+
+        <div class="container text-center">
         <header>
             <!--Responsive Offcanvas Navbar-->
             <nav class="navbar navbar-expand-lg" style="background-color:rgba(187, 181, 181);">
@@ -84,6 +139,21 @@
         </div>
 
         <div class="container text-center">
+            <form method="post" action="<?php 
+                    // echo htmlspecialchars($_SERVER["PHP_SELF"]);
+                    echo "pricePackages.php";
+                    ?>">
+                <div class="col-12 col-md-6 col-lg-4 mx-auto">
+                    
+                    <label class="form-label">Wedding Date</label>
+                        <!-- have dateErr and dateStr.  dateErr only set on error. -->
+                    <input type="date" class="form-control<?php if(isset($dateErr)) echo " is-invalid"; ?>" id="date" 
+                        name="date" <?php if (isset($dateStr) && (empty($dateErr))) echo("value=\"$dateStr\"")  ?>>
+
+                    <?php if (isset($dateErr)) 
+                            echo "<div class=\"invalid-feedback\">$dateErr</div>";
+                            ?>
+                    
             <form>
                 <div class="col-12 col-md-6 col-lg-4 mx-auto">
                     <label class="form-label">Wedding Date</label>
@@ -121,6 +191,23 @@
                     </div>
                 </div>
 
+
+                
+
+
+                <div class="col-12 col-lg-4 mx-auto">
+                    <select class="form-select<?php if(isset($optionErr)) echo " is-invalid"; ?>" id="option" name="option">
+                        <option value="0" <?php if($optionStr == "0") echo "selected"?>>Please select a rental option</option>
+                        <option value="1" <?php if($optionStr == "1") echo "selected"?>>Layered Arch Wedding Set</option>
+                        <option value="2" <?php if($optionStr == "2") echo "selected"?>>Modern Round Wedding Set</option>
+                        <option value="3" <?php if($optionStr == "3") echo "selected"?>>Vintage Mirrors Wedding Set</option>
+                        <option value="5" <?php if($optionStr == "5") echo "selected"?>>Rustic Wood Wedding Set</option>
+                        <option value="4" <?php if($optionStr == "4") echo "selected"?>>Dark Walnut Wedding Set</option>
+                    </select>
+                    <?php if (isset($optionErr)) 
+                            echo "<div class=\"invalid-feedback\">Please select an option</div>";
+                            ?>
+                            
                 <div class="col-12 col-lg-4 mx-auto">
                     <select class="form-select" id="option" name="option">
                         <option selected>Please select a rental option</option>

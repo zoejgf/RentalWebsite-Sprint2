@@ -1,4 +1,3 @@
-<?php
             // DISPLAY CODE ERRORS!
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);
@@ -106,6 +105,7 @@
     
         <link href="style.css" rel="stylesheet" type="text/css"/>
 
+
         <!-- Fonts -->
         <link rel="stylesheet" href="https://use.typekit.net/kir2pvu.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -134,8 +134,9 @@
 
         <div class="container text-center">
 
-        
-            <div id="layeredArchPriceSelect">
+
+            <div id="layeredArchPriceSelect" <?php if ($optionStr == "1") echo "style=\"display: block;\"";?>> <!-- PARENT DIV -->
+
                 <div class="row">
                     <div class="col-12">
                         <h1>LAYERED ARCH RENTAL PACKAGES</h1>
@@ -262,7 +263,8 @@
             </div>
         
 
-            <div id="modernRoundPriceSelect">
+            <div id="modernRoundPriceSelect" <?php if ($optionStr == "2") echo "style=\"display: block;\"";?>>
+
                 <h1>Modern Round</h1>
                 <div class="row">
                     <div class="col-12">
@@ -416,7 +418,9 @@
 
             <!--Next package-->
 
-            <div id="vintageMirrorPriceSelect">
+
+            <div id="vintageMirrorPriceSelect" <?php if ($optionStr == "3") echo "style=\"display: block;\"";?>>
+
                 <h1>Vintage Mirror</h1>
                 <div class="row">
                     <div class="col-12">
@@ -589,7 +593,8 @@
 
             <!--Next package-->
 
-            <div id="darkWalnutPriceSelect">
+            <div id="darkWalnutPriceSelect" <?php if ($optionStr == "4") echo "style=\"display: block;\"";?>>
+
                 <div class="row">
                     <h1>Dark Walnut</h1>
                     <div class="col-12">
@@ -728,7 +733,9 @@
 
             </div>
 
-            <div id="rusticWoodPriceSelect">
+
+            <div id="rusticWoodPriceSelect" <?php if ($optionStr == "5") echo "style=\"display: block;\"";?>>
+
                 <div class="row">
                 
                     <h1>Rustic Wood</h1>

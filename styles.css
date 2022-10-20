@@ -174,5 +174,10 @@ div#gallery label.default {
     color: white;
 }
 
+#rusticWoodPriceSelect, #darkWalnutPriceSelect, 
+    #vintageMirrorPriceSelect, #modernRoundPriceSelect, 
+    #layeredArchPriceSelect {
+        display: none;
+    }
 
 
