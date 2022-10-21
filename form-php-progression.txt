@@ -1,30 +1,30 @@
 
 
-Pick your set page:
+checkAvail.php / Pick your set page:
     Check for error, if present, present sorry message re date not available for that package
 
     Allows user to visually pick between the 5 sets
     Asks the user to pick their wedding date
     Submits to packages.php
     
-    Needs parameters for SET, and DATE
+    Needs parameters for OPTION, and DATE
     
-Packages.php:
+pricePackages.php:
     Checks if the date/package is available using PHP** - if not available, it presents a nice message saying sorry, links back to "pick your set"
     If its available, allows user to visually pick between the available packages
     Submits to extras.php
     
-    Takes in SET and DATE, and:
+    Takes in OPTION and DATE, and:
         on Success: Captures (need a an embedded form here) PACKAGE
         on Failure: Presents message saying sorry, and goes back to 1st page
     
-Extras.php:
+chooseExtras.php:
     Only shows the available extras using PHP**
     If its available, allows user to visually pick between the available packages
     Delivery is also an option at the bottom, looks visually different
     Submits to reserve.php
     
-    Takes in SET, DATE, and PACKAGE.
+    Takes in OPTION, DATE, and PACKAGE.
     Present form that passes SUBPACKAGES and DELIVERY in addition to three values received above.
     
 Reserve.php:
@@ -32,7 +32,7 @@ Reserve.php:
     Collects Name, Email and Phone Number
     Submits to vardump.php (or similar page) that displays name, email, phone, set, package, date, extras (these should all be available in the GET or POST array)
     
-    Prints out SET, DATE, PACKAGE, SUBPACKAGE, and DELIVERY
+    Prints out OPTION, DATE, PACKAGE, SUBPACKAGE, and DELIVERY
     Collects NAME, EMAIL, and PHONE in another html form
     
     Submits all of these to vardump.php

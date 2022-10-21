@@ -1,100 +1,108 @@
+<<<<<<< HEAD
         <?php
             // DISPLAY CODE ERRORS!
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);
             error_reporting(E_ALL);
+=======
+<?php
+// DISPLAY CODE ERRORS!
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+>>>>>>> 7da37079f0fc8d79f8f47cb6aa880de1bec2c5bc
 
-            date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
-            $dateNow = new DateTime;                            // Create a new DateTime object
-            //echo $dateNow->format("Y-m-d") . "<br>";          // Format the DateTime object for printing with given format
+        date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
+        $dateNow = new DateTime;                            // Create a new DateTime object
+        //echo $dateNow->format("Y-m-d") . "<br>";          // Format the DateTime object for printing with given format
 
-            //echo "Todays Date: " . date("Y-m-d") . "<br><br>";  // prints unix timestamp w/ given format, diff from DateTime
+        //echo "Todays Date: " . date("Y-m-d") . "<br><br>";  // prints unix timestamp w/ given format, diff from DateTime
 
-            /* 
-             * Check for prior values/errors, display if required
-             * if 1st visit, and no error, then continue
-            */
+        /* 
+            * Check for prior values/errors, display if required
+            * if 1st visit, and no error, then continue
+        */
 
-            //print_r($_POST);
+        //print_r($_POST);
 
-            if (count($_POST) > 0) {
-                // we have post variables
-                //echo "We have POST Variables";
+        if (count($_POST) > 0) {
+            // we have post variables
+            //echo "We have POST Variables";
 
-                if (!isset($_POST["date"])) {           // Is a value NOT set for "date", if so, that's an error
+            if (!isset($_POST["date"])) {           // Is a value NOT set for "date", if so, that's an error
+                $dateErr = 0;
+                // echo "date not set 1<br>";
+            } else {
+                if (empty($_POST["date"])) {
+                    //echo "date is set, but empty";
                     $dateErr = 0;
-                    // echo "date not set 1<br>";
-                } else {
-                    if (empty($_POST["date"])) {
-                        //echo "date is set, but empty";
-                        $dateErr = 0;
-                        // echo "date not set 2<br>";
-                    } else {                
-                        // echo "we have a date<br>";
-                        $date = new DateTime($_POST["date"]);
-                        $dateStr = $date->format("Y-m-d");
-    
-                        //echo "Date submitted via calendar: " . $date->format("Y-m-d") . "<br>";
-    
-                        if ($dateNow >= $date) {        // Is the entered date earlier than required, if so, error
-                            $dateErr = -1;
-                            //echo "InCorrect, date " . $date->format("Y-m-d") . " is not later than " . $dateNow->format("Y-m-d") . "<br>";
-                        } 
-                    }
+                    // echo "date not set 2<br>";
+                } else {                
+                    // echo "we have a date<br>";
+                    $date = new DateTime($_POST["date"]);
+                    $dateStr = $date->format("Y-m-d");
+
+                    //echo "Date submitted via calendar: " . $date->format("Y-m-d") . "<br>";
+
+                    if ($dateNow >= $date) {        // Is the entered date earlier than required, if so, error
+                        $dateErr = -1;
+                        //echo "InCorrect, date " . $date->format("Y-m-d") . " is not later than " . $dateNow->format("Y-m-d") . "<br>";
+                    } 
                 }
-    
-                if (!isset($_POST["option"])) {         // is a value NOT set for "option", if so, error
-                                                        // 
+            }
+
+            if (!isset($_POST["option"])) {         // is a value NOT set for "option", if so, error
+                                                    // 
+                $optionErr = "Please select a rental option.";
+                //echo "<br>" . "NO _POST[option] value";
+                $optionStr = "0";
+            } else {
+                //echo "We have a POST element \"option\"" . "<br>";
+                if (empty($_POST["option"])) {
                     $optionErr = "Please select a rental option.";
-                    //echo "<br>" . "NO _POST[option] value";
+                    //echo "<br>" . "Have _POST[option], but is empty";
+                    // Was hitting on this error when option not selected
                     $optionStr = "0";
                 } else {
-                    //echo "We have a POST element \"option\"" . "<br>";
-                    if (empty($_POST["option"])) {
+                    if ($_POST["option"] == 0) {
                         $optionErr = "Please select a rental option.";
-                        //echo "<br>" . "Have _POST[option], but is empty";
-                        // Was hitting on this error when option not selected
+                        //echo "<br>" . "Option value is 0";
                         $optionStr = "0";
                     } else {
-                        if ($_POST["option"] == 0) {
-                            $optionErr = "Please select a rental option.";
-                            //echo "<br>" . "Option value is 0";
-                            $optionStr = "0";
-                        } else {
-                            $optionStr = $_POST["option"];
-                        }
+                        $optionStr = $_POST["option"];
                     }
                 }
-
-                if (isset($optionErr) || isset($dateErr)) { 
-                    // We have an error in one or more form elements
-                    
-                    if (isset($optionErr)) 
-                        $responseText .= "option=0";
-                    else    
-                        $responseText .= "option=$optionStr";
-
-                    if (isset($dateErr))
-                        $responseText .= "&date=$dateErr";
-                    else
-                        $responseText .= "&date=$dateStr";
-
-                    //echo $responseText;
-                    
-                    header("Location: checkAvail.php?$responseText");
-
-                 } /* else {
-                    echo "SUCCESS";
-                    echo "<br>$optionStr";
-                    echo "<br>$dateStr";
-                 } */
-
-            } else {
-                // echo "We have NO post variables, first visit to page";
-                
-                $optionStr = 0;
             }
-        ?>
+
+            if (isset($optionErr) || isset($dateErr)) { 
+                // We have an error in one or more form elements
+                
+                if (isset($optionErr)) 
+                    $responseText .= "option=0";
+                else    
+                    $responseText .= "option=$optionStr";
+
+                if (isset($dateErr))
+                    $responseText .= "&date=$dateErr";
+                else
+                    $responseText .= "&date=$dateStr";
+
+                //echo $responseText;
+                
+                header("Location: checkAvail.php?$responseText");
+
+                } /* else {
+                echo "SUCCESS";
+                echo "<br>$optionStr";
+                echo "<br>$dateStr";
+                } */
+
+        } else {
+            // echo "We have NO post variables, first visit to page";
+            
+            $optionStr = 0;
+        }
+    ?>
 
 <!DOCTYPE html>
 <html lang="en-US">
@@ -238,7 +246,7 @@
 
                     <form>
                         <div class="col-12 col-lg-4 mx-auto">
-                            <select class="form-select" id="option" name="option">
+                            <select class="form-select" id="option" name="package">
                                 <option selected>Please select a rental option</option>
                                 <option value="1">Full Set Rental $849</option>
                                 <option value="2">Pick 6 Rental $749</option>
@@ -384,7 +392,7 @@
 
                 <form>
                     <div class="col-12 col-lg-4 mx-auto">
-                        <select class="form-select" id="option" name="option">
+                        <select class="form-select" id="option" name="package">
                             <option selected>Please select a rental option</option>
                             <option value="1">Full Set Rental $799</option>
                             <option value="2">Pick 6 Rental $699</option>
@@ -394,7 +402,7 @@
                     </div>
 
                     <div class="form-check form-check-inline p-3" id="extrasCheck">
-                        <input class="form-check-input" type="checkbox" value="" id="modernSign">
+                        <input class="form-check-input" type="checkbox" value="" id="modernSign" name="modernRound">
                         <label class="form-check-label" for="modernSign">
                           Include the Modern Round Sign
                           <img src="walnut-ridge-images/IMG_7338.jpg" alt="round sign display" style="width:200px;height:250px;object-fit:cover;padding:15px 0 15px 0;"">
@@ -539,7 +547,7 @@
 
                 <form>
                     <div class="col-12 col-lg-4 mx-auto">
-                        <select class="form-select" id="option" name="option">
+                        <select class="form-select" id="option" name="package">
                             <option selected>Please select a rental option</option>
                             <option value="1">Platinum Package Rental $849</option>
                             <option value="2">Gold Package Rental $799</option>
@@ -690,7 +698,7 @@
 
                 <form>
                     <div class="col-12 col-lg-4 mx-auto">
-                        <select class="form-select" id="option" name="option">
+                        <select class="form-select" id="option" name="package">
                             <option selected>Please select a rental option</option>
                             <option value="1">Dark-Walnut Full set $299</option>
                             <option value="2">Dark-Walnut "No Seating" Set $245/option>
@@ -832,7 +840,7 @@
 
                 <form>
                     <div class="col-12 col-lg-4 mx-auto">
-                        <select class="form-select" id="option" name="option">
+                        <select class="form-select" id="option" name="package">
                             <option selected>Please select a rental option</option>
                             <option value="1">Dark-Walnut Full set $299</option>
                             <option value="2">Dark-Walnut "No Seating" Set $245/option>
