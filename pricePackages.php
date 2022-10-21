@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-        <?php
-            // DISPLAY CODE ERRORS!
-            ini_set('display_errors', 1);
-            ini_set('display_startup_errors', 1);
-            error_reporting(E_ALL);
-=======
+
 <?php
 // DISPLAY CODE ERRORS!
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
->>>>>>> 7da37079f0fc8d79f8f47cb6aa880de1bec2c5bc
 
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
         $dateNow = new DateTime;                            // Create a new DateTime object
