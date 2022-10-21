@@ -11,14 +11,21 @@ checkAvail.php / Pick your set page:
     
 pricePackages.php:
     Checks if the date/package is available using PHP** - if not available, it presents a nice message saying sorry, links back to "pick your set"
-    If its available, allows user to visually pick between the available packages
-    Submits to extras.php
+    If its available, allows user to visually pick between the available packages.  Also allows selection of various extras, each with
+    it's own checkbox.
+
+    extras stored inside array 'checks[]'
+
+    Submits to chooseExtras.php
     
     Takes in OPTION and DATE, and:
         on Success: Captures (need a an embedded form here) PACKAGE
         on Failure: Presents message saying sorry, and goes back to 1st page
     
 chooseExtras.php:
+
+    takes in data for PACKAGE, OPTION, DATE, and possible array of checks[] from prior pages
+
     Only shows the available extras using PHP**
     If its available, allows user to visually pick between the available packages
     Delivery is also an option at the bottom, looks visually different

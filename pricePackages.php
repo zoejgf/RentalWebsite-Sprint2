@@ -1,96 +1,73 @@
 
 <?php
-// DISPLAY CODE ERRORS!
+        // DISPLAY CODE ERRORS IN DEVELOPMENT!
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
+        // -----------------------------------
 
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
         $dateNow = new DateTime;                            // Create a new DateTime object
         //echo $dateNow->format("Y-m-d") . "<br>";          // Format the DateTime object for printing with given format
 
-        //echo "Todays Date: " . date("Y-m-d") . "<br><br>";  // prints unix timestamp w/ given format, diff from DateTime
-
-        /* 
-            * Check for prior values/errors, display if required
-            * if 1st visit, and no error, then continue
-        */
-
-        //print_r($_POST);
-
-        if (count($_POST) > 0) {
-            // we have post variables
-            //echo "We have POST Variables";
-
+        // POST values indicates form submission from checkAvail.php, 
+        // verify values present, and validate if required
+        if (count($_POST) > 0) {        // we have post variables 
+            
             if (!isset($_POST["date"])) {           // Is a value NOT set for "date", if so, that's an error
                 $dateErr = 0;
-                // echo "date not set 1<br>";
             } else {
-                if (empty($_POST["date"])) {
-                    //echo "date is set, but empty";
+                if (empty($_POST["date"])) {        // if value is set, but empty, that is also an error
                     $dateErr = 0;
-                    // echo "date not set 2<br>";
                 } else {                
-                    // echo "we have a date<br>";
-                    $date = new DateTime($_POST["date"]);
-                    $dateStr = $date->format("Y-m-d");
-
-                    //echo "Date submitted via calendar: " . $date->format("Y-m-d") . "<br>";
+                    $date = new DateTime($_POST["date"]);   // current date, used to verify entered date as appropriate
+                    $dateStr = $date->format("Y-m-d");      // selected date
 
                     if ($dateNow >= $date) {        // Is the entered date earlier than required, if so, error
-                        $dateErr = -1;
-                        //echo "InCorrect, date " . $date->format("Y-m-d") . " is not later than " . $dateNow->format("Y-m-d") . "<br>";
+                        $dateErr = -1;              // error code for prior date, -1
                     } 
                 }
             }
 
             if (!isset($_POST["option"])) {         // is a value NOT set for "option", if so, error
-                                                    // 
                 $optionErr = "Please select a rental option.";
-                //echo "<br>" . "NO _POST[option] value";
                 $optionStr = "0";
             } else {
-                //echo "We have a POST element \"option\"" . "<br>";
-                if (empty($_POST["option"])) {
+                if (empty($_POST["option"])) {      // triggers if option not selected from checkAvail.php
                     $optionErr = "Please select a rental option.";
-                    //echo "<br>" . "Have _POST[option], but is empty";
-                    // Was hitting on this error when option not selected
-                    $optionStr = "0";
+                    $optionStr = "0";               // set error code
                 } else {
-                    if ($_POST["option"] == 0) {
+                    if ($_POST["option"] == 0) { 
                         $optionErr = "Please select a rental option.";
-                        //echo "<br>" . "Option value is 0";
                         $optionStr = "0";
-                    } else {
+                    } else {                        // save previuosly entered value if redirect, re-populate form as required
                         $optionStr = $_POST["option"];
                     }
                 }
             }
 
-            if (isset($optionErr) || isset($dateErr)) { 
-                // We have an error in one or more form elements
+            // IF WE HAVE AN ERROR, MUST REDIRECT BACK TO checkAvail.php
+            if ($optionStr == "0" || isset($dateErr)) { 
                 
-                if (isset($optionErr)) 
-                    $responseText .= "option=0";
-                else    
-                    $responseText .= "option=$optionStr";
+                $responseText .= "option=$optionStr";
 
                 if (isset($dateErr))
                     $responseText .= "&date=$dateErr";
                 else
                     $responseText .= "&date=$dateStr";
-
-                //echo $responseText;
                 
                 header("Location: checkAvail.php?$responseText");
 
-                } /* else {
-                echo "SUCCESS";
-                echo "<br>$optionStr";
-                echo "<br>$dateStr";
-                } */
+                } 
+            
+        // WE HAVE GET VARIABLES INSTEAD, means redirected back from chooseExtras.php w/ errors
+        } elseif (count($_GET) > 0) {       
+            $optionStr = $_GET["option"];
+            $dateStr = $_GET["date"];
+            $packageErr = $_GET["package"];    // if 0, means we did not select.  error, test below
 
         } else {
+            echo "HOW DID WE GET HERE?";
             // echo "We have NO post variables, first visit to page";
             
             $optionStr = 0;
@@ -220,30 +197,38 @@
                         <hr class="mx-auto">
                     </div>
 
-                    <form>
+                    <form method="post" action="chooseExtras.php">
                         <div class="col-12 col-lg-4 mx-auto">
-                            <select class="form-select" id="option" name="package">
-                                <option selected>Please select a rental option</option>
+                            <select class="form-select<?php if(isset($packageErr)) echo " is-invalid"; ?>" id="option" name="package">
+                                <option value="0" selected>Please select a rental option</option>
                                 <option value="1">Full Set Rental $849</option>
                                 <option value="2">Pick 6 Rental $749</option>
                                 <option value="3">Pick 4 Rental $699</option>
                             
                             </select>
+
+                            <?php if (isset($packageErr)) 
+                            echo "<div class=\"invalid-feedback\">Please select a rental option</div>";
+                            ?>
+
+                            <input type="hidden" name="option" value="<?php echo $optionStr ?>">
+                            <input type="hidden" name="date" value="<?php echo $dateStr ?>">    
+
                         </div>
-                    </form>       
+                     
 
-                    <div>
-                        <hr class="mx-auto">
-                    </div>
-                
-
-                    <div class="row mx-auto">
-                        <div class="col-12">
-                            <input type="submit" class="button" value="Check Availability" style="padding: 0.3em 1em;">
-                            <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
+                        <div>
+                            <hr class="mx-auto">
                         </div>
-                    </div>
+                    
 
+                        <div class="row mx-auto">
+                            <div class="col-12">
+                                <input type="submit" class="button" value="Check Availability" style="padding: 0.3em 1em;">
+                                <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
+                            </div>
+                        </div>
+                    </form>      
                 </div>
             </div>
         
@@ -350,38 +335,47 @@
                     <hr class="mx-auto">
                 </div>
 
-                <form>
+                <form method="post" action="chooseExtras.php">
                     <div class="col-12 col-lg-4 mx-auto">
-                        <select class="form-select" id="option" name="package">
-                            <option selected>Please select a rental option</option>
+                        <select class="form-select<?php if(isset($packageErr)) echo " is-invalid"; ?>" id="option" name="package">
+                            <option value="0" selected>Please select a rental option</option>
                             <option value="1">Full Set Rental $799</option>
                             <option value="2">Pick 6 Rental $699</option>
                             <option value="3">Pick 4 Rental $599</option>
                         
                         </select>
+
+                        <?php if (isset($packageErr)) 
+                            echo "<div class=\"invalid-feedback\">Please select a rental option</div>";
+                            ?>
+
+                        <input type="hidden" name="option" value="<?php echo $optionStr ?>">
+                        <input type="hidden" name="date" value="<?php echo $dateStr ?>">    
+
                     </div>
 
                     <div class="form-check form-check-inline p-3" id="extrasCheck">
-                        <input class="form-check-input" type="checkbox" value="" id="modernSign" name="modernRound">
-                        <label class="form-check-label" for="modernSign">
+                        <input class="form-check-input" type="checkbox"  name="checks[]" id="modernSign" value="modernSign">
+                        <label class="form-check-label" for="modernRound">
                           Include the Modern Round Sign
                           <img src="walnut-ridge-images/IMG_7338.jpg" alt="round sign display" style="width:200px;height:250px;object-fit:cover;padding:15px 0 15px 0;"">
                         </label>
                     </div>
                     
-                </form>       
+                    
 
-                <div>
-                    <hr class="mx-auto">
-                </div>
-            
-
-                <div class="row mx-auto">
-                    <div class="col-12">
-                        <input type="submit" class="button" value="Check Availability" style="padding: 0.3em 1em;">
-                        <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
+                    <div>
+                        <hr class="mx-auto">
                     </div>
-                </div>
+                
+
+                    <div class="row mx-auto">
+                        <div class="col-12">
+                            <input type="submit" class="button" value="Check Availability" style="padding: 0.3em 1em;">
+                            <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
+                        </div>
+                    </div>
+                </form>       
             
             </div>
 
@@ -489,58 +483,63 @@
                     <hr class="mx-auto">
                 </div>
 
-                <form>
+                <form method="post" action="chooseExtras.php">
                     <div class="col-12 col-lg-4 mx-auto">
-                        <select class="form-select" id="option" name="package">
-                            <option selected>Please select a rental option</option>
+                        <select class="form-select<?php if(isset($packageErr)) echo " is-invalid"; ?>" id="option" name="package">
+                            <option value="0" selected>Please select a rental option</option>
                             <option value="1">Platinum Package Rental $849</option>
                             <option value="2">Gold Package Rental $799</option>
                             <option value="3">Pick 6 Rental $649</option>
                             <option value="4">Pick 4 Rental $599</option>
                         
                         </select>
+
+                        <?php if (isset($packageErr)) 
+                            echo "<div class=\"invalid-feedback\">Please select a rental option</div>";
+                            ?>
+
+                        <input type="hidden" name="option" value="<?php echo $optionStr ?>">
+                        <input type="hidden" name="date" value="<?php echo $dateStr ?>">    
+
                     </div>
 
                     <div class="container text-center">
                         <div class="form-check form-check-inline p-3" id="extrasCheck">
-                            <input class="form-check-input" type="checkbox" value="" id="modernSign">
-                            <label class="form-check-label" for="modernSign">
+                            <input class="form-check-input" type="checkbox"  name="checks[]" value="smallModernSign" id="smallModernSign">
+                            <label class="form-check-label" for="smallModernSign">
                               Include Small Custom Mirror
                               <img src="walnut-ridge-images\_DSC0713.jpeg" alt="small custom sign display" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                             </label>
                         </div>
     
                         <div class="form-check form-check-inline p-3" id="extrasCheck">
-                            <input class="form-check-input" type="checkbox" value="" id="clearBall">
-                            <label class="form-check-label" for="clearBall">
+                            <input class="form-check-input" type="checkbox"  name="checks[]" value="medModernSign" id="medModernSign">
+                            <label class="form-check-label" for="medModernSign">
                               Include Medium Custom Mirror
                               <img src="walnut-ridge-images\_DSC0762.jpeg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                             </label>
                         </div>
 
                         <div class="form-check form-check-inline p-3" id="extrasCheck">
-                            <input class="form-check-input" type="checkbox" value="" id="clearBall">
-                            <label class="form-check-label" for="clearBall">
+                            <input class="form-check-input" type="checkbox"  name="checks[]" value="larModernSign" id="larModernSign">
+                            <label class="form-check-label" for="larModernSign">
                               Include Large Custom Mirror
                               <img src="walnut-ridge-images\_DSC0676.jpeg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                             </label>
                         </div>
                     </div>
 
-                    
-                    
-                </form>       
-
-                <div>
-                    <hr class="mx-auto">
-                </div>
-
-                <div class="row mx-auto">
-                    <div class="col-12">
-                        <input type="submit" class="button" value="Check Availability" style="padding: 0.3em 1em;">
-                        <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
+                    <div>
+                        <hr class="mx-auto">
                     </div>
-                </div>
+
+                    <div class="row mx-auto">
+                        <div class="col-12">
+                            <input type="submit" class="button" value="Check Availability" style="padding: 0.3em 1em;">
+                            <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
+                        </div>
+                    </div>
+                </form>       
 
             </div>
 
@@ -624,22 +623,29 @@
                     <hr class="mx-auto">
                 </div>
 
-                <form>
+                <form method="post" action="chooseExtras.php">
                     <div class="col-12 col-lg-4 mx-auto">
-                        <select class="form-select" id="option" name="package">
-                            <option selected>Please select a rental option</option>
+                        <select class="form-select<?php if(isset($packageErr)) echo " is-invalid"; ?>" id="option" name="package">
+                            <option value="0" selected>Please select a rental option</option>
                             <option value="1">Dark-Walnut Full set $299</option>
                             <option value="2">Dark-Walnut "No Seating" Set $245/option>
                             <option value="3">Dark-Walnut Pick 4 Rental $199</option>
                 
-                        
                         </select>
+
+                        <?php if (isset($packageErr)) 
+                            echo "<div class=\"invalid-feedback\">Please select a rental option</div>";
+                            ?>
+
+                        <input type="hidden" name="option" value="<?php echo $optionStr ?>">
+                        <input type="hidden" name="date" value="<?php echo $dateStr ?>">    
+
                     </div>
 
                     <div class="container text-center">
                         <div class="form-check form-check-inline p-3" id="extrasCheck">
-                            <input class="form-check-input" type="checkbox" value="" id="modernSign">
-                            <label class="form-check-label" for="modernSign">
+                            <input class="form-check-input" type="checkbox"  name="checks[]" value="aisleRunner" id="aisleRunner">
+                            <label class="form-check-label" for="aisleRunner">
                                 Include Aisle Runner Add-On
                               <img src="walnut-ridge-images\DSC_3378.NEF.jpg" alt="small custom sign display" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                             $99 extra
@@ -647,26 +653,26 @@
                         </div>
     
                         <div class="form-check form-check-inline p-3" id="extrasCheck">
-                            <input class="form-check-input" type="checkbox" value="" id="clearBall">
-                            <label class="form-check-label" for="clearBall">
+                            <input class="form-check-input" type="checkbox"  name="checks[]" value="typeWriter" id="typeWriter">
+                            <label class="form-check-label" for="typeWriter">
                                 Include Vintage Type Writter
                               <img src="walnut-ridge-images\Donnie+Rosie+Photo+1-9647.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                             $99 extra
                             </label>
                         </div>
                     </div>
-              </form>       
 
-                <div>
-                    <hr class="mx-auto">
-                </div>
-
-                <div class="row mx-auto">
-                    <div class="col-12">
-                        <input type="submit" class="button" value="Check Availability" style="padding: 0.3em 1em;">
-                        <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
+                    <div>
+                        <hr class="mx-auto">
                     </div>
-                </div>
+
+                    <div class="row mx-auto">
+                        <div class="col-12">
+                            <input type="submit" class="button" value="Check Availability" style="padding: 0.3em 1em;">
+                            <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
+                        </div>
+                    </div>
+                </form>       
 
             </div>
 
@@ -750,22 +756,29 @@
                     <hr class="mx-auto">
                 </div>
 
-                <form>
+                <form method="post" action="chooseExtras.php">
                     <div class="col-12 col-lg-4 mx-auto">
-                        <select class="form-select" id="option" name="package">
-                            <option selected>Please select a rental option</option>
-                            <option value="1">Rustic Wood Full set $299</option>
-                            <option value="2">Rustic Wood "No Seating" Set $245/option>
-                            <option value="3">Rustic Wood Pick 4 Rental $199</option>
+                        <select class="form-select<?php if(isset($packageErr)) echo " is-invalid"; ?>" id="option" name="package">
+                            <option value="0" selected>Please select a rental option</option>
+                            <option value="1">Dark-Walnut Full set $299</option>
+                            <option value="2">Dark-Walnut "No Seating" Set $245/option>
+                            <option value="3">Dark-Walnut Pick 4 Rental $199</option>
                 
-                        
                         </select>
+
+                        <?php if (isset($packageErr)) 
+                            echo "<div class=\"invalid-feedback\">Please select a rental option</div>";
+                            ?>
+
+                        <input type="hidden" name="option" value="<?php echo $optionStr ?>">
+                        <input type="hidden" name="date" value="<?php echo $dateStr ?>">    
+
                     </div>
 
                     <div class="container text-center">
                         <div class="form-check form-check-inline p-3" id="extrasCheck">
-                            <input class="form-check-input" type="checkbox" value="" id="modernSign">
-                            <label class="form-check-label" for="modernSign">
+                            <input class="form-check-input" type="checkbox"  name="checks[]" value="aisleRunner" id="aisleRunner">
+                            <label class="form-check-label" for="aisleRunner">
                                 Include Aisle Runner Add-On
                               <img src="walnut-ridge-images\DSC_3378.NEF.jpg" alt="small custom sign display" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                             $99 extra
@@ -773,26 +786,26 @@
                         </div>
     
                         <div class="form-check form-check-inline p-3" id="extrasCheck">
-                            <input class="form-check-input" type="checkbox" value="" id="clearBall">
-                            <label class="form-check-label" for="clearBall">
+                            <input class="form-check-input" type="checkbox"  name="checks[]" value="typeWriter" id="typeWriter">
+                            <label class="form-check-label" for="typeWriter">
                                 Include Vintage Type Writter
                               <img src="walnut-ridge-images\Donnie+Rosie+Photo+1-9647.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                             $99 extra
                             </label>
                         </div>
                     </div>
-              </form>       
 
-                <div>
-                    <hr class="mx-auto">
-                </div>
-
-                <div class="row mx-auto">
-                    <div class="col-12">
-                        <input type="submit" class="button" value="Check Availability" style="padding: 0.3em 1em;">
-                        <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
+                    <div>
+                        <hr class="mx-auto">
                     </div>
-                </div>
+
+                    <div class="row mx-auto">
+                        <div class="col-12">
+                            <input type="submit" class="button" value="Check Availability" style="padding: 0.3em 1em;">
+                            <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
+                        </div>
+                    </div>
+                </form>       
 
             </div>
             

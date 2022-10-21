@@ -409,6 +409,15 @@ label.btn.btn-primary:hover {
     border-color: rgb(221, 169, 156);
 }
 
+
+#rusticWoodPriceSelect, #darkWalnutPriceSelect, 
+    #vintageMirrorPriceSelect, #modernRoundPriceSelect, 
+    #layeredArchPriceSelect {
+        display: none;
+    }
+
+
+
 /* div#vintageMirrorPriceSelect {
     visibility: hidden;
     display:none;
