@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
@@ -71,12 +69,7 @@
 
         ?>
 
-        <!-- Logo Header-->
-        <div class="container text-center">
-            <img src="walnut-ridge-images/wr-logo.png" style="width:230px;height:150px; object-fit:contain">
-        </div>
 
-        <div class="container text-center">
         <header>
             <!--Responsive Offcanvas Navbar-->
             <nav class="navbar navbar-expand-lg" style="background-color:rgba(187, 181, 181);">
@@ -123,12 +116,10 @@
               </nav>
         </header>
 
-        <!-- Logo Header-->
-        <!-- 
-            <div class="container text-center">
+        <!-- Logo Header
+        <div class="container text-center">
             <img src="walnut-ridge-images/wr-logo.png" style="width:230px;height:150px; object-fit:contain">
-        </div> 
-        -->
+        </div> -->
 
         <div class="container text-center pt-4">
             <h1>Check Availability</h1>
@@ -153,12 +144,12 @@
                     <?php if (isset($dateErr)) 
                             echo "<div class=\"invalid-feedback\">$dateErr</div>";
                             ?>
-                    
-            <form>
+                </div>
+            <!-- <form>
                 <div class="col-12 col-md-6 col-lg-4 mx-auto">
                     <label class="form-label">Wedding Date</label>
                     <input type="date" class="form-control" id="date" name="date">
-                </div>
+                </div> -->
 
                 <div>
                     <hr class="mx-auto">
@@ -168,29 +159,30 @@
                 <label class="form-label">Rental Option</label>
                 </div>
 
-                <div class="row">
-                    <div class="col">
-                        <img src="walnut-ridge-images/la-sign.jpg" style="width:200px;height:200px; object-fit:cover;">
-                        <p>Layered Arch</h4>
-                    </div>
-                    <div class="col">
-                        <img src="walnut-ridge-images/mr-4.jpg" style="width:200px;height:200px; object-fit:cover;">
-                        <p>Modern Round</p>
-                    </div>
-                    <div class="col">
-                        <img src="walnut-ridge-images/vm-4.jpg" style="width:200px;height:200px; object-fit:cover;">
-                        <p>Vintage Mirror</p>
-                    </div>
-                    <div class="col">
-                        <img src="walnut-ridge-images/dw-2.jpg" style="width:200px;height:200px; object-fit:cover;">
-                        <p>Dark Walnut</p>
-                    </div>
-                    <div class="col">
-                        <img src="walnut-ridge-images/rw-2.jpg" style="width:200px;height:200px; object-fit:cover;">
-                        <p>Rustic Wood</p>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <img src="walnut-ridge-images/la-sign.jpg" style="width:200px;height:200px; object-fit:cover;">
+                            <p>Layered Arch</h4>
+                        </div>
+                        <div class="col">
+                            <img src="walnut-ridge-images/mr-4.jpg" style="width:200px;height:200px; object-fit:cover;">
+                            <p>Modern Round</p>
+                        </div>
+                        <div class="col">
+                            <img src="walnut-ridge-images/vm-4.jpg" style="width:200px;height:200px; object-fit:cover;">
+                            <p>Vintage Mirror</p>
+                        </div>
+                        <div class="col">
+                            <img src="walnut-ridge-images/dw-2.jpg" style="width:200px;height:200px; object-fit:cover;">
+                            <p>Dark Walnut</p>
+                        </div>
+                        <div class="col">
+                            <img src="walnut-ridge-images/rw-2.jpg" style="width:200px;height:200px; object-fit:cover;">
+                            <p>Rustic Wood</p>
+                        </div>
                     </div>
                 </div>
-
 
                 
 
@@ -207,8 +199,9 @@
                     <?php if (isset($optionErr)) 
                             echo "<div class=\"invalid-feedback\">Please select an option</div>";
                             ?>
-                            
-                <div class="col-12 col-lg-4 mx-auto">
+                      
+                </div>
+                <!-- <div class="col-12 col-lg-4 mx-auto">
                     <select class="form-select" id="option" name="option">
                         <option selected>Please select a rental option</option>
                         <option value="1">Layered Arch Wedding Set</option>
@@ -217,7 +210,7 @@
                         <option value="4">Rustic Wood Wedding Set</option>
                         <option value="5">Dark Walnut Wedding Set</option>
                     </select>
-                </div>
+                </div> -->
 
                 <div>
                     <hr class="mx-auto">
