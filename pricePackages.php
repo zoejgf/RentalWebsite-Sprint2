@@ -46,6 +46,8 @@
                 }
             }
 
+
+
             // IF WE HAVE AN ERROR, MUST REDIRECT BACK TO checkAvail.php
             if ($optionStr == "0" || isset($dateErr)) { 
                 
@@ -58,7 +60,7 @@
                 
                 header("Location: checkAvail.php?$responseText");
 
-                } 
+            }
             
         // WE HAVE GET VARIABLES INSTEAD, means redirected back from chooseExtras.php w/ errors
         } elseif (count($_GET) > 0) {       
@@ -72,6 +74,55 @@
             
             $optionStr = 0;
         }
+
+
+        /*
+            1 - Layered Arch Packages
+            2 - Modern Round 
+            3 - Vintage Mirror
+            4 - Dark Walnut
+            5 - Rustic Wood
+        */
+
+
+        // We are good so far, do we have package availability on this date?  If not, return w/ an error code
+        $datearray = explode("-",$dateStr); // parse date month for inventory use
+        $month = $datearray[1];             // parse date month for inventory use
+
+        if ($optionStr == "1" && $month == "1") {
+            // layered arch not available in January
+            // return w/ error message
+            $message = "Sorry, the Layered Arch Package is not available in January.";
+            $responseText = "options=$optionStr&date=$dateStr&message=$message";
+            header("Location: checkAvail.php?$responseText");
+        }
+
+        if ($optionStr == "2" && $month == "2") {
+            $message = "Sorry, the Modern Round Package is not available in February.";
+            $responseText = "options=$optionStr&date=$dateStr&message=$message";
+            header("Location: checkAvail.php?$responseText");
+        }
+
+        if ($optionStr == "3" && $month == "3") {
+            $message = "Sorry, the Vintage Mirror Package is not available in March.";
+            $responseText = "options=$optionStr&date=$dateStr&message=$message";
+            header("Location: checkAvail.php?$responseText");
+        }
+
+        if ($optionStr == "4" && $month == "4") {
+            $message = "Sorry, the Dark Walnut Package is not available in April.";
+            $responseText = "options=$optionStr&date=$dateStr&message=$message";
+            header("Location: checkAvail.php?$responseText");
+        }
+
+        if ($optionStr == "5" && $month == "5") {
+            $message = "Sorry, the Rustic Wood Package is not available in May.";
+            $responseText = "options=$optionStr&date=$dateStr&message=$message";
+            header("Location: checkAvail.php?$responseText");
+        }
+
+
+
     ?>
 
 <!DOCTYPE html>
@@ -97,6 +148,14 @@
 
     </head>
     <body>
+
+        <?php 
+            /*
+            echo "dateStr: " . $dateStr . "<br>";
+            echo "month: " . $month . "<br>";
+            echo "optionStr: " . $optionStr . "<br>";
+            */
+        ?>
 
         <!-- Image Header-->
         <div class="container text-center">
