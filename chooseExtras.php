@@ -34,10 +34,13 @@
             
         }
 
-        /* 
+        $datearray = explode("-",$date);
+        $month = $datearray[1];
 
+        /* 
         Date retrieved to this point, with some keys below.
             $month - selected month for wedding rental
+            $date - full date selected by user
             $option - selected option from checkAvail page
             $package - selected package from pricePackages page (listed below)
 
