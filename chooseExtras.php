@@ -30,7 +30,7 @@
 
         } elseif (count($_GET) > 0) {
             // Validation error, GET parameters set
-
+            
             
         }
 
