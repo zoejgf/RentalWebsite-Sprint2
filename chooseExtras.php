@@ -34,12 +34,190 @@
             
         }
 
+        if (isset($_GET["date"])) { 
+            // get date and then disable based on month and options
+            $dateStr = $_GET["date"];
+            // dateStr can be month
+            
+
+            if ($dateStr == checkdate(int $2)) {
+                echo 
+            
+                <div class="form-check form-check-inline p-3" id="antiqueJugs">
+                    <input class="form-check-input" type="checkbox" value="" id="antiqueJugs">
+                    <label class="form-check-label" for="antiqueJugs">
+                    Antique Gallon Jugs
+                    <img src="walnut-ridge-images/da-8.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $4 each
+                    </label>
+                </div>
+                <div class="form-check form-check-inline p-3" id="wineJugs">
+                    <input class="form-check-input" type="checkbox" value="" id="wineJugs">
+                    <label class="form-check-label" for="wineJugs">
+                    XL Wine Jugs
+                    <img src="walnut-ridge-images/da-4.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $20 each
+                    </label>
+                </div>
+                <br>
+                <div class="form-check form-check-inline p-3" id="clearBall">
+                    <input class="form-check-input" type="checkbox" value="" id="clearBall">
+                    <label class="form-check-label" for="clearBall">
+                    Clear Antique Ball Jars
+                    <img src="walnut-ridge-images/da-7.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $30/50 Jars (Assorted)
+                    </label>
+                </div>
+                <div class="form-check form-check-inline p-3" id="blueBall">
+                    <input class="form-check-input" type="checkbox" value="" id="blueBall">
+                    <label class="form-check-label" for="blueBall">
+                    Blue Antique Ball Jars
+                    <img src="walnut-ridge-images/da-6.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $30/25 Jars (Assorted)
+                    </label>
+                </div>
+            </div>
+
+            <div class="container text-center">
+                <div class="form-check form-check-inline p-3" id="delivery">
+                    <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+                    <label class="btn btn-primary" for="btn-check">Add Delivery</label>
+                </div>
+            </div>
+                
+
+                
+            } elseif ($dateStr == checkdate(int $3)) {
+                echo<div class="container text-center">
+                <div class="form-check form-check-inline p-3" id="vintageCouch">
+                    <input class="form-check-input" type="checkbox" value="" id="vintageCouch">
+                    <label class="form-check-label" for="vintageCouch">
+                    Vintage Couch
+                    <img src="walnut-ridge-images/da-1.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $99 add on
+                    </label>
+                </div>
+                
+               
+                </div>
+                <br>
+                <div class="form-check form-check-inline p-3" id="clearBall">
+                    <input class="form-check-input" type="checkbox" value="" id="clearBall">
+                    <label class="form-check-label" for="clearBall">
+                    Clear Antique Ball Jars
+                    <img src="walnut-ridge-images/da-7.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $30/50 Jars (Assorted)
+                    </label>
+                </div>
+                <div class="form-check form-check-inline p-3" id="blueBall">
+                    <input class="form-check-input" type="checkbox" value="" id="blueBall">
+                    <label class="form-check-label" for="blueBall">
+                    Blue Antique Ball Jars
+                    <img src="walnut-ridge-images/da-6.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $30/25 Jars (Assorted)
+                    </label>
+                </div>
+            </div>
+
+            <div class="container text-center">
+                <div class="form-check form-check-inline p-3" id="delivery">
+                    <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+                    <label class="btn btn-primary" for="btn-check">Add Delivery</label>
+                </div>
+            </div>
+            } elseif ($dateStr == checkdate(int $4)) {
+                <div class="container text-center">
+                <div class="form-check form-check-inline p-3" id="vintageCouch">
+                    <input class="form-check-input" type="checkbox" value="" id="vintageCouch">
+                    <label class="form-check-label" for="vintageCouch">
+                    Vintage Couch
+                    <img src="walnut-ridge-images/da-1.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $99 add on
+                    </label>
+                </div>
+                <div class="form-check form-check-inline p-3" id="antiqueJugs">
+                    <input class="form-check-input" type="checkbox" value="" id="antiqueJugs">
+                    <label class="form-check-label" for="antiqueJugs">
+                    Antique Gallon Jugs
+                    <img src="walnut-ridge-images/da-8.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $4 each
+                    </label>
+                </div>
+                <div class="form-check form-check-inline p-3" id="wineJugs">
+                    <input class="form-check-input" type="checkbox" value="" id="wineJugs">
+                    <label class="form-check-label" for="wineJugs">
+                    XL Wine Jugs
+                    <img src="walnut-ridge-images/da-4.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $20 each
+                    </label>
+                </div>
+                <br>
+                
+            
+
+            <div class="container text-center">
+                <div class="form-check form-check-inline p-3" id="delivery">
+                    <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+                    <label class="btn btn-primary" for="btn-check">Add Delivery</label>
+                </div>
+            </div>
+            } elseif ($dateStr == checkdate(int $5)) {
+                <div class="container text-center">
+                <div class="form-check form-check-inline p-3" id="vintageCouch">
+                    <input class="form-check-input" type="checkbox" value="" id="vintageCouch">
+                    <label class="form-check-label" for="vintageCouch">
+                    Vintage Couch
+                    <img src="walnut-ridge-images/da-1.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $99 add on
+                    </label>
+                </div>
+                <div class="form-check form-check-inline p-3" id="antiqueJugs">
+                    <input class="form-check-input" type="checkbox" value="" id="antiqueJugs">
+                    <label class="form-check-label" for="antiqueJugs">
+                    Antique Gallon Jugs
+                    <img src="walnut-ridge-images/da-8.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $4 each
+                    </label>
+                </div>
+                <div class="form-check form-check-inline p-3" id="wineJugs">
+                    <input class="form-check-input" type="checkbox" value="" id="wineJugs">
+                    <label class="form-check-label" for="wineJugs">
+                    XL Wine Jugs
+                    <img src="walnut-ridge-images/da-4.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $20 each
+                    </label>
+                </div>
+                <br>
+                <div class="form-check form-check-inline p-3" id="clearBall">
+                    <input class="form-check-input" type="checkbox" value="" id="clearBall">
+                    <label class="form-check-label" for="clearBall">
+                    Clear Antique Ball Jars
+                    <img src="walnut-ridge-images/da-7.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $30/50 Jars (Assorted)
+                    </label>
+                </div>
+                <div class="form-check form-check-inline p-3" id="blueBall">
+                    <input class="form-check-input" type="checkbox" value="" id="blueBall">
+                    <label class="form-check-label" for="blueBall">
+                    Blue Antique Ball Jars
+                    <img src="walnut-ridge-images/da-6.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $30/25 Jars (Assorted)
+                    </label>
+                </div>
+            </div>
+
+            }
+
+        }
+
         /* 
 
         Date retrieved to this point, with some keys below.
             $month - selected month for wedding rental
             $option - selected option from checkAvail page
             $package - selected package from pricePackages page (listed below)
+
+            
 
          
         Checkboxes and their respective packages (Packages w/ their Extras from pricePackages.php)
