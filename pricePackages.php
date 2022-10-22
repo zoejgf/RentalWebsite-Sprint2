@@ -714,7 +714,7 @@
                         <div class="form-check form-check-inline p-3" id="extrasCheck">
                             <input class="form-check-input" type="checkbox"  name="checks[]" value="typeWriter" id="typeWriter">
                             <label class="form-check-label" for="typeWriter">
-                                Include Vintage Type Writter
+                                Include Vintage Typewriter
                               <img src="walnut-ridge-images\Donnie+Rosie+Photo+1-9647.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                             $99 extra
                             </label>
