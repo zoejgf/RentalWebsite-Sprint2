@@ -80,7 +80,6 @@
                 2 - No Seating 245
                 3 - Pick 4 199
 
-
 */
 
     ?>
@@ -125,13 +124,15 @@
                 if (!empty($_POST['checks'])) {
                     foreach($_POST['checks'] as $CHECK) {
                         // cycle through selected checkboxes, and put into stack of hidden fields
-                        echo "<input type=\"hidden\" name=\"checks[]\" value=\"$CHECK\" >\n";
+                        echo "<input type=\"hidden\" name=\"checks[]\" value=\"$CHECK\" > ";
                     }
+                    echo "\n";
                 }
 
             
             ?>
             <div class="container text-center">
+                <?php if ($month != "2") { // If February, do not show the vintage couch ?>
                 <div class="form-check form-check-inline p-3" id="vintageCouch">
                     <input class="form-check-input" type="checkbox" value="" id="vintageCouch">
                     <label class="form-check-label" for="vintageCouch">
@@ -139,7 +140,9 @@
                     <img src="walnut-ridge-images/da-1.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                     $99 add on
                     </label>
-                </div>
+                </div> <?php } ?>
+                
+                <?php if ($month != "3") { // If March, do not show the jugs ?>
                 <div class="form-check form-check-inline p-3" id="antiqueJugs">
                     <input class="form-check-input" type="checkbox" value="" id="antiqueJugs">
                     <label class="form-check-label" for="antiqueJugs">
@@ -155,8 +158,10 @@
                     <img src="walnut-ridge-images/da-4.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                     $20 each
                     </label>
-                </div>
+                </div> <?php } ?>
                 <br>
+                
+                <?php if ($month != "4") { // jars not available in April ?>
                 <div class="form-check form-check-inline p-3" id="clearBall">
                     <input class="form-check-input" type="checkbox" value="" id="clearBall">
                     <label class="form-check-label" for="clearBall">
@@ -172,15 +177,16 @@
                     <img src="walnut-ridge-images/da-6.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                     $30/25 Jars (Assorted)
                     </label>
-                </div>
+                </div> <?php } ?>
             </div>
 
+            <?php if ($month != "5") { // delivery not available in May ?>
             <div class="container text-center">
                 <div class="form-check form-check-inline p-3" id="delivery">
                     <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
                     <label class="btn btn-primary" for="btn-check">Add Delivery</label>
                 </div>
-            </div>
+            </div><?php } ?>
 
             <div class="p-2">
                 <hr class="mx-auto">
