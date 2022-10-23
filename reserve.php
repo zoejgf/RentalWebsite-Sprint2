@@ -221,6 +221,7 @@
             $option - selected option from checkAvail page
             $package - selected package from pricePackages page (listed below)
             $check[] - add-ons from pricePackages page
+            $extras[] - extras selected from chooseExtras.php
 
          
         Checkboxes and their respective packages (Packages w/ their Extras from pricePackages.php)
@@ -341,8 +342,6 @@
 
                 </div>
                 
-
-
                 <div class="row">
                     <div class="col-6 col-md-6 mt-3">
                         <label for="name" class="form-label">Name</label>
