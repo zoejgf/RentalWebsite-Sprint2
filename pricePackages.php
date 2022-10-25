@@ -568,14 +568,16 @@
                             <label class="form-check-label" for="smallModernSign">
                               Include Small Custom Mirror
                               <img src="walnut-ridge-images\_DSC0713.jpeg" alt="small custom sign display" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                            at $40.00
                             </label>
                         </div>
     
                         <div class="form-check form-check-inline p-3" id="extrasCheck">
                             <input class="form-check-input" type="checkbox"  name="checks[]" value="medModernSign" id="medModernSign">
                             <label class="form-check-label" for="medModernSign">
-                              Include Medium Custom Mirror
+                              Medium Custom Mirror
                               <img src="walnut-ridge-images\_DSC0762.jpeg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                              additional $60
                             </label>
                         </div>
 
@@ -584,6 +586,7 @@
                             <label class="form-check-label" for="larModernSign">
                               Include Large Custom Mirror
                               <img src="walnut-ridge-images\_DSC0676.jpeg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                              at $80
                             </label>
                         </div>
                     </div>

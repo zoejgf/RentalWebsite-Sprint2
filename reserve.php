@@ -60,13 +60,13 @@
             global $totalPrice;
 
             if ($c == "modernSign")
-                $returnPrice = 0;
+                $returnPrice = 275;
             if ($c == "smallModernSign")
-                $returnPrice = 0;
+                $returnPrice = 40;
             if ($c == "medModernSign")
-                $returnPrice = 0;
+                $returnPrice = 60;
             if ($c == "larModernSign")
-                $returnPrice = 0;
+                $returnPrice = 80;
             if ($c == "aisleRunner")
                 $returnPrice = 99;
             if ($c == "typeWriter")
