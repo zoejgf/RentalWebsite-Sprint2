@@ -401,12 +401,13 @@ label.btn.btn-primary {
     padding: 7px 70px 7px 70px;
     background-color: rgb(219, 196, 189);
     border-color: rgb(219, 196, 189);
-    --bs-btn-active-bg: rgb(221, 161, 146);
-    --bs-btn-active-border-color: rgb(221, 161, 146);
+    --bs-btn-active-bg: rgb(221, 168, 155);
+    --bs-btn-active-border-color: rgb(239, 201, 192);
+    border-width: 4px;
 }
 label.btn.btn-primary:hover {
-    background-color: rgb(221, 169, 156);
-    border-color: rgb(221, 169, 156);
+    background-color: rgb(222, 182, 172);
+    border-color: rgb(222, 182, 172);
 }
 
 
