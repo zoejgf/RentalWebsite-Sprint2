@@ -149,14 +149,6 @@
     </head>
     <body>
 
-        <?php 
-            /*
-            echo "dateStr: " . $dateStr . "<br>";
-            echo "month: " . $month . "<br>";
-            echo "optionStr: " . $optionStr . "<br>";
-            */
-        ?>
-
         <!-- Image Header-->
         <div class="container text-center">
             <img src="walnut-ridge-images/wr-logo.png" style="width:230px;height:150px; object-fit:contain">

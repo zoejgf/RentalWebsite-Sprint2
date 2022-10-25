@@ -15,7 +15,9 @@
             $package = $_POST["package"];
             /*if (!empty($_POST["checks"]))
                 $addOns = $_POST["checks"];*/
-
+            $name = $_POST["name"];
+            $email = $_POST["email"];
+            $phone = $_POST["phone"];
             
             // ERROR CHECK - PACKAGE PRESENT?  IF NOT, REDIRECT BACK
             if (!isset($_POST["package"])) {
@@ -60,13 +62,13 @@
             global $totalPrice;
 
             if ($c == "modernSign")
-                $returnPrice = 275;
+                $returnPrice = 0;
             if ($c == "smallModernSign")
-                $returnPrice = 40;
+                $returnPrice = 0;
             if ($c == "medModernSign")
-                $returnPrice = 60;
+                $returnPrice = 0;
             if ($c == "larModernSign")
-                $returnPrice = 80;
+                $returnPrice = 0;
             if ($c == "aisleRunner")
                 $returnPrice = 99;
             if ($c == "typeWriter")
@@ -301,93 +303,55 @@
         <!------ Previously selected information will be shown FROM php ------>
 
         <div class="container" style="width:70%">
-            <form class="px-4 mt-3 g-3" method="post" action="dump.php">
+            
+            <div class="row">
+                <div class="col-12 col-sm-6 mt-3 pe-sm-5 text-center text-sm-end text-sm-start ">
+                    <span class="fw-bolder">Name:</span> <?php echo $name ?>        
+                </div>
+                <div class="col-12 col-sm-6 mt-3 ps-sm-5 text-center text-sm-start ">
+                    <span class="fw-bolder">Phone:</span> <?php echo $phone ?>        
+                </div>
+                <div class="col-12 text-center mt-3">
+                    email: <?php echo $email ?>        
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5 mt-3 text-end h6">
+                    <?php echo "$packageName"; ?>
+                </div>
+                <div class="col-2"></div>
+                <div class="col-5 mt-3 h6">
+                    <?php echo "\$$packagePrice"; ?>
+                </div>
                 <?php
-                    //name="checks[]"
-                    // https://makitweb.com/get-checked-checkboxes-value-with-php/
                     if (!empty($_POST['checks'])) {
-                        foreach($_POST['checks'] as $CHECK) {
-                            // cycle through selected checkboxes, and put into stack of hidden fields
-                            echo "<input type=\"hidden\" name=\"checks[]\" value=\"$CHECK\" > ";
-                        }
+                        foreach($_POST['checks'] as $CHECK) { ?>
+                        <div class="col-5 text-end h6"><?php echo returnAddOnText($CHECK)?></div>
+                        <div class="col-2"></div>
+                        <div class="col-5 h6"><?php echo "$" . returnAddOnPrice($CHECK)?></div>
+                            <?php
+                        } 
                     }
-                    // TODO - PROCESS INTO HIDDEN FIELDS!
                     // values for extras - delivery/?, couch/99, antique/4-ea, wine/20-ea, clearJars/30, blueJars/30
                     if (!empty($_POST['extras'])) {
-                        foreach($_POST['extras'] as $EXTRA) {
-                            echo "<input type=\"hidden\" name=\"extras[]\" value=\"$EXTRA\" > ";
+                        foreach($_POST['extras'] as $EXTRA) { ?>
+                        <div class="col-5 text-end h6"> <?php echo returnExtraName($EXTRA); ?></div>
+                        <div class="col-2"></div>
+                        <div class="col-5 h6"><?php echo "$" . returnExtraPrice($EXTRA); ?></div>
+                        <?php
                         }
                     }
-
-                    echo "\n";
-                    echo "<input type=\"hidden\" name=\"date\" value=\"$date\" >";
-                    echo "<input type=\"hidden\" name=\"option\" value=\"$option\" >";
-                    echo "<input type=\"hidden\" name=\"package\" value=\"$package\" >";
-
-                ?>
-
-                <div class="row">
-                    <div class="col-5 mt-3 text-end h6">
-                        <?php echo "$packageName"; ?>
-                    </div>
-                    <div class="col-2"></div>
-                    <div class="col-5 mt-3 h6">
-                        <?php echo "\$$packagePrice"; ?>
-                    </div>
-                    <?php
-                        if (!empty($_POST['checks'])) {
-                            foreach($_POST['checks'] as $CHECK) { ?>
-                            <div class="col-5 text-end h6"><?php echo returnAddOnText($CHECK)?></div>
-                            <div class="col-2"></div>
-                            <div class="col-5 h6"><?php echo "$" . returnAddOnPrice($CHECK)?></div>
-                                <?php
-                            } 
-                        }
-                        // values for extras - delivery/?, couch/99, antique/4-ea, wine/20-ea, clearJars/30, blueJars/30
-                        if (!empty($_POST['extras'])) {
-                            foreach($_POST['extras'] as $EXTRA) { ?>
-                            <div class="col-5 text-end h6"> <?php echo returnExtraName($EXTRA); ?></div>
-                            <div class="col-2"></div>
-                            <div class="col-5 h6"><?php echo "$" . returnExtraPrice($EXTRA); ?></div>
-                            <?php
-                            }
-                        }
-                        ?>
-                    <div class="col-5 mt-3 text-end h6 fw-bolder">
-                        Total Price (extra w/ multiple Jugs): 
-                    </div>
-                    <div class="col-2"></div>
-                    <div class="col-5 mt-3 h6 fw-bolder">
-                        <?php echo "\$$totalPrice"; ?>
-                    </div>
-
+                    ?>
+                <div class="col-5 mt-3 text-end h6 fw-bolder">
+                    Total Price (extra w/ multiple Jugs): 
                 </div>
+                <div class="col-2"></div>
+                <div class="col-5 mt-3 h6 fw-bolder">
+                    <?php echo "\$$totalPrice"; ?>
+                </div>
+
+            </div>
                 
-                <div class="row">
-                    <div class="col-6 col-md-6 mt-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input class="form-control" type="text" id="name" name="name">
-                    </div>
-                
-                    <div class="col-6 col-md-6 mt-3">
-                        <label for="phone" class="form-label">Phone</label>
-                        <input class="form-control" type="tel" id="phone" name="phone">
-                    </div>
-
-                    <div class="col-12 mt-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input class="form-control" type="email" id="email" name="email">
-                    </div>
-
-                </div>
-
-                <div class="row mx-auto text-center">
-                    <div class="col-12">
-                        <input type="submit" class="button" value="Reserve" style="margin: auto; padding: 0.3em 1em;">
-                        <!-- <button type="submit" class="btn btn-primary" value="Send" style="padding: 2px 1em;">Send Request</button> -->
-                    </div>
-                </div>
-            </form>
         </div>
     </body>
 </html>

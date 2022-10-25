@@ -24,8 +24,6 @@
                 }
 
                 $package = $_POST["package"];
-
-                echo "Selected date: " . $date . ", selected option: " . $option . ", selected package: " . $package;
             }
 
         } elseif (count($_GET) > 0) {
