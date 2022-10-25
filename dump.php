@@ -312,7 +312,7 @@
                     <span class="fw-bolder">Phone:</span> <?php echo $phone ?>        
                 </div>
                 <div class="col-12 text-center mt-3">
-                    email: <?php echo $email ?>        
+                <span class="fw-bolder">Email:</span> <?php echo $email ?>        
                 </div>
             </div>
             <div class="row">
