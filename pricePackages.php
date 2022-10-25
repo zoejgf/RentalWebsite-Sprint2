@@ -1,4 +1,3 @@
-
 <?php
         // DISPLAY CODE ERRORS IN DEVELOPMENT!
         ini_set('display_errors', 1);
