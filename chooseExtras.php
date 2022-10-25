@@ -42,6 +42,8 @@
             $option - selected option from checkAvail page
             $package - selected package from pricePackages page (listed below)
 
+            
+
          
         Checkboxes and their respective packages (Packages w/ their Extras from pricePackages.php)
             Modern Round - modernRound
