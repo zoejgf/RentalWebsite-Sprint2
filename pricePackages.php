@@ -5,6 +5,7 @@
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
         // -----------------------------------
+        $responseText = "";
 
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
         $dateNow = new DateTime;                            // Create a new DateTime object
