@@ -112,7 +112,7 @@
     <body>
         <!------- Logo Header ------>
         <div class="container text-center">
-            <img src="walnut-ridge-images/wr-logo.png" style="width:230px;height:150px; object-fit:contain">
+            <img src="walnut-ridge-images/wr-logo.png" style="width:260px;height:110px; object-fit:cover;">
         </div>
         <div class="container text-center">
             <h1>Choose Your Extras</h1>
@@ -216,7 +216,10 @@
             <div class="container text-center">
                 <div class="form-check form-check-inline p-3" id="delivery">
                     <input type="checkbox" name="extras[]" value="delivery" class="btn-check" id="btn-check" autocomplete="off">
-                    <label class="btn btn-primary" for="btn-check">Add Delivery</label>
+                    <label class="btn btn-primary" for="btn-check">
+                        <i class="fa-solid fa-truck-fast" aria-hidden="true"></i>
+                        Add Delivery
+                    </label>
                 </div>
             </div><?php } ?>
 

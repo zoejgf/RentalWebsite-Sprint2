@@ -295,7 +295,7 @@
         ?>
         <!------- Logo Header ------>
         <div class="container text-center">
-            <img src="walnut-ridge-images/wr-logo.png" style="width:230px;height:150px; object-fit:contain">
+        <img src="walnut-ridge-images/wr-logo.png" style="width:260px;height:110px; object-fit:cover;">
         </div>
 
         <!-- Breadcrumb -->

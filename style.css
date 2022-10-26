@@ -468,7 +468,7 @@ div#delivery {
     list-style: none;
     display: flex;
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 2%;
 }
 .steps .step {
     white-space: nowrap;
@@ -480,6 +480,7 @@ div#delivery {
     margin-right: 30px;
     padding: 0 20px;
 }
+
 .steps .step > a {
     text-decoration: none !important;
     color: white !important;
