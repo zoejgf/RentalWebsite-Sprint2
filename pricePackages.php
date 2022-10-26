@@ -138,6 +138,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://use.typekit.net/kir2pvu.css">
+        <script src="https://kit.fontawesome.com/3cd733d9ed.js" crossorigin="anonymous"></script>        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
        <!-- CSS only -->
@@ -153,6 +154,33 @@
         <div class="container text-center">
             <img src="walnut-ridge-images/wr-logo.png" style="width:230px;height:150px; object-fit:contain">
         </div>
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumbs">
+                <ul class="steps">
+                    <li class="step">
+                    <a href="checkAvail.php">
+                        <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
+                    </a>
+                    </li>
+                    <li class="step">
+                    <a href="pricePackages.php">
+                        <i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i> Price Packages
+                    </a>
+                    </li>
+                    <li class="step">
+                    <a href="chooseExtras.php">
+                        <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Extras
+                    </a>
+                    </li>
+                    <li class="step">
+                    <a href="reserve.php">
+                        <i class="fa-regular fa-address-card" aria-hidden="true"></i> Reserve
+                    </a>
+                    </li>
+                </ul>
+            </div>
+        <!-- end breadcrumb code -->
 
         <div class="container text-center">
             <h1>Select Your Package</h1>
