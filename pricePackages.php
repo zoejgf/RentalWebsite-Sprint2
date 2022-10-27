@@ -159,7 +159,7 @@
         <div class="container pt-3">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">                
             <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item">
+                    <li class="breadcrumb-item visited">
                         <a href="checkAvail.php">
                             <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
                         </a>
@@ -167,7 +167,7 @@
                             Check Availability
                         </a>
                     </li>
-                    <li class="breadcrumb-item">
+                    <li class="breadcrumb-item visited">
                         <a href="pricePackages.php">
                             <i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i>
                         </a>

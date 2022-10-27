@@ -489,14 +489,22 @@ li.breadcrumb-item a:hover {
     color: white;
     cursor: pointer;
 }
-li.breadcrumb-item a.is-active {
+/*li.breadcrumb-item a.is-active {
     display:inline;
     visibility: visible;
+}*/
+li.breadcrumb-item.visited {
+    padding-right: 15px; 
 }
+li.breadcrumb-item:not(.visited){
+    visibility:hidden;
+}
+/*
 li.breadcrumb-item a.crumb:not(.is-active){
     visibility:hidden; 
     display:none
 }
+*/
 li.breadcrumb-item::before {
     padding: none;
 }

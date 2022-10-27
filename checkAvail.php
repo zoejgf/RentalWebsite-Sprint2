@@ -95,7 +95,7 @@
                             <a class="nav-link" href="#">Meet the Owners</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a id="avail" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                               Wedding Rentals
                             </a>
                             <ul class="dropdown-menu">
@@ -111,7 +111,7 @@
                             <a class="nav-link" href="gallery.html">Photo Gallery</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="checkAvail.php">Check Availability</a>
+                            <a class="nav-link" id="avail" href="checkAvail.php">Check Availability</a>
                         </li>
                     </ul>
                     </div>
@@ -128,7 +128,7 @@
         <div class="container pt-3">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">                
             <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item">
+                    <li class="breadcrumb-item visited">
                         <a href="checkAvail.php">
                             <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
                         </a>
