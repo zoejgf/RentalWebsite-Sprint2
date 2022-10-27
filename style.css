@@ -464,72 +464,40 @@ div#delivery {
 } */
 
 /* Breadcrumb CSS*/
-.steps {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding-top: 2%;
+ol.breadcrumb {
+    --bs-breadcrumb-divider-color: white;
 }
-.steps .step {
-    white-space: nowrap;
-    transition: 0.3s ease-in-out;
-    background: rgb(219, 196, 189);
-    position: relative;
-    height: 50px;
-    line-height: 50px;
-    margin-right: 30px;
-    padding: 0 20px;
+li.breadcrumb-item {
+    background-color: rgb(213,182,174);
+    padding: 15px 0px 15px 0px;
 }
-
-.steps .step > a {
-    text-decoration: none !important;
-    color: white !important;
+li.breadcrumb-item:last-of-type{
+    padding: 15px 15px 15px 0px;
 }
-.steps .step:last-child {
-    margin-right: 0;
+li.breadcrumb-item:first-of-type{
+    padding: 15px 0px 15px 15px;
 }
-.steps .step::before {
-    transition: 0.3s ease-in-out;
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -25px;
-    border-left: 25px solid transparent;
-    border-top: 25px solid rgb(219, 196, 189);
-    border-bottom: 25px solid rgb(219, 196, 189);
+.breadcrumb-item a {
+    color: white;
+    text-decoration: none;
+    padding-right: 0;
 }
-.steps .step:first-child::before {
-    display: none;
+li.breadcrumb-item i {
+    color:white;
 }
-.steps .step::after {
-    transition: 0.3s ease-in-out;
-    position: absolute;
-    top: 0;
-    right: -25px;
-    border-left: 25px solid rgb(219, 196, 189);
-    border-top: 25px solid transparent;
-    border-bottom: 25px solid transparent;
-    content: "";
+li.breadcrumb-item a:hover {
+    color: white;
+    cursor: pointer;
 }
-.steps .step:last-child::after {
-    display: none;
+li.breadcrumb-item a.is-active {
+    display:inline;
+    visibility: visible;
 }
-.steps .step:hover {
-    background: rgb(201, 168, 160);
+li.breadcrumb-item a.crumb:not(.is-active){
+    visibility:hidden; 
+    display:none
 }
-.steps .step:hover::before {
-    border-top-color: rgb(201, 168, 160);
-    border-bottom-color: rgb(201, 168, 160);
-}
-.steps .step:hover::after {
-    border-left-color: rgb(201, 168, 160);
-}
-.steps .step:first-child {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-.steps .step:last-child {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+li.breadcrumb-item::before {
+    padding: none;
 }
 /*End Breadcrumb Styling*/

@@ -119,30 +119,44 @@
         </div>
 
         <!-- Breadcrumb -->
-        <div class="breadcrumbs">
-                <ul class="steps">
-                    <li class="step">
-                    <a href="checkAvail.php">
-                        <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
-                    </a>
+        <div class="container pt-3">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">                
+            <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a href="checkAvail.php">
+                            <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
+                        </a>
+                        <a class="crumb" href="checkAvail.php">
+                            Check Availability
+                        </a>
                     </li>
-                    <li class="step">
-                    <a href="pricePackages.php">
-                        <i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i> Price Packages
-                    </a>
+                    <li class="breadcrumb-item">
+                        <a href="pricePackages.php">
+                            <i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i>
+                        </a>
+                        <a class="crumb" href="pricePackages.php">
+                            Price Packages
+                        </a>
                     </li>
-                    <li class="step">
-                    <a href="chooseExtras.php">
-                        <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Extras
-                    </a>
+                    <li class="breadcrumb-item">
+                        <a href="chooseExtras.php">
+                            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+                        </a>
+                        <a class="is-active crumb" href="chooseExtras.php">
+                            Extras
+                        </a>
                     </li>
-                    <li class="step">
-                    <a href="reserve.php">
-                        <i class="fa-regular fa-address-card" aria-hidden="true"></i> Reserve
-                    </a>
+                    <li class="breadcrumb-item">
+                        <a href="reserve.php">
+                            <i class="fa-regular fa-address-card" aria-hidden="true"></i>
+                        </a>
+                        <a class="crumb" href="reserve.php">
+                            Reserve
+                        </a>
                     </li>
-                </ul>
-            </div>
+                </ol>
+            </nav>
+        </div>
         <!-- end breadcrumb code -->
 
         <form method="post" action="reserve.php">
