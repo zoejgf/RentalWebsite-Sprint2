@@ -29,19 +29,19 @@
                 }
             }
 
-            if (!isset($_POST["option"])) {         // is a value NOT set for "option", if so, error
-                $optionErr = "Please select a rental option.";
-                $optionStr = "0";
+            if (!isset($_POST["set"])) {         // is a value NOT set for "option", if so, error
+                $setErr = "Please select a rental option.";
+                $setStr = "0";
             } else {
-                if (empty($_POST["option"])) {      // triggers if option not selected from checkAvail.php
-                    $optionErr = "Please select a rental option.";
-                    $optionStr = "0";               // set error code
+                if (empty($_POST["set"])) {      // triggers if option not selected from checkAvail.php
+                    $setErr = "Please select a rental option.";
+                    $setStr = "0";               // set error code
                 } else {
-                    if ($_POST["option"] == 0) { 
-                        $optionErr = "Please select a rental option.";
-                        $optionStr = "0";
+                    if ($_POST["set"] == 0) { 
+                        $setErr = "Please select a rental option.";
+                        $setStr = "0";
                     } else {                        // save previuosly entered value if redirect, re-populate form as required
-                        $optionStr = $_POST["option"];
+                        $setStr = $_POST["set"];
                     }
                 }
             }
@@ -49,22 +49,24 @@
 
 
             // IF WE HAVE AN ERROR, MUST REDIRECT BACK TO checkAvail.php
-            if ($optionStr == "0" || isset($dateErr)) { 
+            if ($setStr == "0" || isset($dateErr)) { 
                 
-                $responseText .= "option=$optionStr";
+                $responseText .= "set=$setStr";
 
                 if (isset($dateErr))
                     $responseText .= "&date=$dateErr";
                 else
                     $responseText .= "&date=$dateStr";
                 
+                //error_log($responseText);
+
                 header("Location: checkAvail.php?$responseText");
 
             }
             
         // WE HAVE GET VARIABLES INSTEAD, means redirected back from chooseExtras.php w/ errors
         } elseif (count($_GET) > 0) {       
-            $optionStr = $_GET["option"];
+            $setStr = $_GET["option"];
             $dateStr = $_GET["date"];
             $packageErr = $_GET["package"];    // if 0, means we did not select.  error, test below
 
@@ -72,7 +74,7 @@
             echo "HOW DID WE GET HERE?";
             // echo "We have NO post variables, first visit to page";
             
-            $optionStr = 0;
+            $setStr = 0;
         }
 
 
@@ -89,35 +91,35 @@
         $datearray = explode("-",$dateStr); // parse date month for inventory use
         $month = $datearray[1];             // parse date month for inventory use
 
-        if ($optionStr == "1" && $month == "1") {
+        if ($setStr == "1" && $month == "1") {
             // layered arch not available in January
             // return w/ error message
             $message = "Sorry, the Layered Arch Package is not available in January.";
-            $responseText = "options=$optionStr&date=$dateStr&message=$message";
+            $responseText = "options=$setStr&date=$dateStr&message=$message";
             header("Location: checkAvail.php?$responseText");
         }
 
-        if ($optionStr == "2" && $month == "2") {
+        if ($setStr == "2" && $month == "2") {
             $message = "Sorry, the Modern Round Package is not available in February.";
-            $responseText = "options=$optionStr&date=$dateStr&message=$message";
+            $responseText = "options=$setStr&date=$dateStr&message=$message";
             header("Location: checkAvail.php?$responseText");
         }
 
-        if ($optionStr == "3" && $month == "3") {
+        if ($setStr == "3" && $month == "3") {
             $message = "Sorry, the Vintage Mirror Package is not available in March.";
-            $responseText = "options=$optionStr&date=$dateStr&message=$message";
+            $responseText = "options=$setStr&date=$dateStr&message=$message";
             header("Location: checkAvail.php?$responseText");
         }
 
-        if ($optionStr == "4" && $month == "4") {
+        if ($setStr == "4" && $month == "4") {
             $message = "Sorry, the Dark Walnut Package is not available in April.";
-            $responseText = "options=$optionStr&date=$dateStr&message=$message";
+            $responseText = "options=$setStr&date=$dateStr&message=$message";
             header("Location: checkAvail.php?$responseText");
         }
 
-        if ($optionStr == "5" && $month == "5") {
+        if ($setStr == "5" && $month == "5") {
             $message = "Sorry, the Rustic Wood Package is not available in May.";
-            $responseText = "options=$optionStr&date=$dateStr&message=$message";
+            $responseText = "options=$setStr&date=$dateStr&message=$message";
             header("Location: checkAvail.php?$responseText");
         }
 
@@ -207,7 +209,7 @@
         <div class="container text-center">
 
 
-            <div id="layeredArchPriceSelect" <?php if ($optionStr == "1") echo "style=\"display: block;\"";?>> <!-- PARENT DIV -->
+            <div id="layeredArchPriceSelect" <?php if ($setStr == "1") echo "style=\"display: block;\"";?>> <!-- PARENT DIV -->
 
                 <div class="row">
                     <div class="col-12">
@@ -294,9 +296,9 @@
                         <div class="col-12 col-lg-4 mx-auto">
                             <select class="form-select<?php if(isset($packageErr)) echo " is-invalid"; ?>" id="option" name="package">
                                 <option value="0" selected>Please select a rental option</option>
-                                <option value="1">Full Set Rental $849</option>
-                                <option value="2">Pick 6 Rental $749</option>
-                                <option value="3">Pick 4 Rental $699</option>
+                                <option value="1">Layered Arch Full Set Rental $849</option>
+                                <option value="2">Layered Arch Pick 6 Rental $749</option>
+                                <option value="3">Layered Arch Pick 4 Rental $699</option>
                             
                             </select>
 
@@ -304,7 +306,7 @@
                             echo "<div class=\"invalid-feedback\">Please select a rental option</div>";
                             ?>
 
-                            <input type="hidden" name="option" value="<?php echo $optionStr ?>">
+                            <input type="hidden" name="set" value="<?php echo $setStr ?>">
                             <input type="hidden" name="date" value="<?php echo $dateStr ?>">    
 
                         </div>
@@ -326,7 +328,7 @@
             </div>
         
 
-            <div id="modernRoundPriceSelect" <?php if ($optionStr == "2") echo "style=\"display: block;\"";?>>
+            <div id="modernRoundPriceSelect" <?php if ($setStr == "2") echo "style=\"display: block;\"";?>>
 
                 <h1>Modern Round</h1>
                 <div class="row">
@@ -442,7 +444,7 @@
                             echo "<div class=\"invalid-feedback\">Please select a rental option</div>";
                             ?>
 
-                        <input type="hidden" name="option" value="<?php echo $optionStr ?>">
+                        <input type="hidden" name="set" value="<?php echo $setStr ?>">
                         <input type="hidden" name="date" value="<?php echo $dateStr ?>">    
 
                     </div>
@@ -475,7 +477,7 @@
             <!--Next package-->
 
 
-            <div id="vintageMirrorPriceSelect" <?php if ($optionStr == "3") echo "style=\"display: block;\"";?>>
+            <div id="vintageMirrorPriceSelect" <?php if ($setStr == "3") echo "style=\"display: block;\"";?>>
 
                 <h1>Vintage Mirror</h1>
                 <div class="row">
@@ -580,10 +582,10 @@
                     <div class="col-12 col-lg-4 mx-auto">
                         <select class="form-select<?php if(isset($packageErr)) echo " is-invalid"; ?>" id="option" name="package">
                             <option value="0" selected>Please select a rental option</option>
-                            <option value="1">Platinum Package Rental $849</option>
-                            <option value="2">Gold Package Rental $799</option>
-                            <option value="3">Pick 6 Rental $649</option>
-                            <option value="4">Pick 4 Rental $599</option>
+                            <option value="1">Vintage Mirror Platinum Package Rental $849</option>
+                            <option value="2">Vintage Mirror Gold Package Rental $799</option>
+                            <option value="3">Vintage Mirror Pick 6 Rental $649</option>
+                            <option value="4">Vintage Mirror Pick 4 Rental $599</option>
                         
                         </select>
 
@@ -591,7 +593,7 @@
                             echo "<div class=\"invalid-feedback\">Please select a rental option</div>";
                             ?>
 
-                        <input type="hidden" name="option" value="<?php echo $optionStr ?>">
+                        <input type="hidden" name="set" value="<?php echo $setStr ?>">
                         <input type="hidden" name="date" value="<?php echo $dateStr ?>">    
 
                     </div>
@@ -641,7 +643,7 @@
 
             <!--Next package-->
 
-            <div id="darkWalnutPriceSelect" <?php if ($optionStr == "4") echo "style=\"display: block;\"";?>>
+            <div id="darkWalnutPriceSelect" <?php if ($setStr == "4") echo "style=\"display: block;\"";?>>
 
                 <div class="row">
                     <h1>Dark Walnut</h1>
@@ -733,7 +735,7 @@
                             echo "<div class=\"invalid-feedback\">Please select a rental option</div>";
                             ?>
 
-                        <input type="hidden" name="option" value="<?php echo $optionStr ?>">
+                        <input type="hidden" name="set" value="<?php echo $setStr ?>">
                         <input type="hidden" name="date" value="<?php echo $dateStr ?>">    
 
                     </div>
@@ -773,7 +775,7 @@
             </div>
 
 
-            <div id="rusticWoodPriceSelect" <?php if ($optionStr == "5") echo "style=\"display: block;\"";?>>
+            <div id="rusticWoodPriceSelect" <?php if ($setStr == "5") echo "style=\"display: block;\"";?>>
 
                 <div class="row">
                 
@@ -856,9 +858,9 @@
                     <div class="col-12 col-lg-4 mx-auto">
                         <select class="form-select<?php if(isset($packageErr)) echo " is-invalid"; ?>" id="option" name="package">
                             <option value="0" selected>Please select a rental option</option>
-                            <option value="1">Dark-Walnut Full set $299</option>
-                            <option value="2">Dark-Walnut "No Seating" Set $245/option>
-                            <option value="3">Dark-Walnut Pick 4 Rental $199</option>
+                            <option value="1">Rustic Wood Full Package Rental $299</option>
+                            <option value="2">Rustic Wood "No Seating" Rental $245/option>
+                            <option value="3">Rustic Wood "You Pick 4" Rental $199</option>
                 
                         </select>
 
@@ -866,7 +868,7 @@
                             echo "<div class=\"invalid-feedback\">Please select a rental option</div>";
                             ?>
 
-                        <input type="hidden" name="option" value="<?php echo $optionStr ?>">
+                        <input type="hidden" name="set" value="<?php echo $setStr ?>">
                         <input type="hidden" name="date" value="<?php echo $dateStr ?>">    
 
                     </div>

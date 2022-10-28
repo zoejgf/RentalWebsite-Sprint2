@@ -11,16 +11,16 @@
             // we have post variables
             // Save date & option for either hidden fields, or redirect on error back to pricePackages.php
             $date = $_POST["date"];    
-            $option = $_POST["option"];
+            $set = $_POST["set"];
             
             // ERROR CHECK - PACKAGE PRESENT?  IF NOT, REDIRECT BACK
             if (!isset($_POST["package"])) {
-                header("Location: pricePackages.php?date=$date&option=$option");   // redirect back to pricePackages, date = 1 indicates error
+                header("Location: pricePackages.php?date=$date&option=$set");   // redirect back to pricePackages, date = 1 indicates error
             } else {
                 $package = $_POST["package"];
                 if ($package == "0") {
                     // did not select a rental option
-                   header("Location: pricePackages.php?date=$date&option=$option&package=0");   // redirect back to pricePackages, package = 0 indicates error
+                   header("Location: pricePackages.php?date=$date&option=$set&package=0");   // redirect back to pricePackages, package = 0 indicates error
                 }
 
                 $package = $_POST["package"];
@@ -39,7 +39,7 @@
         Date retrieved to this point, with some keys below.
             $month - selected month for wedding rental
             $date - full date selected by user
-            $option - selected option from checkAvail page
+            $set - selected option from checkAvail page
             $package - selected package from pricePackages page (listed below)
 
             
@@ -172,7 +172,7 @@
                 }
                 echo "\n";
                 echo "<input type=\"hidden\" name=\"date\" value=\"$date\" >";
-                echo "<input type=\"hidden\" name=\"option\" value=\"$option\" >";
+                echo "<input type=\"hidden\" name=\"set\" value=\"$set\" >";
                 echo "<input type=\"hidden\" name=\"package\" value=\"$package\" >";
 
             ?>
