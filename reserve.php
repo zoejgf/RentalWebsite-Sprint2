@@ -4,6 +4,10 @@
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
 
+
+        // Import separate functions file
+        require __DIR__ . '/pkg-mgmt.php';
+
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
         
         // Form Submission from pricePackages.php
@@ -37,10 +41,14 @@
         }
 
         $totalPrice = 0;
+        $packageName = "";
+        $packagePrice = 0;
+        processPackageNamesPrices($packageName, $packagePrice, $totalPrice, $set, $package);
 
         /*
          * Add Ons from pricePackages.php
         */
+        /*
         function returnAddOnText($c) {
             if ($c == "modernSign")
                 return "Modern Round Sign";
@@ -194,6 +202,7 @@
             if ($e == "clearJars") return "Clear Antique Ball Jars";
             if ($e == "blueJars") return "Blue Antique Ball Jars";
         }
+        */
         
         /*
             Pricing - we have 
@@ -389,7 +398,7 @@
                             foreach($_POST['extras'] as $EXTRA) { ?>
                             <div class="col-5 text-end h6"> <?php echo returnExtraName($EXTRA); ?></div>
                             <div class="col-2"></div>
-                            <div class="col-5 h6"><?php echo "$" . returnExtraPrice($EXTRA); ?></div>
+                            <div class="col-5 h6"><?php echo "$" . returnExtraPrice($EXTRA, $totalPrice); ?></div>
                             <?php
                             }
                         }
