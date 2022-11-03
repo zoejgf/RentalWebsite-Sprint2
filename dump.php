@@ -79,19 +79,9 @@ $packageName
             <?php $message .= "\$$totalPrice"; ?>
         
     </body>
-</html>";
+</html>"
 
-// Always set content-type when sending HTML email
-$headers = "MIME-Version: 1.0" . "\r\n";
-$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-// More headers
-$headers .= 'From: <webmaster@example.com>' . "\r\n";
-$headers .= 'Cc: myboss@example.com' . "\r\n";
-
-mail($to,$subject,$message,$headers);
-
-?>
 
 
 
@@ -110,7 +100,7 @@ mail($to,$subject,$message,$headers);
         <link rel="stylesheet" href="https://use.typekit.net/kir2pvu.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-       <!-- CSS only -->
+    <!-- CSS only -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
         <!-- JavaScript Bundle with Popper -->
