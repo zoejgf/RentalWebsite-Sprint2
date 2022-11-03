@@ -71,7 +71,7 @@
             $packageErr = $_GET["package"];    // if 0, means we did not select.  error, test below
 
         } else {
-            echo "HOW DID WE GET HERE?";
+            header("Location: checkAvail.php");
             // echo "We have NO post variables, first visit to page";
             
             $setStr = 0;
