@@ -240,44 +240,8 @@
             </div>
 
             <div id="upgradeLayeredArch">
-<<<<<<< HEAD
                 
                 <?php 
-
-                $upgrades = processPackageUpgrades($set, $package);
-                //echo implode(" ", $upgrades);
-                // echo $upgrades["name"];
-                // echo $upgrades["difference"];
-                // echo $upgrades["description"];
-
-                if(count($upgrades) > 0) {
-                    ?>
-                        <!--html-->
-                        <h2>Your Current Package: </h2>
-                        <div class="container text-center">
-                    <?php 
-                        echo $package
-                    ?>
-                        </div>
-
-                        <h3>Upgrade your package: </h3>
-                        <div class="container upgradePack text-center">
-                            <div class="form-check" id="upgrade1">
-                                <input class="form-check-input" type="radio" name="package" id="package">
-                                <label class="form-check-label" for="package">
-                    <?php
-=======
-               
-            <?php echo $package;?>
-                testing 
-                
-                <?php if ($package == 2) {
-                    echo "$package 1";
-                } 
-                else if ($package == 3){
->>>>>>> b559ba591ad5fd99dbfa6775c15a691d0e54b3b5
-                    
-                    <?php 
 
                 $upgrades = processPackageUpgrades($set, $package);
                 //echo implode(" ", $upgrades);
