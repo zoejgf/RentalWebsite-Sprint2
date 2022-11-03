@@ -30,6 +30,8 @@
             // Validation error, GET parameters set
             
             
+        } else {
+            header("Location: checkAvail.php");
         }
 
         $datearray = explode("-",$date);

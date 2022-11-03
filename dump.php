@@ -35,10 +35,10 @@
                 $package = $_POST["package"];
             }
 
+        }  elseif (count($_GET) > 0) {
+            // Not Used
         } else {
-            // Houston, we have a problem.
-            
-            
+            header("Location: checkAvail.php");
         }
 
         $totalPrice = 0;
