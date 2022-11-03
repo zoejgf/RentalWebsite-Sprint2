@@ -236,7 +236,8 @@
             </div>
 
             <div id="upgradeLayeredArch">
-                
+               
+            <?php echo $package;?>
                 testing 
                 
                 <?php if ($package == 2) {
