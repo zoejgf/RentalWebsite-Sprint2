@@ -32,6 +32,8 @@
             // Validation error, GET parameters set
             
             
+        } else {
+            header("Location: checkAvail.php");
         }
 
         $datearray = explode("-",$date);
@@ -119,28 +121,28 @@
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">                
             <ol class="breadcrumb justify-content-center">
                     <li class="breadcrumb-item visited">
-                        <a href="checkAvail.php">
+                        <!-- <a href="checkAvail.php"> -->
                             <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
-                        </a>
-                        <a class="crumb" href="checkAvail.php">
+                        <!-- </a> -->
+                        <!-- <a class="crumb" href="checkAvail.php"> -->
                             Check Availability
-                        </a>
+                        <!-- </a> -->
                     </li>
                     <li class="breadcrumb-item visited">
-                        <a href="pricePackages.php">
+                        <!-- <a href="pricePackages.php"> -->
                             <i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i>
-                        </a>
-                        <a class="crumb" href="pricePackages.php">
+                        <!-- </a> -->
+                        <!-- <a class="crumb" href="pricePackages.php"> -->
                             Price Packages
-                        </a>
+                        <!-- </a> -->
                     </li>
                     <li class="breadcrumb-item visited">
-                        <a href="chooseExtras.php">
+                        <!-- <a href="chooseExtras.php"> -->
                             <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
-                        </a>
-                        <a class="is-active crumb" href="chooseExtras.php">
+                        <!-- </a> -->
+                        <!-- <a class="is-active crumb" href="chooseExtras.php"> -->
                             Extras
-                        </a>
+                        <!-- </a> -->
                     </li>
                     <li class="breadcrumb-item">
                         <a href="reserve.php">
@@ -238,8 +240,44 @@
             </div>
 
             <div id="upgradeLayeredArch">
+<<<<<<< HEAD
                 
                 <?php 
+
+                $upgrades = processPackageUpgrades($set, $package);
+                //echo implode(" ", $upgrades);
+                // echo $upgrades["name"];
+                // echo $upgrades["difference"];
+                // echo $upgrades["description"];
+
+                if(count($upgrades) > 0) {
+                    ?>
+                        <!--html-->
+                        <h2>Your Current Package: </h2>
+                        <div class="container text-center">
+                    <?php 
+                        echo $package
+                    ?>
+                        </div>
+
+                        <h3>Upgrade your package: </h3>
+                        <div class="container upgradePack text-center">
+                            <div class="form-check" id="upgrade1">
+                                <input class="form-check-input" type="radio" name="package" id="package">
+                                <label class="form-check-label" for="package">
+                    <?php
+=======
+               
+            <?php echo $package;?>
+                testing 
+                
+                <?php if ($package == 2) {
+                    echo "$package 1";
+                } 
+                else if ($package == 3){
+>>>>>>> b559ba591ad5fd99dbfa6775c15a691d0e54b3b5
+                    
+                    <?php 
 
                 $upgrades = processPackageUpgrades($set, $package);
                 //echo implode(" ", $upgrades);
