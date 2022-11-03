@@ -342,7 +342,7 @@
         <!------ Previously selected information will be shown FROM php ------>
 
         <div class="container" style="width:70%">
-            <form class="px-4 mt-3 g-3" method="post" action="dump.php">
+            <form class="px-4 mt-3 g-3" method="post" action="confirm.php">
                 <?php
                     //name="checks[]"
                     // https://makitweb.com/get-checked-checkboxes-value-with-php/
