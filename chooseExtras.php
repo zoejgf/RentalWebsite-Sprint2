@@ -41,9 +41,7 @@
             $date - full date selected by user
             $set - selected option from checkAvail page
             $package - selected package from pricePackages page (listed below)
-
             
-
          
         Checkboxes and their respective packages (Packages w/ their Extras from pricePackages.php)
             Modern Round - modernRound
@@ -58,7 +56,6 @@
                 1 - Full Set Rental, $849
                 2 - Pick 6 Rental, $749
                 3 - Pick 4 Rental, $699
-
             2 - Modern Round 
                 1 - Full Set Rental 799
                 2 - Pick 6 Rental 699
@@ -69,17 +66,14 @@
                 2 - Gold Package 799
                 3 - Pick 6 649
                 4 - Pick 4 599
-
             4 - Dark Walnut
                 1 - Full Set 299
                 2 - No Seating 245
                 3 - Pick 4 199
-
             5 - Rustic Wood
                 1 - Full Set 299
                 2 - No Seating 245
                 3 - Pick 4 199
-
 */
 
     ?>
@@ -236,6 +230,27 @@
                     </label>
                 </div>
             </div><?php } ?>
+
+            <div class="p-2">
+                <hr class="mx-auto">
+            </div>
+
+            <div id="upgradeLayeredArch">
+                
+                testing 
+                
+                <?php if ($package == 2) {
+                    echo "$package 1";
+                } 
+                else if ($package == 3){
+                    
+                    echo "$package 2 && 1";
+                    
+                } 
+                    
+                ?> 
+                
+            </div>
 
             <div class="p-2">
                 <hr class="mx-auto">

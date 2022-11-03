@@ -207,11 +207,7 @@
         /*
             Pricing - we have 
                 checkAvail.php - choose wedding set, no pricing
-
                 pricePackages.php - choose package, sets price.  includes add-ons, listed in checks[] array
-
-
-
         */
 
 /*          // WORKING WITH AN ARRAY OF VALUES IN CHECKS, i.e. checks[0], checks[1], etc....
@@ -231,7 +227,6 @@
             $package - selected package from pricePackages page (listed below)
             $check[] - add-ons from pricePackages page
             $extras[] - extras selected from chooseExtras.php
-
          
         Checkboxes and their respective packages (Packages w/ their Extras from pricePackages.php)
             Modern Round - modernRound
@@ -246,7 +241,6 @@
                 1 - Full Set Rental, $849
                 2 - Pick 6 Rental, $749
                 3 - Pick 4 Rental, $699
-
             2 - Modern Round 
                 1 - Full Set Rental 799
                 2 - Pick 6 Rental 699
@@ -257,17 +251,14 @@
                 2 - Gold Package 799
                 3 - Pick 6 649
                 4 - Pick 4 599
-
             4 - Dark Walnut
                 1 - Full Set 299
                 2 - No Seating 245
                 3 - Pick 4 199
-
             5 - Rustic Wood
                 1 - Full Set 299
                 2 - No Seating 245
                 3 - Pick 4 199
-
 */
 
 
