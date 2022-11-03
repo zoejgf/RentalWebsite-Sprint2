@@ -17,6 +17,7 @@
                     $upgrades["description"] = "Receive an additional 6 items";
                 }
                 if ($package == "3") {
+                    $upgrades["currentPack"] = "Layered Arch Pick 4 Rental";
                     $upgrades["name"] = "Layered Arch Full Set Rental";
                     $upgrades["difference"] = 250;
                     $upgrades["description"] = "Receive an additional 6 items";
