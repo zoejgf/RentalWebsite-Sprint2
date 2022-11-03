@@ -498,6 +498,7 @@ li.breadcrumb-item.visited {
 }
 li.breadcrumb-item:not(.visited){
     visibility:hidden;
+    display:none;
 }
 /*
 li.breadcrumb-item a.crumb:not(.is-active){
