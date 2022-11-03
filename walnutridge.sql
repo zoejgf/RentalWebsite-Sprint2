@@ -13,20 +13,27 @@ it with the preset 10-12 "dummy data" items
  Packages, i.e. Pick 6 or Pick 4
 */
 
+/*
+cpanel database, 
+db: redgreen_wedding
+user: redgreen_php
+pw: redtomatoes
+*/
+
 
 drop table if exists customers;
-drop table if exists order;
+drop table if exists reservation;
 drop table if exists ordered_extras;
 drop table if exists extras;
 
-create table order (
-    order_id int NOT NULL,
-    order_customer int NOT NULL,
-    order_set varchar(10),
-    order_package varchar(10),
-    order_date DATETIME,
-    PRIMARY KEY (order_id),
-    FOREIGN KEY (order_customer)
+create table reservation (
+    reservation_id int NOT NULL,
+    reservation_customer int NOT NULL,
+    reservation_set varchar(10),
+    reservation_package varchar(10),
+    reservation_date DATETIME,
+    PRIMARY KEY (reservation_id),
+    FOREIGN KEY (reservation_customer) REFERENCES customers(customer_id)
 );
 
 create table extras (
@@ -34,12 +41,14 @@ create table extras (
     name varchar(30),
     price decimal(10,2),
     PRIMARY KEY (extras_id)
-)
+);
 
 create table ordered_extras (
     ordered_extras_id int NOT NULL,
-    order_id int FOREIGN KEY REFERENCES order(order_id),
-    extras_id int FOREGIN KEY REFERENCES extras(extras_id)
+    reservation_id int NOT NULL,
+        FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id),
+    extras_id int NOT NULL,
+        FOREIGN KEY (extras_id) REFERENCES extras(extras_id)
 );
 
 create table customers (
