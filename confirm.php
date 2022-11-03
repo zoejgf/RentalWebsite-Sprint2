@@ -49,8 +49,35 @@ $to = "Alferez-Ruiz.Jeconiah@student.greenriver.edu";
 $subject = "HTML email";
 
 $message = "<!DOCTYPE html>
-<body> boobs
-   
+<body>
+<div>
+   $name        
+   $phone         
+   $email         
+   $packageName
+   \$$packagePrice";
+
+        
+            if (!empty($_POST['checks'])) {
+                foreach($_POST['checks'] as $CHECK) { ?>
+               <?php $message .= returnAddOnText($CHECK)?></div>
+               <?php $message .= returnAddOnPrice($CHECK)?></div>
+                    <?php
+                } 
+            }
+            // values for extras - delivery/?, couch/99, antique/4-ea, wine/20-ea, clearJars/30, blueJars/30
+            if (!empty($_POST['extras'])) {
+                foreach($_POST['extras'] as $EXTRA) { ?>
+                 <?php $message .= returnExtraName($EXTRA); ?></div>
+                <?php $message .= returnExtraPrice($EXTRA, $totalPrice); ?></div>
+                <?php
+                }
+            }
+            ?>
+        
+        
+            <?php $message .= "\$$totalPrice"; ?>
+        
     </body>
 </html>";
 
