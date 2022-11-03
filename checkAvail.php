@@ -38,7 +38,7 @@
              * if 1st visit, and no error, then continue
             */
 
-            $optionStr = "7";   // Dummy value for now, used to re-populate options if returned from pricepackage
+            $setStr = "7";   // Dummy value for now, used to re-populate options if returned from pricepackage
 
             if (isset($_GET["date"])) { 
                 // 0 - no date selected, -1 prior date selected
@@ -54,16 +54,17 @@
 
             }
 
-            if (isset($_GET["option"])) {
-                $optionStr = $_GET["option"];
+            if (isset($_GET["set"])) {
+                $setStr = $_GET["set"];
+                echo "setStr = " . $setStr;
                 // optionStr can be 0 no option selected, or selected option
-                //echo "option string: $optionStr <br>";
-                if ($optionStr == "0") {
-                    $optionErr = "1";
+                //echo "option string: $setStr <br>";
+                if ($setStr == "0") {
+                    $setErr = "1";
                     //echo "Setting optionErr<br>";
                 }
             } else {
-                $optionStr = "0";
+                $setStr = "0";
             }
 
             if (isset($_GET["message"])) {
@@ -232,15 +233,15 @@
 
 
                 <div class="col-12 col-lg-4 mx-auto">
-                    <select class="form-select<?php if(isset($optionErr) || (isset($message))) echo " is-invalid"; ?>" id="option" name="option">
-                        <option value="0" <?php if($optionStr == "0") echo "selected"?>>Please select a rental option</option>
-                        <option value="1" <?php if($optionStr == "1") echo "selected"?>>Layered Arch Wedding Set</option>
-                        <option value="2" <?php if($optionStr == "2") echo "selected"?>>Modern Round Wedding Set</option>
-                        <option value="3" <?php if($optionStr == "3") echo "selected"?>>Vintage Mirrors Wedding Set</option>
-                        <option value="4" <?php if($optionStr == "4") echo "selected"?>>Dark Walnut Wedding Set</option>
-                        <option value="5" <?php if($optionStr == "5") echo "selected"?>>Rustic Wood Wedding Set</option>
+                    <select class="form-select<?php if(isset($setErr) || (isset($message))) echo " is-invalid"; ?>" id="option" name="set">
+                        <option value="0" <?php if($setStr == "0") echo "selected"?>>Please select a rental option</option>
+                        <option value="1" <?php if($setStr == "1") echo "selected"?>>Layered Arch Wedding Set</option>
+                        <option value="2" <?php if($setStr == "2") echo "selected"?>>Modern Round Wedding Set</option>
+                        <option value="3" <?php if($setStr == "3") echo "selected"?>>Vintage Mirrors Wedding Set</option>
+                        <option value="4" <?php if($setStr == "4") echo "selected"?>>Dark Walnut Wedding Set</option>
+                        <option value="5" <?php if($setStr == "5") echo "selected"?>>Rustic Wood Wedding Set</option>
                     </select>
-                    <?php if (isset($optionErr)) 
+                    <?php if (isset($setErr)) 
                             echo "<div class=\"invalid-feedback\">Please select an option</div>";
                             ?>
                     <?php if (isset($message))

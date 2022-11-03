@@ -4,6 +4,10 @@
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
 
+
+        // Import separate functions file
+        require __DIR__ . '/pkg-mgmt.php';
+
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
         
         // Form Submission from pricePackages.php
@@ -11,7 +15,7 @@
             // we have post variables
             // Save date & option for either hidden fields, or redirect on error back to pricePackages.php
             $date = $_POST["date"];    
-            $option = $_POST["option"];
+            $set = $_POST["set"];
             $package = $_POST["package"];
             /*if (!empty($_POST["checks"]))
                 $addOns = $_POST["checks"];*/
@@ -19,12 +23,12 @@
             
             // ERROR CHECK - PACKAGE PRESENT?  IF NOT, REDIRECT BACK
             if (!isset($_POST["package"])) {
-                header("Location: pricePackages.php?date=$date&option=$option");   // redirect back to pricePackages, date = 1 indicates error
+                header("Location: pricePackages.php?date=$date&option=$set");   // redirect back to pricePackages, date = 1 indicates error
             } else {
                 $package = $_POST["package"];
                 if ($package == "0") {
                     // did not select a rental option
-                   header("Location: pricePackages.php?date=$date&option=$option&package=0");   // redirect back to pricePackages, package = 0 indicates error
+                   header("Location: pricePackages.php?date=$date&option=$set&package=0");   // redirect back to pricePackages, package = 0 indicates error
                 }
 
                 $package = $_POST["package"];
@@ -37,10 +41,14 @@
         }
 
         $totalPrice = 0;
+        $packageName = "";
+        $packagePrice = 0;
+        processPackageNamesPrices($packageName, $packagePrice, $totalPrice, $set, $package);
 
         /*
          * Add Ons from pricePackages.php
         */
+        /*
         function returnAddOnText($c) {
             if ($c == "modernSign")
                 return "Modern Round Sign";
@@ -78,9 +86,9 @@
 
     
         // PROCESS PACKAGE PRICES
-        if (isset($option) && isset($package)) {
+        if (isset($set) && isset($package)) {
             
-            if ($option == "1") {
+            if ($set == "1") {
                 $packageName = "Layered Arch Package, ";
                 if ($package == "1") {
                     $packageName .= "Full Set Rental";
@@ -94,7 +102,7 @@
                 }
             }
             
-            if ($option == "2") {
+            if ($set == "2") {
                 $packageName = "Modern Round Package, ";
                 if ($package == "1") {
                     $packageName .= "Full Set Rental";
@@ -108,7 +116,7 @@
                 }
             }
 
-            if ($option == "3") {
+            if ($set == "3") {
                 $packageName = "Vintage Mirror Package, ";
                 if ($package == "1") {
                     $packageName = "Platinum Package";
@@ -125,7 +133,7 @@
                 }
             }            
 
-            if ($option == "4") {
+            if ($set == "4") {
                 $packageName = "Dark Walnut Package, ";
                 if ($package == "1") {
                     $packageName = "Full Set Rental";
@@ -139,7 +147,7 @@
                 }
             }
 
-            if ($option == "5") {
+            if ($set == "5") {
                 $packageName = "Rustic Wood Package, ";
                 if ($package == "1") {
                     $packageName = "Full Set";
@@ -194,6 +202,7 @@
             if ($e == "clearJars") return "Clear Antique Ball Jars";
             if ($e == "blueJars") return "Blue Antique Ball Jars";
         }
+        */
         
         /*
             Pricing - we have 
@@ -214,7 +223,7 @@
         Date retrieved to this point, with some keys below.
             $month - selected month for wedding rental
             $date - full date selected by user
-            $option - selected option from checkAvail page
+            $set - selected option from checkAvail page
             $package - selected package from pricePackages page (listed below)
             $check[] - add-ons from pricePackages page
             $extras[] - extras selected from chooseExtras.php
@@ -282,7 +291,7 @@
     </head>
     <body>
         <?php 
-            //echo "\$package: $package<br>\$option: $option<br>\$date: $date<br><br>";
+            //echo "\$package: $package<br>\$set: $set<br>\$date: $date<br><br>";
         ?>
         <!------- Logo Header ------>
         <div class="container text-center">
@@ -353,7 +362,7 @@
 
                     echo "\n";
                     echo "<input type=\"hidden\" name=\"date\" value=\"$date\" >";
-                    echo "<input type=\"hidden\" name=\"option\" value=\"$option\" >";
+                    echo "<input type=\"hidden\" name=\"set\" value=\"$set\" >";
                     echo "<input type=\"hidden\" name=\"package\" value=\"$package\" >";
 
                 ?>
@@ -380,7 +389,7 @@
                             foreach($_POST['extras'] as $EXTRA) { ?>
                             <div class="col-5 text-end h6"> <?php echo returnExtraName($EXTRA); ?></div>
                             <div class="col-2"></div>
-                            <div class="col-5 h6"><?php echo "$" . returnExtraPrice($EXTRA); ?></div>
+                            <div class="col-5 h6"><?php echo "$" . returnExtraPrice($EXTRA, $totalPrice); ?></div>
                             <?php
                             }
                         }
