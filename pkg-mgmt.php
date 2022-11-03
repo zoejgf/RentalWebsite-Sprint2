@@ -1,6 +1,9 @@
 <?php
 
     // THIS SECTION INCLUDES NEWER FUNCTIONS TO MAP/RETRIEVE EXTRAS/OPTIONS/SETS/PACKAGES
+    $set_name;
+    $package_name;
+    $package_price;
 
     /*
      * Return a String value giving the name of the selected Set.
@@ -51,7 +54,14 @@
      * returnSet() above.
      */
     function returnSetPackagePrice($order) {
+        $set = returnSet($order);
+        $package = returnPackageNumber($order);
+        global $set_name;
+        global $package_name;
+        global $package_price;
+
         
+
     } 
 
         /*
