@@ -46,8 +46,7 @@
                     $upgrades["name"] = "Full Set Rental";
                     $upgrades["difference"] = 100;
                     $upgrades["description"] = "Receive an additional 6 items";
-
-                    $upgrades["currentPack"] = "Modern Round Pick 6 Rental";
+                    
                     $upgrades["name"] = "Pick 6 Rental";
                     $upgrades["difference"] = 200;
                     $upgrades["description"] = "Receive an additional 6 items";
