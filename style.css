@@ -490,6 +490,7 @@ li.breadcrumb-item a:hover {
 }
 li.breadcrumb-item a.is-active {
     text-decoration: underline;
+    text-shadow: 1.5px 1.5px rgba(255,255,255, .3);
 }
 li.breadcrumb-item.visited{
     padding-right: 15px; 
