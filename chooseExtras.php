@@ -255,7 +255,7 @@
                         <h2>Your Current Package: </h2>
                         <div class="container text-center">
                     <?php 
-                        echo $package
+                        echo $upgrades["currentPack"];
                     ?>
                         </div>
 

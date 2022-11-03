@@ -29,18 +29,21 @@
             
             if ($set == "2") {
                 if ($package == "2") {
+                    $upgrades["currentPack"] = "Modern Round Pick 6 Rental";
                     $upgrades["name"] = "Full Set Rental";
                     $upgrades["difference"] = 100;
                     $upgrades["description"] = "Receive an additional 6 items";
                 }
                 if ($package == "3") {
-                    $upgrades["name"] = "Pick 6 Rental";
-                    $upgrades["difference"] = 200;
+                    $upgrades["currentPack"] = "Modern Round Pick 6 Rental";
+                    $upgrades["name"] = "Full Set Rental";
+                    $upgrades["difference"] = 100;
                     $upgrades["description"] = "Receive an additional 6 items";
 
-                    $upgrades["name1"] = "Pick 4 Rental";
-                    $upgrades["difference1"] = 100;
-                    $upgrades["description1"] = "Receive an additional 2 items";
+                    $upgrades["currentPack"] = "Modern Round Pick 6 Rental";
+                    $upgrades["name"] = "Pick 6 Rental";
+                    $upgrades["difference"] = 200;
+                    $upgrades["description"] = "Receive an additional 6 items"
                 }
             }
 
