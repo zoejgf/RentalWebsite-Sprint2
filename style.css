@@ -486,14 +486,12 @@ li.breadcrumb-item i {
     color:white;
 }
 li.breadcrumb-item a:hover {
-    color: white;
-    cursor: pointer;
+    color: rgba(255,255,255, .7);
 }
-/*li.breadcrumb-item a.is-active {
-    display:inline;
-    visibility: visible;
-}*/
-li.breadcrumb-item.visited {
+li.breadcrumb-item a.is-active {
+    text-decoration: underline;
+}
+li.breadcrumb-item.visited{
     padding-right: 15px; 
 }
 li.breadcrumb-item:not(.visited){
