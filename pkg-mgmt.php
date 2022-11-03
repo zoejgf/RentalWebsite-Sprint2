@@ -1,5 +1,99 @@
 <?php
 
+    // THIS SECTION INCLUDES NEWER FUNCTIONS TO MAP/RETRIEVE EXTRAS/OPTIONS/SETS/PACKAGES
+
+    /*
+     * Return a String value giving the name of the selected Set.
+     */
+    function returnSet($order) {
+        // SET will be values of 1/2/4/8/16
+
+        $order = $order & 127;  // Filter out all values except those for selected SET
+                                // Keep bits 1-7
+
+        $ret = "";
+
+        if ($order == 1) {
+            $ret = "Layered Arch";
+        } else if ($order == 2) {
+            $ret = "Modern Round";
+        } else if ($order == 4) {
+            $ret = "Vintage Mirror";
+        } else if ($order == 8) {
+            $ret = "Dark Walnut";
+        } else if ($order == 16) {
+            $ret = "Rustic Wood";
+        } else if ($order == 32) {
+            // unused
+        } else if ($order == 64) {
+            // unused
+        }
+
+        return $ret;
+    }
+
+    /*
+     * Returns the package number selected, i.e. 1..4.  Filters the package
+     * bits out of the $order number, and then treats those remaining 4 bits
+     * as a normal binary number, and returns.
+     */
+    function returnPackageNumber($order) {
+        // Keep bits 8-11 (4 bits, an embedded  binary number that stores values 0-7)
+        $order = $order & 1920; // keep bits 8-11, 0b0111_1000_0000 = 1,920
+        $order = $order >> 7;   // shift right so we now have bits 1..4
+        
+        return $order;
+    }
+
+    /*
+     * Given the order number, use the 1st 11 bits to return the Set name,
+     * Package Name, and Price.  Uses functions returnPackageNumber() and
+     * returnSet() above.
+     */
+    function returnSetPackagePrice($order) {
+        
+    } 
+
+        /*
+                From pricePackages.php, package selection possibilities
+            1 - Layered Arch Packages
+                1 - Full Set Rental, $849
+                2 - Pick 6 Rental, $749
+                3 - Pick 4 Rental, $699
+
+            2 - Modern Round 
+                1 - Full Set Rental 799
+                2 - Pick 6 Rental 699
+                3 - Pick 4 Rental 599
+            
+            3 - Vintage Mirror
+                1 - Platinum Package 849
+                2 - Gold Package 799
+                3 - Pick 6 649
+                4 - Pick 4 599
+
+            4 - Dark Walnut
+                1 - Full Set 299
+                2 - No Seating 245
+                3 - Pick 4 199
+
+            5 - Rustic Wood
+                1 - Full Set 299
+                2 - No Seating 245
+                3 - Pick 4 199
+        */
+
+
+    
+
+
+
+
+    /*
+     * When an item is selected, i.e. SET, PACKAGE, OPTION(S), or EXTRA(S), that is noted in 
+     * 64
+    */
+
 
     /*
         * Add Ons from pricePackages.php
