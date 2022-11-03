@@ -45,19 +45,51 @@
 
         // Values passed in by reference, changed within function
         processPackageNamesPrices($packageName, $packagePrice, $totalPrice, $set, $package);
+$to = "Alferez-Ruiz.Jeconiah@student.greenriver.edu";
+$subject = "HTML email";
 
+$message = "<!DOCTYPE html>
+<body>
+<div>
+$name        
+$phone         
+$email         
+$packageName
+\$$packagePrice";
 
-/*          // WORKING WITH AN ARRAY OF VALUES IN CHECKS, i.e. checks[0], checks[1], etc....
-                if (!empty($_POST['checks'])) {
-                    foreach($_POST['checks'] as $CHECK) {
-                        // cycle through selected checkboxes, and put into stack of hidden fields
-                        echo "<input type=\"hidden\" name=\"checks[]\" value=\"$CHECK\" > ";
-                    }
-                    echo "\n";
+        
+            if (!empty($_POST['checks'])) {
+                foreach($_POST['checks'] as $CHECK) { ?>
+            <?php $message .= returnAddOnText($CHECK)?></div>
+            <?php $message .= returnAddOnPrice($CHECK)?></div>
+                    <?php
+                } 
+            }
+            // values for extras - delivery/?, couch/99, antique/4-ea, wine/20-ea, clearJars/30, blueJars/30
+            if (!empty($_POST['extras'])) {
+                foreach($_POST['extras'] as $EXTRA) { ?>
+                <?php $message .= returnExtraName($EXTRA); ?></div>
+                <?php $message .= returnExtraPrice($EXTRA, $totalPrice); ?></div>
+                <?php
                 }
-                */
- 
+            }
+            ?>
+        
+        
+            <?php $message .= "\$$totalPrice"; ?>
+        
+    </body>
+</html>";
 
+// Always set content-type when sending HTML email
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+// More headers
+$headers .= 'From: <webmaster@example.com>' . "\r\n";
+$headers .= 'Cc: myboss@example.com' . "\r\n";
+
+mail($to,$subject,$message,$headers);
 
 ?>
 
