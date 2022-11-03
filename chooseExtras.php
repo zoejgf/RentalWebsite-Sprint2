@@ -254,21 +254,22 @@
                         <!--html-->
                         <h2>Your Current Package: </h2>
                         <div class="container text-center">
+                        <div class="form-check-inline" id="upgrade1">
+                                <input class="form-check-input text-center" type="radio" name="package" id="package" checked>
+                                <label class="form-check-label" for="package">
                     <?php 
-                        echo $package
+                        echo $upgrades["currentPack"];
                     ?>
                         </div>
 
                         <h3>Upgrade your package: </h3>
                         <div class="container upgradePack text-center">
-                            <div class="form-check" id="upgrade1">
+                            <div class="form-check form-check-inline" id="upgrade1">
                                 <input class="form-check-input" type="radio" name="package" id="package">
                                 <label class="form-check-label" for="package">
                     <?php
                     
-                    echo $upgrades["name"];
-                    echo $upgrades["difference"];
-                    echo $upgrades["description"];
+                    echo $upgrades["name"] . " " . $upgrades["difference"] . " " . $upgrades["description"];
                     ?>
                                 </label>
                             </div>
@@ -278,7 +279,7 @@
                         
                     ?>
                         <div class="container upgradePack text-center">
-                            <div class="form-check" id="upgrade2">
+                            <div class="form-check-inline" id="upgrade2">
                                 <input class="form-check-input" type="radio" name="package" id="package">
                                 <label class="form-check-label" for="package">
                     <?php
@@ -295,7 +296,7 @@
 
                     ?>
                         <div class="container upgradePack text-center">
-                            <div class="form-check" id="upgrade3">
+                            <div class="form-check-inline" id="upgrade3">
                                 <input class="form-check-input" type="radio" name="package" id="package">
                                 <label class="form-check-label" for="package">
                     <?php
