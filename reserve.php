@@ -198,11 +198,7 @@
         /*
             Pricing - we have 
                 checkAvail.php - choose wedding set, no pricing
-
                 pricePackages.php - choose package, sets price.  includes add-ons, listed in checks[] array
-
-
-
         */
 
 /*          // WORKING WITH AN ARRAY OF VALUES IN CHECKS, i.e. checks[0], checks[1], etc....
@@ -222,7 +218,6 @@
             $package - selected package from pricePackages page (listed below)
             $check[] - add-ons from pricePackages page
             $extras[] - extras selected from chooseExtras.php
-
          
         Checkboxes and their respective packages (Packages w/ their Extras from pricePackages.php)
             Modern Round - modernRound
@@ -237,7 +232,6 @@
                 1 - Full Set Rental, $849
                 2 - Pick 6 Rental, $749
                 3 - Pick 4 Rental, $699
-
             2 - Modern Round 
                 1 - Full Set Rental 799
                 2 - Pick 6 Rental 699
@@ -248,17 +242,14 @@
                 2 - Gold Package 799
                 3 - Pick 6 649
                 4 - Pick 4 599
-
             4 - Dark Walnut
                 1 - Full Set 299
                 2 - No Seating 245
                 3 - Pick 4 199
-
             5 - Rustic Wood
                 1 - Full Set 299
                 2 - No Seating 245
                 3 - Pick 4 199
-
 */
 
 
@@ -299,30 +290,44 @@
         </div>
 
         <!-- Breadcrumb -->
-        <div class="breadcrumbs">
-                <ul class="steps">
-                    <li class="step">
-                    <a href="checkAvail.php">
-                        <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
-                    </a>
+        <div class="container pt-3">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">                
+            <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item visited">
+                        <a href="checkAvail.php">
+                            <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
+                        </a>
+                        <a class="crumb" href="checkAvail.php">
+                            Check Availability
+                        </a>
                     </li>
-                    <li class="step">
-                    <a href="pricePackages.php">
-                        <i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i> Price Packages
-                    </a>
+                    <li class="breadcrumb-item visited">
+                        <a href="pricePackages.php">
+                            <i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i>
+                        </a>
+                        <a class="crumb" href="pricePackages.php">
+                            Price Packages
+                        </a>
                     </li>
-                    <li class="step">
-                    <a href="chooseExtras.php">
-                        <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Extras
-                    </a>
+                    <li class="breadcrumb-item visited">
+                        <a href="chooseExtras.php">
+                            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+                        </a>
+                        <a class="crumb" href="chooseExtras.php">
+                            Extras
+                        </a>
                     </li>
-                    <li class="step">
-                    <a href="reserve.php">
-                        <i class="fa-regular fa-address-card" aria-hidden="true"></i> Reserve
-                    </a>
+                    <li class="breadcrumb-item visited">
+                        <a href="reserve.php">
+                            <i class="fa-regular fa-address-card" aria-hidden="true"></i>
+                        </a>
+                        <a class="is-active crumb" href="reserve.php">
+                            Reserve
+                        </a>
                     </li>
-                </ul>
-            </div>
+                </ol>
+            </nav>
+        </div>
         <!-- end breadcrumb code -->
 
         <!------ Previously selected information will be shown FROM php ------>
