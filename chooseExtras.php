@@ -4,6 +4,8 @@
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
 
+        require __DIR__ . '/pkg-upgrades.php';
+
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
         
         // Form Submission from pricePackages.php
@@ -95,7 +97,7 @@
         <script src="https://kit.fontawesome.com/3cd733d9ed.js" crossorigin="anonymous"></script>        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-       <!-- CSS only -->
+        <!-- CSS only -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
         <!-- JavaScript Bundle with Popper -->
@@ -167,7 +169,7 @@
                 echo "\n";
                 echo "<input type=\"hidden\" name=\"date\" value=\"$date\" >";
                 echo "<input type=\"hidden\" name=\"set\" value=\"$set\" >";
-                echo "<input type=\"hidden\" name=\"package\" value=\"$package\" >";
+                //echo "<input type=\"hidden\" name=\"package\" value=\"$package\" >";
 
             ?>
             <div class="container text-center">
@@ -237,16 +239,77 @@
 
             <div id="upgradeLayeredArch">
                 
-                testing 
-                
-                <?php if ($package == 2) {
-                    echo "$package 1";
-                } 
-                else if ($package == 3){
+                <?php 
+
+                $upgrades = processPackageUpgrades($set, $package);
+                //echo implode(" ", $upgrades);
+                // echo $upgrades["name"];
+                // echo $upgrades["difference"];
+                // echo $upgrades["description"];
+
+                if(count($upgrades) > 0) {
+                    ?>
+                        <!--html-->
+                        <h2>Your Current Package: </h2>
+                        <div class="container text-center">
+                    <?php 
+                        echo $package
+                    ?>
+                        </div>
+
+                        <h3>Upgrade your package: </h3>
+                        <div class="container upgradePack text-center">
+                            <div class="form-check" id="upgrade1">
+                                <input class="form-check-input" type="radio" name="package" id="package">
+                                <label class="form-check-label" for="package">
+                    <?php
                     
-                    echo "$package 2 && 1";
+                    echo $upgrades["name"];
+                    echo $upgrades["difference"];
+                    echo $upgrades["description"];
+                    ?>
+                                </label>
+                            </div>
+                        </div>
+                    <?php
+                    if(isset($upgrades["name1"])) {
+                        
+                    ?>
+                        <div class="container upgradePack text-center">
+                            <div class="form-check" id="upgrade2">
+                                <input class="form-check-input" type="radio" name="package" id="package">
+                                <label class="form-check-label" for="package">
+                    <?php
+                        echo $upgrades["name1"];
+                        echo $upgrades["difference1"];
+                        echo $upgrades["description1"];
+
+                    ?>
+                                </label>
+                            </div>
+                        </div>
+                    <?php
+                        if(isset($upgrades["name2"])) {
+
+                    ?>
+                        <div class="container upgradePack text-center">
+                            <div class="form-check" id="upgrade3">
+                                <input class="form-check-input" type="radio" name="package" id="package">
+                                <label class="form-check-label" for="package">
+                    <?php
+                            echo $upgrades["name2"];
+                            echo $upgrades["difference2"];
+                            echo $upgrades["description2"];
+
+                    ?>
+                                </label>
+                            </div>
+                        </div>
+                    <?php
+                        }
+                    }
                     
-                } 
+                }
                     
                 ?> 
                 
