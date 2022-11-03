@@ -34,10 +34,10 @@
                 $package = $_POST["package"];
             }
 
+        } elseif (count($_GET) > 0) {
+            // Not Used
         } else {
-            // Houston, we have a problem.
-            
-            
+            header("Location: checkAvail.php");
         }
 
         $totalPrice = 0;
@@ -303,36 +303,36 @@
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">                
             <ol class="breadcrumb justify-content-center">
                     <li class="breadcrumb-item visited">
-                        <a href="checkAvail.php">
+                        <!-- <a href="checkAvail.php"> -->
                             <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
-                        </a>
-                        <a class="crumb" href="checkAvail.php">
+                        <!-- </a> -->
+                        <!-- <a class="crumb" href="checkAvail.php"> -->
                             Check Availability
-                        </a>
+                        <!-- </a> -->
                     </li>
                     <li class="breadcrumb-item visited">
-                        <a href="pricePackages.php">
+                        <!-- <a href="pricePackages.php"> -->
                             <i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i>
-                        </a>
-                        <a class="crumb" href="pricePackages.php">
+                        <!-- </a> -->
+                        <!-- <a class="crumb" href="pricePackages.php"> -->
                             Price Packages
-                        </a>
+                        <!-- </a> -->
                     </li>
                     <li class="breadcrumb-item visited">
-                        <a href="chooseExtras.php">
+                        <!-- <a href="chooseExtras.php"> -->
                             <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
-                        </a>
-                        <a class="crumb" href="chooseExtras.php">
+                        <!-- </a> -->
+                        <!-- <a class="crumb" href="chooseExtras.php"> -->
                             Extras
-                        </a>
+                        <!-- </a> -->
                     </li>
                     <li class="breadcrumb-item visited">
-                        <a href="reserve.php">
+                        <!-- <a href="reserve.php"> -->
                             <i class="fa-regular fa-address-card" aria-hidden="true"></i>
-                        </a>
-                        <a class="is-active crumb" href="reserve.php">
+                        <!-- </a> -->
+                        <!-- <a class="is-active crumb" href="reserve.php"> -->
                             Reserve
-                        </a>
+                        <!-- </a> -->
                     </li>
                 </ol>
             </nav>
@@ -342,7 +342,7 @@
         <!------ Previously selected information will be shown FROM php ------>
 
         <div class="container" style="width:70%">
-            <form class="px-4 mt-3 g-3" method="post" action="dump.php">
+            <form class="px-4 mt-3 g-3" method="post" action="confirm.php">
                 <?php
                     //name="checks[]"
                     // https://makitweb.com/get-checked-checkboxes-value-with-php/

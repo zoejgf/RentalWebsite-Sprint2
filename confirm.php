@@ -35,31 +35,53 @@
                 $package = $_POST["package"];
             }
 
+        }  elseif (count($_GET) > 0) {
+            // Not Used
         } else {
-            // Houston, we have a problem.
-            
-            
+            header("Location: checkAvail.php");
         }
 
         $totalPrice = 0;
 
         // Values passed in by reference, changed within function
         processPackageNamesPrices($packageName, $packagePrice, $totalPrice, $set, $package);
+$to = "Alferez-Ruiz.Jeconiah@student.greenriver.edu";
+$subject = "HTML email";
 
+$message = "<!DOCTYPE html>
+<body>
+<div>
+$name        
+$phone         
+$email         
+$packageName
+\$$packagePrice";
 
-/*          // WORKING WITH AN ARRAY OF VALUES IN CHECKS, i.e. checks[0], checks[1], etc....
-                if (!empty($_POST['checks'])) {
-                    foreach($_POST['checks'] as $CHECK) {
-                        // cycle through selected checkboxes, and put into stack of hidden fields
-                        echo "<input type=\"hidden\" name=\"checks[]\" value=\"$CHECK\" > ";
-                    }
-                    echo "\n";
+        
+            if (!empty($_POST['checks'])) {
+                foreach($_POST['checks'] as $CHECK) { ?>
+            <?php $message .= returnAddOnText($CHECK)?></div>
+            <?php $message .= returnAddOnPrice($CHECK)?></div>
+                    <?php
+                } 
+            }
+            // values for extras - delivery/?, couch/99, antique/4-ea, wine/20-ea, clearJars/30, blueJars/30
+            if (!empty($_POST['extras'])) {
+                foreach($_POST['extras'] as $EXTRA) { ?>
+                <?php $message .= returnExtraName($EXTRA); ?></div>
+                <?php $message .= returnExtraPrice($EXTRA, $totalPrice); ?></div>
+                <?php
                 }
-                */
- 
+            }
+            ?>
+        
+        
+            <?php $message .= "\$$totalPrice"; ?>
+        
+    </body>
+</html>"
 
 
-?>
 
 
 
@@ -78,7 +100,7 @@
         <link rel="stylesheet" href="https://use.typekit.net/kir2pvu.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-       <!-- CSS only -->
+    <!-- CSS only -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
         <!-- JavaScript Bundle with Popper -->

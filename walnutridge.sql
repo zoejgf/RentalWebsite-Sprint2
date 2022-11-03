@@ -14,17 +14,19 @@ it with the preset 10-12 "dummy data" items
 */
 
 
-drop table if exists customer;
+drop table if exists customers;
+drop table if exists order;
+drop table if exists ordered_extras;
+drop table if exists extras;
 
 create table order (
     order_id int NOT NULL,
-    first_name varchar(30) NOT NULL,
-    last_name varchar(30) NOT NULL,
-    email varchar(50),
-    phone varchar(20),
+    order_customer int NOT NULL,
     order_set varchar(10),
     order_package varchar(10),
-    PRIMARY KEY (order_id)
+    order_date DATETIME,
+    PRIMARY KEY (order_id),
+    FOREIGN KEY (order_customer)
 );
 
 create table extras (
@@ -38,5 +40,13 @@ create table ordered_extras (
     ordered_extras_id int NOT NULL,
     order_id int FOREIGN KEY REFERENCES order(order_id),
     extras_id int FOREGIN KEY REFERENCES extras(extras_id)
+);
+
+create table customers (
+    customer_id int NOT NULL,
+    first_name varchar(30) NOT NULL,
+    last_name varchar(30) NOT NULL,
+    email varchar(50),
+    phone varchar(20)
 );
 
