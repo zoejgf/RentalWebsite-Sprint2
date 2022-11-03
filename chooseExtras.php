@@ -119,28 +119,28 @@
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">                
             <ol class="breadcrumb justify-content-center">
                     <li class="breadcrumb-item visited">
-                        <a href="checkAvail.php">
+                        <!-- <a href="checkAvail.php"> -->
                             <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
-                        </a>
-                        <a class="crumb" href="checkAvail.php">
+                        <!-- </a> -->
+                        <!-- <a class="crumb" href="checkAvail.php"> -->
                             Check Availability
-                        </a>
+                        <!-- </a> -->
                     </li>
                     <li class="breadcrumb-item visited">
-                        <a href="pricePackages.php">
+                        <!-- <a href="pricePackages.php"> -->
                             <i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i>
-                        </a>
-                        <a class="crumb" href="pricePackages.php">
+                        <!-- </a> -->
+                        <!-- <a class="crumb" href="pricePackages.php"> -->
                             Price Packages
-                        </a>
+                        <!-- </a> -->
                     </li>
                     <li class="breadcrumb-item visited">
-                        <a href="chooseExtras.php">
+                        <!-- <a href="chooseExtras.php"> -->
                             <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
-                        </a>
-                        <a class="is-active crumb" href="chooseExtras.php">
+                        <!-- </a> -->
+                        <!-- <a class="is-active crumb" href="chooseExtras.php"> -->
                             Extras
-                        </a>
+                        <!-- </a> -->
                     </li>
                     <li class="breadcrumb-item">
                         <a href="reserve.php">

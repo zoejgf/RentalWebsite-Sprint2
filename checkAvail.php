@@ -130,12 +130,12 @@
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">                
             <ol class="breadcrumb justify-content-center">
                     <li class="breadcrumb-item visited">
-                        <a href="checkAvail.php">
+                        <!-- <a href="checkAvail.php"> -->
                             <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
-                        </a>
-                        <a class="is-active crumb" href="checkAvail.php">
+                        <!-- </a> -->
+                        <!-- <a class="is-active crumb" href="checkAvail.php"> -->
                             Check Availability
-                        </a>
+                        <!-- </a> -->
                     </li>
                     <li class="breadcrumb-item">
                         <a href="pricePackages.php">
