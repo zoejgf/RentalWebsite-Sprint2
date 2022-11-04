@@ -255,7 +255,7 @@
                         <h2>Your Current Package: </h2>
                         <div class="container text-center">
                         <div class="form-check-inline" id="upgrade1">
-                                <input class="form-check-input text-center" type="radio" name="package" id="package" checked>
+                                <input class="form-check-input text-center" type="radio" name="package" id="package" value="$package" checked>
                                 <label class="form-check-label" for="package">
                     <?php 
                         echo $upgrades["currentPack"];
@@ -265,11 +265,11 @@
                         <h3>Upgrade your package: </h3>
                         <div class="container upgradePack text-center">
                             <div class="form-check form-check-inline" id="upgrade1">
-                                <input class="form-check-input" type="radio" name="package" id="package">
+                                <input class="form-check-input" type="radio" name="package" id="package" value="<?php $upgrades["id"] ?>">
                                 <label class="form-check-label" for="package">
                     <?php
                     
-                    echo $upgrades["name"] . " " . $upgrades["difference"] . " " . $upgrades["description"];
+                    echo $upgrades["name"]."<br>$".$upgrades["difference"]."<br>".$upgrades["description"];
                     ?>
                                 </label>
                             </div>
@@ -280,12 +280,10 @@
                     ?>
                         <div class="container upgradePack text-center">
                             <div class="form-check-inline" id="upgrade2">
-                                <input class="form-check-input" type="radio" name="package" id="package">
+                                <input class="form-check-input" type="radio" name="package" id="package" value="<?php $upgrades["id"] ?>">
                                 <label class="form-check-label" for="package">
                     <?php
-                        echo $upgrades["name1"];
-                        echo $upgrades["difference1"];
-                        echo $upgrades["description1"];
+                        echo $upgrades["name1"]."<br>$".$upgrades["difference1"]."<br>".$upgrades["description1"];
 
                     ?>
                                 </label>
@@ -297,12 +295,10 @@
                     ?>
                         <div class="container upgradePack text-center">
                             <div class="form-check-inline" id="upgrade3">
-                                <input class="form-check-input" type="radio" name="package" id="package">
+                                <input class="form-check-input" type="radio" name="package" id="package" value="<?php $upgrades["id"] ?>">
                                 <label class="form-check-label" for="package">
                     <?php
-                            echo $upgrades["name2"];
-                            echo $upgrades["difference2"];
-                            echo $upgrades["description2"];
+                            echo $upgrades["name2"]."<br>$".$upgrades["difference2"]."<br>".$upgrades["description2"];
 
                     ?>
                                 </label>
