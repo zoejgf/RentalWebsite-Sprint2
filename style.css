@@ -494,3 +494,8 @@ li.breadcrumb-item::before {
     padding: none;
 }
 /*End Breadcrumb Styling*/
+
+/*Styling for uprade offer*/
+.container.upgradePack.text-center {
+    padding-bottom: 10px;
+}

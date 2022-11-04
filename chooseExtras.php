@@ -235,12 +235,10 @@
                 </div>
             </div><?php } ?>
 
-            <div class="p-2">
-                <hr class="mx-auto">
-            </div>
+            
 
-            <div id="upgradeLayeredArch">
-                
+            <div id="upgradeOffer">
+
                 <?php 
 
                 $upgrades = processPackageUpgrades($set, $package);
@@ -252,6 +250,10 @@
                 if(count($upgrades) > 0) {
                     ?>
                         <!--html-->
+                        <div class="p-2">
+                            <hr class="mx-auto">
+                        </div>
+                        
                         <h2>Your Current Package: </h2>
                         <div class="container text-center">
                         <div class="form-check-inline" id="upgrade1">
@@ -269,7 +271,7 @@
                                 <label class="form-check-label" for="package">
                     <?php
                     
-                    echo $upgrades["name"]."<br>$".$upgrades["difference"]."<br>".$upgrades["description"];
+                    echo $upgrades["name"]."<br>Additional $".$upgrades["difference"]."<br>".$upgrades["description"];
                     ?>
                                 </label>
                             </div>
@@ -283,7 +285,7 @@
                                 <input class="form-check-input" type="radio" name="package" id="package" value="<?php $upgrades["id"] ?>">
                                 <label class="form-check-label" for="package">
                     <?php
-                        echo $upgrades["name1"]."<br>$".$upgrades["difference1"]."<br>".$upgrades["description1"];
+                        echo $upgrades["name1"]."<br>Additional $".$upgrades["difference1"]."<br>".$upgrades["description1"];
 
                     ?>
                                 </label>
@@ -298,7 +300,7 @@
                                 <input class="form-check-input" type="radio" name="package" id="package" value="<?php $upgrades["id"] ?>">
                                 <label class="form-check-label" for="package">
                     <?php
-                            echo $upgrades["name2"]."<br>$".$upgrades["difference2"]."<br>".$upgrades["description2"];
+                            echo $upgrades["name2"]."<br>Additional $".$upgrades["difference2"]."<br>".$upgrades["description2"];
 
                     ?>
                                 </label>
