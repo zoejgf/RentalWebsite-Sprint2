@@ -497,5 +497,8 @@ li.breadcrumb-item::before {
 
 /*Styling for uprade offer*/
 .container.upgradePack.text-center {
-    padding-bottom: 10px;
+    padding-top: 10px;
+}
+div.currentPack {
+    padding-bottom: 30px;
 }

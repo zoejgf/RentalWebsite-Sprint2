@@ -254,14 +254,16 @@
                             <hr class="mx-auto">
                         </div>
                         
+                        
                         <h2>Your Current Package: </h2>
-                        <div class="container text-center">
-                        <div class="form-check-inline" id="upgrade1">
+                        <div class="container currentPack text-center">
+                            <div class="form-check-inline" id="upgrade1">
                                 <input class="form-check-input text-center" type="radio" name="package" id="package" value="<?php echo $package ?>" checked>
                                 <label class="form-check-label" for="package">
                     <?php 
-                        echo $upgrades["currentPack"];
+                        echo $upgrades["currentPack"]." - $".$upgrades["currentPrice"];
                     ?>
+                            </div>
                         </div>
 
                         <h3>Upgrade your package: </h3>
