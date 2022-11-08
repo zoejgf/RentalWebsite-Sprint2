@@ -25,7 +25,7 @@
                    header("Location: pricePackages.php?date=$date&option=$set&package=0");   // redirect back to pricePackages, package = 0 indicates error
                 }
 
-                $package = $_POST["package"];
+                //$package = $_POST["package"];
             }
 
         } elseif (count($_GET) > 0) {
@@ -312,9 +312,9 @@
                         }
                     }
                     
-                }
-                    
-                ?> 
+                } else {    // we have chosen the most expensive package already, add a hidden form field
+                    echo "<input type=\"hidden\" name=\"package\" value=\"$package\" >";    
+                }     // end else block ?>  
                 
             </div>
 
