@@ -91,39 +91,7 @@
         $datearray = explode("-",$dateStr); // parse date month for inventory use
         $month = $datearray[1];             // parse date month for inventory use
 
-        if ($setStr == "1" && $month == "1") {
-            // layered arch not available in January
-            // return w/ error message
-            $message = "Sorry, the Layered Arch Package is not available in January.";
-            $responseText = "options=$setStr&date=$dateStr&message=$message";
-            header("Location: checkAvail.php?$responseText");
-        }
-
-        if ($setStr == "2" && $month == "2") {
-            $message = "Sorry, the Modern Round Package is not available in February.";
-            $responseText = "options=$setStr&date=$dateStr&message=$message";
-            header("Location: checkAvail.php?$responseText");
-        }
-
-        if ($setStr == "3" && $month == "3") {
-            $message = "Sorry, the Vintage Mirror Package is not available in March.";
-            $responseText = "options=$setStr&date=$dateStr&message=$message";
-            header("Location: checkAvail.php?$responseText");
-        }
-
-        if ($setStr == "4" && $month == "4") {
-            $message = "Sorry, the Dark Walnut Package is not available in April.";
-            $responseText = "options=$setStr&date=$dateStr&message=$message";
-            header("Location: checkAvail.php?$responseText");
-        }
-
-        if ($setStr == "5" && $month == "5") {
-            $message = "Sorry, the Rustic Wood Package is not available in May.";
-            $responseText = "options=$setStr&date=$dateStr&message=$message";
-            header("Location: checkAvail.php?$responseText");
-        }
-
-
+       
 
     ?>
 
