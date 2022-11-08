@@ -45,7 +45,14 @@
 
         // Values passed in by reference, changed within function
         processPackageNamesPrices($packageName, $packagePrice, $totalPrice, $set, $package);
-$to = "Alferez-Ruiz.Jeconiah@student.greenriver.edu";
+        // Always set content-type when sending HTML email
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+// More headers
+$headers .= 'From: <webmaster@example.com>' . "\r\n";
+$headers .= 'Cc: myboss@example.com' . "\r\n";
+$to = $_POST["email"];;
 $subject = "HTML email";
 
 $message = "<!DOCTYPE html>
@@ -56,6 +63,7 @@ $phone
 $email         
 $packageName
 \$$packagePrice";
+mail($to,$subject,$message,$headers);
 
         
             if (!empty($_POST['checks'])) {
@@ -79,7 +87,11 @@ $packageName
             <?php $message .= "\$$totalPrice"; ?>
         
     </body>
-</html>"
+</html>";
+
+
+
+?>
 
 
 
