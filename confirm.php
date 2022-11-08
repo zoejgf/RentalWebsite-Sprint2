@@ -52,7 +52,7 @@ $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 // More headers
 $headers .= 'From: <webmaster@example.com>' . "\r\n";
 $headers .= 'Cc: myboss@example.com' . "\r\n";
-$to = $_POST["email"];;
+$to = $email;
 $subject = "HTML email";
 
 $message = "<!DOCTYPE html>
@@ -87,12 +87,7 @@ mail($to,$subject,$message,$headers);
             <?php $message .= "\$$totalPrice"; ?>
         
     </body>
-</html>";
-
-
-
-?>
-
+</html>
 
 
 
