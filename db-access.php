@@ -94,4 +94,23 @@
 
     //addCustomer('Jane', 'Smith', 'jane@hotmail.com', '555-555-5432');   // Test function addCustomer()
 
+    /*
+     * Add a Resrvation to the database given customerID, reservationSet, reservationPackage, and Date
+     */
+    function addReservation($customerID, $reservationSet, 
+        $reservationPackage, $reservationDate) {
+        global $cnxn; 
+
+        $sql = "insert into reservation (reservation_customer, 
+            reservation_set, reservation_package, reservation_date)
+        values 
+            ($customerID, '$reservationSet', 
+            '$reservationPackage', '$reservationDate')";
+        
+        $result = mysqli_query($cnxn, $sql);
+    }
+    
+    // test addReservation
+    // addReservation(2, 'Modern Round', 'Full Set Rental', '2023-07-22');
+
 ?>
