@@ -64,7 +64,7 @@
                 
         $result = mysqli_query($cnxn, $sql);
         return $result;
-        
+
         /*
         while ($row = mysqli_fetch_assoc($result)) {
             $reservationID = $row['reservation_id'];
@@ -80,7 +80,18 @@
 
     //reservationDetails(2);   // Test reservationDetails function
 
+    /*
+     * Add a Customer to the database given firstname, lastname, email, and phone
+     */
+    function addCustomer($first, $last, $email, $phone) {
+        global $cnxn; 
 
+        $sql = "insert into customers (first_name, last_name, email, phone) 
+            values ('$first', '$last', '$email', '$phone')";
+        
+        $result = mysqli_query($cnxn, $sql);
+    }
 
+    //addCustomer('Jane', 'Smith', 'jane@hotmail.com', '555-555-5432');   // Test function addCustomer()
 
 ?>
