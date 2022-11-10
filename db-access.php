@@ -1,0 +1,48 @@
+<?php
+    
+    require '/home/redgreen/db.php';     // Live Version
+    //require __DIR__ . 'db.php';
+
+    // SAMPLE SQL QUERY ....
+    function queryReservations() {
+        global $cnxn;                       // from imported file db.php
+        $sql = "SELECT reservation.reservation_id AS reservation_id, 
+            reservation.reservation_set AS 'set', 
+            reservation.reservation_package AS package, 
+            reservation.reservation_date AS date, 
+            customers.customer_id AS customer_id, 
+            customers.first_name AS fname, 
+            customers.last_name AS lname, 
+            customers.email AS email, 
+            customers.phone AS phone 
+        FROM reservation 
+            INNER JOIN customers ON 
+            reservation.reservation_customer = customers.customer_id";
+        
+        $result = mysqli_query($cnxn, $sql);
+        return $result;
+        /*
+        while ($row = mysqli_fetch_assoc($result)) {
+            $reservationID = $row['reservation_id'];
+            $set = $row['set'];
+            $package = $row['package'];
+            $date = $row['date'];
+            $customerID = $row['customer_id'];
+            $first = $row['fname'];
+            $last = $row['lname'];
+            $phone = $row['phone'];
+            $email = $row['email'];
+            
+            echo "<p>$reservationID, $set, $package, $date, $customerID, $first, $last, $phone, $email</p>";
+        }
+        */
+    }
+    // END SAMPLE QUERY
+    
+    //  queryReservations();    // Test queryReservations
+
+
+
+
+
+?>

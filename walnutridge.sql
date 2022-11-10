@@ -20,42 +20,41 @@ user: redgreen_php
 pw: redtomatoes
 */
 
-
-drop table if exists customers;
-drop table if exists reservation;
 drop table if exists ordered_extras;
+drop table if exists reservation;
 drop table if exists extras;
+drop table if exists customers;
 
-create table reservation (
-    reservation_id int NOT NULL,
-    reservation_customer int NOT NULL,
-    reservation_set varchar(10),
-    reservation_package varchar(10),
-    reservation_date DATETIME,
-    PRIMARY KEY (reservation_id),
-    FOREIGN KEY (reservation_customer) REFERENCES customers(customer_id)
-);
-
-create table extras (
-    extras_id int NOT NULL,
-    name varchar(30),
-    price decimal(10,2),
-    PRIMARY KEY (extras_id)
-);
-
-create table ordered_extras (
-    ordered_extras_id int NOT NULL,
-    reservation_id int NOT NULL,
-        FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id),
-    extras_id int NOT NULL,
-        FOREIGN KEY (extras_id) REFERENCES extras(extras_id)
-);
 
 create table customers (
-    customer_id int NOT NULL,
+    customer_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     first_name varchar(30) NOT NULL,
     last_name varchar(30) NOT NULL,
     email varchar(50),
     phone varchar(20)
+);
+
+
+create table reservation (
+    reservation_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    reservation_customer int NOT NULL,
+        CONSTRAINT fk_customer FOREIGN KEY (reservation_customer) REFERENCES customers(customer_id),
+    reservation_set varchar(30),
+    reservation_package varchar(30),
+    reservation_date DATETIME
+);
+
+create table extras (
+    extras_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name varchar(30),
+    price decimal(10,2)
+);
+
+create table ordered_extras (
+    ordered_extras_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    reservation_id int NOT NULL,
+        CONSTRAINT fk_reservation FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id),
+    extras_id int NOT NULL,
+        CONSTRAINT fk_extras FOREIGN KEY (extras_id) REFERENCES extras(extras_id)
 );
 
