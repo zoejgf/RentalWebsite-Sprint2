@@ -47,7 +47,7 @@
 
 
     /*
-     * This returns an array of rows containing invidual reservations
+     * This returns an associative array containing reservation details
      */
     function reservationDetails($reservationID) {
         global $cnxn;                       // from imported file db.php
@@ -82,6 +82,7 @@
 
     /*
      * Add a Customer to the database given firstname, lastname, email, and phone
+     * All values are Strings.
      */
     function addCustomer($first, $last, $email, $phone) {
         global $cnxn; 
