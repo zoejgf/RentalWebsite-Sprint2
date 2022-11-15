@@ -55,18 +55,62 @@ $headers .= 'Cc: myboss@example.com' . "\r\n";
 $to = $email;
 $subject = "HTML email";
 
-$message = "<!DOCTYPE html>
-<body>
-<div>
-$name        
-$phone         
-$email         
-$packageName
-\$$packagePrice";
+//start email layout
+$addOns = "";
+
+
+if (!empty($_POST['checks'])) {
+                foreach($_POST['checks'] as $CHECK) {
+            $addOns .= returnAddOnText($CHECK) . ", ";
+            //$addOns .= returnAddOnPrice($CHECK);
+                } 
+            }
+            // values for extras - delivery/?, couch/99, antique/4-ea, wine/20-ea, clearJars/30, blueJars/30
+            if (!empty($_POST['extras'])) {
+                foreach($_POST['extras'] as $EXTRA) {
+                    $addOns .= returnExtraName($EXTRA) . ", ";
+                    //$addOns .= returnExtraPrice($EXTRA, $totalPrice);
+                }
+            }
+            
+$message = "
+<!DOCTYPE html>
+    <body>
+        <table>
+            <tr>
+                <th style='padding:5px;text-align:left;border-bottom:1px solid #ddd;'>Name</th>
+                <td style='padding:5px;border-left:1px solid #ddd;border-bottom:1px solid #ddd;'>$name</td>
+            </tr>
+            <tr>
+                <th style='padding:5px;text-align:left;border-bottom:1px solid #ddd;'>Phone Number</th>
+                <td style='padding:5px;border-left:1px solid #ddd;border-bottom:1px solid #ddd;'>$phone</td>
+            </tr>
+            <tr>
+                <th style='padding:5px;text-align:left;border-bottom:1px solid #ddd;'>Package Selected</th>
+                <td style='padding:5px;border-left:1px solid #ddd;border-bottom:1px solid #ddd;'>$packageName</td>
+            </tr>
+            <tr>
+                <th style='padding:5px;text-align:left;border-bottom:1px solid #ddd;'>Price</th>
+                <td style='padding:5px;border-left:1px solid #ddd;border-bottom:1px solid #ddd;'>\$$packagePrice</td>
+            </tr>
+            <tr>
+                <th style='padding:5px;text-align:left;border-bottom:1px solid #ddd;'>Email</th>
+                <td style='padding:5px;border-left:1px solid #ddd;border-bottom:1px solid #ddd;'>$email</td>
+            </tr>
+            <tr>
+                <th style='padding:5px;text-align:left;border-bottom:1px solid #ddd;'>Extras:</th>
+                <td style='padding:5px;border-left:1px solid #ddd;border-bottom:1px solid #ddd;'>$addOns</td>
+            </tr>
+        </table>
+    </body>
+</html>
+"; //end email layout
+
+//sending email
 mail($to,$subject,$message,$headers);
 
         
-            if (!empty($_POST['checks'])) {
+            /*if (!empty($_POST['checks'])) {
                 foreach($_POST['checks'] as $CHECK) { ?>
             <?php $message .= returnAddOnText($CHECK)?></div>
             <?php $message .= returnAddOnPrice($CHECK)?></div>
@@ -84,10 +128,11 @@ mail($to,$subject,$message,$headers);
             ?>
         
         
-            <?php $message .= "\$$totalPrice"; ?>
+            <?php $message .= "\$$totalPrice";*/ ?>
         
     </body>
 </html>
+
 
 
 
