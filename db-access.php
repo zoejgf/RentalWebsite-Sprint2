@@ -8,7 +8,7 @@
     /*
      * This returns an array of rows containing invidual reservations
      */
-    function queryReservations() {
+    function queryReservationsAsc() {
         global $cnxn;                       // from imported file db.php
         $sql = "SELECT reservation.reservation_id AS reservation_id, 
             reservation.reservation_set AS 'set', 
@@ -21,7 +21,8 @@
             customers.phone AS phone 
         FROM reservation 
             INNER JOIN customers ON 
-            reservation.reservation_customer = customers.customer_id";
+            reservation.reservation_customer = customers.customer_id
+            ORDER BY date ASC";
         
         $result = mysqli_query($cnxn, $sql);
         return $result;
@@ -45,6 +46,40 @@
     
     //  queryReservations();    // Test queryReservations
 
+    function queryReservationsDesc() {
+        global $cnxn;                       // from imported file db.php
+        $sql = "SELECT reservation.reservation_id AS reservation_id, 
+            reservation.reservation_set AS 'set', 
+            reservation.reservation_package AS package, 
+            reservation.reservation_date AS date, 
+            customers.customer_id AS customer_id, 
+            customers.first_name AS fname, 
+            customers.last_name AS lname, 
+            customers.email AS email, 
+            customers.phone AS phone 
+        FROM reservation 
+            INNER JOIN customers ON 
+            reservation.reservation_customer = customers.customer_id
+            ORDER BY date DESC";
+        
+        $result = mysqli_query($cnxn, $sql);
+        return $result;
+        /*
+        while ($row = mysqli_fetch_assoc($result)) {
+            $reservationID = $row['reservation_id'];
+            $set = $row['set'];
+            $package = $row['package'];
+            $date = $row['date'];
+            $customerID = $row['customer_id'];
+            $first = $row['fname'];
+            $last = $row['lname'];
+            $phone = $row['phone'];
+            $email = $row['email'];
+            
+            echo "<p>$reservationID, $set, $package, $date, $customerID, $first, $last, $phone, $email</p>";
+        }
+        */
+    }
 
     /*
      * This returns an associative array containing reservation details
@@ -113,5 +148,14 @@
     
     // test addReservation
     // addReservation(2, 'Modern Round', 'Full Set Rental', '2023-07-22');
+    
+    function packageAvailable($packageID, $date) {
+        global $cnxn;                       // from imported file db.php
+        $sql = "";
+                
+        $result = mysqli_query($cnxn, $sql);
+        
+        return $result;        
+    }
 
 ?>
