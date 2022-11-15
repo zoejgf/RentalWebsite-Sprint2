@@ -1,9 +1,7 @@
 <?php
     
-    require '/home/redgreen/db.php';     // Live Version
-    //require __DIR__ . 'db.php';
-
-
+    //require '/home/redgreen/db.php';     // Live Version
+    require __DIR__ . '/db.php';
 
     /*
      * This returns an array of rows containing invidual reservations
@@ -145,6 +143,28 @@
         
         $result = mysqli_query($cnxn, $sql);
     }
+
+    /* Determine if a customer exists or not */
+    function customerExists($fname, $email, $phone) {
+        global $cnxn;
+
+        $sql = "SELECT count(*) AS count FROM customers WHERE first_name='$fname' AND (email='$email' OR phone='$phone')";
+
+        $result = mysqli_query($cnxn, $sql);
+
+        //return $result;
+        if ($row = mysqli_fetch_assoc($result))
+            if ($row['count'] > 0)
+                return true;
+            else
+                return false;
+        else 
+            return false;       // silently fail
+
+    }
+
+    //echo customerExists('John', 'john@email.com', '425-555-1111') . " Customers";
+    
     
     // test addReservation
     // addReservation(2, 'Modern Round', 'Full Set Rental', '2023-07-22');

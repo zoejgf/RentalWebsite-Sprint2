@@ -21,5 +21,5 @@
     $cnxn = @mysqli_connect($hostname, $username, $password, $database) or 
     die("Error Connecting to DB: " . mysqli_connect_error());
     
-    echo 'connected to Database!';
+    //echo 'connected to Database!';
 ?>
