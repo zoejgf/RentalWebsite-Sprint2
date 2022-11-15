@@ -4,6 +4,10 @@
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
         // -----------------------------------
+
+        require __DIR__ . '/db-access.php';
+        require __DIR__ . '/pkg-mgmt.php';
+
         $responseText = "";
 
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
@@ -46,8 +50,6 @@
                 }
             }
 
-
-
             // IF WE HAVE AN ERROR, MUST REDIRECT BACK TO checkAvail.php
             if ($setStr == "0" || isset($dateErr)) { 
                 
@@ -63,6 +65,19 @@
                 header("Location: checkAvail.php?$responseText");
 
             }
+
+            // TODO: We have good data, lets check that this set is available on the given date.
+            // IF not, we will have to redirect back to checkAvail
+            if (!packageAvailable($setStr, $dateStr)) {
+                $responseText = "&date=$dateStr" . "&setMessage=" . getSetName($setStr) . " is not available for the selected date.  Please choose another date or set.";
+                //echo "Package " . $setStr . " is NOT available on " . $dateStr . "<br>";
+                //echo "responseText: " . $responseText . "<br>";
+                header("Location: checkAvail.php?$responseText");
+            } 
+            // else {
+            //     echo "Package " . $setStr . " is available on " . $dateStr;
+            // }
+
             
         // WE HAVE GET VARIABLES INSTEAD, means redirected back from chooseExtras.php w/ errors
         } elseif (count($_GET) > 0) {       

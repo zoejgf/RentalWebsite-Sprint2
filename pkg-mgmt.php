@@ -163,6 +163,21 @@
     }
 
 
+    function getSetName($set) {
+        switch ($set) {
+            case 1: 
+                return "Layered Arch Package";
+            case 2: 
+                return "Modern Round Package";
+            case 3:
+                return "Vintage Mirror Package";
+            case 4:
+                return "Dark Walnut Package";
+            case 5:
+                return "Rustic Wood Package";
+        }
+        return "";
+    }
 
            /* 
         Date retrieved to this point, with some keys below.

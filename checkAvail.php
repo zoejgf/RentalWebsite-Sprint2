@@ -57,8 +57,8 @@
             if (isset($_GET["set"])) {
                 $setStr = $_GET["set"];
                 echo "setStr = " . $setStr;
-                // optionStr can be 0 no option selected, or selected option
-                //echo "option string: $setStr <br>";
+                // setStr can be 0 no set selected, or selected set
+                
                 if ($setStr == "0") {
                     $setErr = "1";
                     //echo "Setting optionErr<br>";
@@ -69,6 +69,10 @@
 
             if (isset($_GET["message"])) {
                 $message = $_GET["message"];
+            }
+
+            if (isset($_GET["setMessage"])) {
+                $message = $_GET["setMessage"];
             }
 
         ?>

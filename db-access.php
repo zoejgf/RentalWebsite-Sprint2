@@ -166,16 +166,159 @@
     //echo customerExists('John', 'john@email.com', '425-555-1111') . " Customers";
     
     
-    // test addReservation
-    // addReservation(2, 'Modern Round', 'Full Set Rental', '2023-07-22');
-    
+    /*
+     * packageAvailable(int packageID, DATE date) 
+     * This function returns a bool value on whether there are packages available.
+     * It takes in an int id for set/package, and a date to test for.  The set
+     * has to be available for 2 days prior and after the event to be considered
+     * available.
+     */
     function packageAvailable($packageID, $date) {
         global $cnxn;                       // from imported file db.php
-        $sql = "";
-                
+            /*
+            1 - Layered Arch Packages
+                1 - Full Set Rental, $849
+                2 - Pick 6 Rental, $749
+                3 - Pick 4 Rental, $699
+
+            2 - Modern Round 
+                1 - Full Set Rental 799
+                2 - Pick 6 Rental 699
+                3 - Pick 4 Rental 599
+            
+            3 - Vintage Mirror
+                1 - Platinum Package 849
+                2 - Gold Package 799
+                3 - Pick 6 649
+                4 - Pick 4 599
+
+            4 - Dark Walnut
+                1 - Full Set 299
+                2 - No Seating 245
+                3 - Pick 4 199
+
+            5 - Rustic Wood
+                1 - Full Set 299
+                2 - No Seating 245
+                3 - Pick 4 199
+                */
+        $package = "";
+        $avail = 0;
+
+        //echo "packageAvailable(), PackageID: " . $packageID . "<br>";
+
+        switch ($packageID) {
+            case 1:
+                $package = "Layered Arch Package";
+                $avail = 1;     // Note: Layered Arch, Modern Round can only be booked once
+                break;
+            case 2:
+                $package = "Modern Round Package";
+                $avail = 1;     // Note: Layered Arch, Modern Round can only be booked once
+                break;
+            case 3:
+                $package = "Vintage Mirror Package";
+                $avail = 2;     // Note: Dark Walnut, Rustic Wood and Vintage Mirror sets can be booked twice at the same time    
+                break;
+            case 4:
+                $package = "Dark Walnut Package";
+                $avail = 2;     // Note: Dark Walnut, Rustic Wood and Vintage Mirror sets can be booked twice at the same time    
+                break;
+            case 5:
+                $package = "Rustic Wood Package";
+                $avail = 2;     // Note: Dark Walnut, Rustic Wood and Vintage Mirror sets can be booked twice at the same time    
+                break;
+            default:
+                return 0;   // incorrect packageID, return 0 availability
+        }
+        
+        $sql = "select count(*) AS count FROM reservation WHERE reservation_set = '$package' AND 
+            reservation_date >= ('$date' - INTERVAL 2 DAY) AND reservation_date <= ('$date' + INTERVAL 2 DAY);";
+        
         $result = mysqli_query($cnxn, $sql);
         
-        return $result;        
+        if ($row = mysqli_fetch_assoc($result)) {
+            if ($row['count']) {
+                //echo "packageAvailable(), has " . $avail . " sets, " . $row['count'] . " are being used.<br>";
+                $avail = $avail - $row['count'];        // e.g. Rustic Wood w/ 2x packages on offer, and 1 is reserved.  Leaves us with one remaining.
+            }
+        }
+            
+        return (boolean)$avail;     // returns true if 1 or more packages avail, false otherwise
+    }
+
+
+    /*
+     * dateAvailability($date)
+     * This function returns an associated array of sets and the availability for each on a given date.
+     * e.g. $set[1] = 0, indicates there is no availability for set 1 on the given date.
+     * e.g. $set[2] = 1, indicates one set is available for the given date
+     */
+    function dateAvailability($date) {
+        global $cnxn;                       // from imported file db.php
+            /*
+            1 - Layered Arch Packages
+                1 - Full Set Rental, $849
+                2 - Pick 6 Rental, $749
+                3 - Pick 4 Rental, $699
+
+            2 - Modern Round 
+                1 - Full Set Rental 799
+                2 - Pick 6 Rental 699
+                3 - Pick 4 Rental 599
+            
+            3 - Vintage Mirror
+                1 - Platinum Package 849
+                2 - Gold Package 799
+                3 - Pick 6 649
+                4 - Pick 4 599
+
+            4 - Dark Walnut
+                1 - Full Set 299
+                2 - No Seating 245
+                3 - Pick 4 199
+
+            5 - Rustic Wood
+                1 - Full Set 299
+                2 - No Seating 245
+                3 - Pick 4 199
+                */
+                
+        $sql = "select reservation_set AS 'set', count(DISTINCT('reservation_set')) AS 'count' FROM reservation WHERE 
+            reservation_date >= ('$date' - INTERVAL 2 DAY) AND reservation_date <= ('$date' + INTERVAL 2 DAY) 
+            GROUP BY reservation_set";
+        
+        $result = mysqli_query($cnxn, $sql);
+
+        $setArray = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+
+            $set = $row['set'];
+            
+            // Determine setID returned from DB for this row
+            switch ($set) {
+                case "Layered Arch Package":
+                    $set = 1;
+                    break;
+                case "Modern Round Package":
+                    $set = 2;
+                    break;
+                case "Vintage Mirror Package":
+                    $set = 3;
+                    break;
+                case "Dark Walnut Package":
+                    $set = 4;
+                    break;
+                case "Rustic Wood Package":
+                    $set = 5;
+                    break;
+            }
+
+            // assign set count to setID in associative array
+            $setArray[$set] = $row['count'];
+        }
+
+        return $setArray;
     }
 
 ?>
