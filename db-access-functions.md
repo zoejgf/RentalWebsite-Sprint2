@@ -34,18 +34,23 @@ function adds a Customer to the database.
  
 ```function addReservation($customerID, $reservationSet, $reservationPackage, $reservationDate)```
 
-Add a Resrvation to the database given customerID, reservationSet, reservationPackage, and Date
-of the reservation.    
-:heavy_plus_sign: adds reservation to database
+Add a Reservation to the database given customerID, reservationSet, reservationPackage, and Date
+of the reservation. Returns an int value of the ReservationID just entered.  This is required
+for the addExtras function.
+:heavy_plus_sign: / heavy_minus_sign: adds reservation to database
+
+---
+ 
+```function addExtras($reservationID, $extrasList)```
+
+Given a reservation ID and a list of Extras IDs, add those extras to the given reservation.
+:heavy_plus_sign: adds reserved extras to the database for a reservation
 
 ---
 
 ```function customerExists($fname, $email, $phone)```
 
-Returns a boolean value indicating whether this customer already exists in the database 
-or not.  The first name must equal, as well as either the email address or phone number
-for the test to return true.  Otherwise a false is returned.  
-:heavy_minus_sign: returns boolean indicating that a customer exists already or not
+If the customer exists, returns their customer_id.  Otherwise returns 0.
 
 ---
 

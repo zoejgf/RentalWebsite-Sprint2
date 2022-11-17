@@ -1,7 +1,7 @@
 <?php
 
 require "db-access.php";
-$results = queryReservationsDesc();
+$results = queryReservations();
 
 while ($row = mysqli_fetch_assoc($result)) {
     $reservationID = $row['reservation_id'];
@@ -16,6 +16,10 @@ while ($row = mysqli_fetch_assoc($result)) {
     
     echo "<p>$reservationID, $set, $package, $date, $customerID, $first, $last, $phone, $email</p>";
 }
+
+
+
+
 
 
 ?>

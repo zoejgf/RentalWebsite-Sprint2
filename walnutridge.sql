@@ -24,7 +24,7 @@ drop table if exists ordered_extras;
 drop table if exists reservation;
 drop table if exists extras;
 drop table if exists customers;
-
+drop table if exists notes;
 
 create table customers (
     customer_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -58,3 +58,9 @@ create table ordered_extras (
         CONSTRAINT fk_extras FOREIGN KEY (extras_id) REFERENCES extras(extras_id)
 );
 
+create table notes (
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    reservation_id int NOT NULL,
+        CONSTRAINT fk_reservation FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id),
+    note_text varchar(5000)     /* less than 64k for TEXT type */
+);

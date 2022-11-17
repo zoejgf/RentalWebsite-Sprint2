@@ -1,8 +1,8 @@
 <?php
     
-    //require '/home/redgreen/db.php';     // Live Version
-    require __DIR__ . '/db.php';
-
+    // require __DIR__ . '/db.php';      // Dev Version
+    require '/home/redgreen/db.php';     // Live Version
+    
     /*
      * This returns an array of rows containing invidual reservations
      */
@@ -85,15 +85,43 @@
     function reservationDetails($reservationID) {
         global $cnxn;                       // from imported file db.php
         $sql = "SELECT reservation.reservation_id AS reservation_id, 
-                    reservation.reservation_set AS 'set', 
-                    reservation.reservation_package AS 'package', 
-                    reservation.reservation_date AS 'date', 
-                    extras.name AS extra_name, extras.price AS extra_price
-            FROM reservation 
-                INNER JOIN ordered_extras ON reservation.reservation_id = ordered_extras.reservation_id
-                INNER JOIN extras ON ordered_extras.extras_id = extras.extras_id
-            WHERE
-                reservation.reservation_id = $reservationID;";
+            reservation.reservation_set AS 'set', 
+            reservation.reservation_package AS 'package', 
+            reservation.reservation_date AS 'date',
+            customers.customer_id AS customer_id, 
+            customers.first_name AS fname, 
+            customers.last_name AS lname, 
+            customers.email AS email, 
+            customers.phone AS phone 
+        FROM reservation
+        INNER JOIN customers ON 
+            reservation.reservation_customer = customers.customer_id
+        WHERE
+            reservation.reservation_id = $reservationID;";
+                
+        $result = mysqli_query($cnxn, $sql);
+        return $result;
+
+        /*
+        if ($row = mysqli_fetch_assoc($result)) {
+            $reservationID = $row['reservation_id'];
+            $set = $row['set'];
+            $package = $row['package'];
+            $date = $row['date'];
+            
+            echo "<p>$reservationID, $set, $package, $date</p>";
+        } */       
+    }
+    
+    
+    function reservationExtras($reservationID) {
+        global $cnxn;                       // from imported file db.php
+        $sql = "SELECT reservation.reservation_id AS reservation_id, 
+            extras.name AS extra_name, extras.price AS extra_price 
+        FROM reservation 
+            INNER JOIN ordered_extras ON reservation.reservation_id = ordered_extras.reservation_id 
+            INNER JOIN extras ON ordered_extras.extras_id = extras.extras_id 
+        WHERE reservation.reservation_id = $reservationID;";
                 
         $result = mysqli_query($cnxn, $sql);
         return $result;
@@ -101,9 +129,6 @@
         /*
         while ($row = mysqli_fetch_assoc($result)) {
             $reservationID = $row['reservation_id'];
-            $set = $row['set'];
-            $package = $row['package'];
-            $date = $row['date'];
             $extraName = $row['extra_name'];
             $extraPrice = $row['extra_price'];
             
@@ -115,7 +140,7 @@
 
     /*
      * Add a Customer to the database given firstname, lastname, email, and phone
-     * All values are Strings.
+     * All values are Strings.  Returns the ID of the customer just added.
      */
     function addCustomer($first, $last, $email, $phone) {
         global $cnxn; 
@@ -124,12 +149,20 @@
             values ('$first', '$last', '$email', '$phone')";
         
         $result = mysqli_query($cnxn, $sql);
+        
+        if ($result) {
+            $last_id = mysqli_insert_id($cnxn);
+            return $last_id;
+        } else {
+            return 0;
+        }
     }
 
     //addCustomer('Jane', 'Smith', 'jane@hotmail.com', '555-555-5432');   // Test function addCustomer()
 
     /*
      * Add a Resrvation to the database given customerID, reservationSet, reservationPackage, and Date
+     * returns ID of reservation just created, or 0 on SQL error.
      */
     function addReservation($customerID, $reservationSet, 
         $reservationPackage, $reservationDate) {
@@ -142,29 +175,78 @@
             '$reservationPackage', '$reservationDate')";
         
         $result = mysqli_query($cnxn, $sql);
+        if ($result) {
+            $last_id = mysqli_insert_id($cnxn);
+            return $last_id;
+        } else {
+            return 0;
+        }
     }
 
-    /* Determine if a customer exists or not */
+    /*
+     * For a given Reservation ID, add the reserved exras for that reservation.
+     */
+    function addReservationExras($reservationID, $extras) {
+        //insert into ordered_extras (reservation_id, extras_id) values (1,2)
+        global $cnxn; 
+
+        foreach ($extras as &$extra) {
+            $sql = "insert into ordered_extras 
+            (reservation_id, extras_id) values ($reservationID,$extra)";
+        
+            $result = mysqli_query($cnxn, $sql);
+        }
+    }
+
+    /* If a customer exists, return their customer_id, otherwise return 0 */
     function customerExists($fname, $email, $phone) {
         global $cnxn;
 
-        $sql = "SELECT count(*) AS count FROM customers WHERE first_name='$fname' AND (email='$email' OR phone='$phone')";
+        $sql = "SELECT customer_id FROM customers WHERE 
+            first_name='$fname' AND (email='$email' OR phone='$phone')";
 
         $result = mysqli_query($cnxn, $sql);
 
         //return $result;
-        if ($row = mysqli_fetch_assoc($result))
-            if ($row['count'] > 0)
-                return true;
-            else
-                return false;
-        else 
-            return false;       // silently fail
-
+        if ($row = mysqli_fetch_assoc($result)) {
+            $customer_id = $row['customer_id'];
+            return $customer_id;
+        }
+        
+        return 0;
     }
 
-    //echo customerExists('John', 'john@email.com', '425-555-1111') . " Customers";
+    /*
+     * Add a note for a given reservationID reservation
+    */
+    function addReservationNote($reservationID, $note) {
+        $sql = "insert into notes (reservation_id, note_text) values ($reservationID, $note)";
+        global $cnxn;
     
+        $result = mysqli_query($cnxn, $sql);
+    }
+
+    
+    /*
+     * Adds a note to a given reservation
+     */
+    function getReservationNotes($reservationID) {
+        global $cnxn;                       // from imported file db.php
+        $sql = "SELECT id, note_text FROM
+            notes WHERE reservation_id = $reservationID";
+                
+        $result = mysqli_query($cnxn, $sql);
+        return $result;
+
+        /*
+        while ($row = mysqli_fetch_assoc($result)) {
+            $id = $row['id'];
+            $noteText = $row['note_text'];
+            
+            echo "<p>$id, $noteText</p>";
+        } */ 
+    }
+
     
     /*
      * packageAvailable(int packageID, DATE date) 
@@ -175,33 +257,6 @@
      */
     function packageAvailable($packageID, $date) {
         global $cnxn;                       // from imported file db.php
-            /*
-            1 - Layered Arch Packages
-                1 - Full Set Rental, $849
-                2 - Pick 6 Rental, $749
-                3 - Pick 4 Rental, $699
-
-            2 - Modern Round 
-                1 - Full Set Rental 799
-                2 - Pick 6 Rental 699
-                3 - Pick 4 Rental 599
-            
-            3 - Vintage Mirror
-                1 - Platinum Package 849
-                2 - Gold Package 799
-                3 - Pick 6 649
-                4 - Pick 4 599
-
-            4 - Dark Walnut
-                1 - Full Set 299
-                2 - No Seating 245
-                3 - Pick 4 199
-
-            5 - Rustic Wood
-                1 - Full Set 299
-                2 - No Seating 245
-                3 - Pick 4 199
-                */
         $package = "";
         $avail = 0;
 
@@ -256,33 +311,6 @@
      */
     function dateAvailability($date) {
         global $cnxn;                       // from imported file db.php
-            /*
-            1 - Layered Arch Packages
-                1 - Full Set Rental, $849
-                2 - Pick 6 Rental, $749
-                3 - Pick 4 Rental, $699
-
-            2 - Modern Round 
-                1 - Full Set Rental 799
-                2 - Pick 6 Rental 699
-                3 - Pick 4 Rental 599
-            
-            3 - Vintage Mirror
-                1 - Platinum Package 849
-                2 - Gold Package 799
-                3 - Pick 6 649
-                4 - Pick 4 599
-
-            4 - Dark Walnut
-                1 - Full Set 299
-                2 - No Seating 245
-                3 - Pick 4 199
-
-            5 - Rustic Wood
-                1 - Full Set 299
-                2 - No Seating 245
-                3 - Pick 4 199
-                */
                 
         $sql = "select reservation_set AS 'set', count(DISTINCT('reservation_set')) AS 'count' FROM reservation WHERE 
             reservation_date >= ('$date' - INTERVAL 2 DAY) AND reservation_date <= ('$date' + INTERVAL 2 DAY) 
@@ -320,5 +348,52 @@
 
         return $setArray;
     }
+    /*
+    $result = queryReservationsDesc();
+    while ($row = mysqli_fetch_assoc($result)) {
+            $reservationID = $row['reservation_id'];
+            $set = $row['set'];
+            $package = $row['package'];
+            $date = $row['date'];
+            $customerID = $row['customer_id'];
+            $first = $row['fname'];
+            $last = $row['lname'];
+            $phone = $row['phone'];
+            $email = $row['email'];
+            
+            echo "<p>$reservationID, $set, $package, $date, $customerID, $first, $last, $phone, $email</p>";
+        }
+*/
 
+
+            /*
+            1 - Layered Arch Packages
+                1 - Full Set Rental, $849
+                2 - Pick 6 Rental, $749
+                3 - Pick 4 Rental, $699
+
+            2 - Modern Round 
+                1 - Full Set Rental 799
+                2 - Pick 6 Rental 699
+                3 - Pick 4 Rental 599
+            
+            3 - Vintage Mirror
+                1 - Platinum Package 849
+                2 - Gold Package 799
+                3 - Pick 6 649
+                4 - Pick 4 599
+
+            4 - Dark Walnut
+                1 - Full Set 299
+                2 - No Seating 245
+                3 - Pick 4 199
+
+            5 - Rustic Wood
+                1 - Full Set 299
+                2 - No Seating 245
+                3 - Pick 4 199
+                */
+                
+    //reservationDetails(6);
+    
 ?>
