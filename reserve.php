@@ -406,8 +406,13 @@
                 
                 <div class="row">
                     <div class="col-6 col-md-6 mt-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input class="form-control" type="text" id="name" name="name">
+                        <label for="fname" class="form-label">First Name</label>
+                        <input class="form-control" type="text" id="fname" name="fname">
+                    </div>
+
+                    <div class="col-6 col-md-6 mt-3">
+                        <label for="lname" class="form-label">Last Name</label>
+                        <input class="form-control" type="text" id="lname" name="lname">
                     </div>
                 
                     <div class="col-6 col-md-6 mt-3">
