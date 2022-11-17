@@ -18,7 +18,9 @@
             $package = $_POST["package"];
             /*if (!empty($_POST["checks"]))
                 $addOns = $_POST["checks"];*/
-            $name = $_POST["name"];
+            //$name = $_POST["name"];
+            $fname = $_POST['fname'];
+            $lname = $_POST['lname'];
             $email = $_POST["email"];
             $phone = $_POST["phone"];
             
@@ -79,7 +81,7 @@ $message = "
         <table>
             <tr>
                 <th style='padding:5px;text-align:left;border-bottom:1px solid #ddd;'>Name</th>
-                <td style='padding:5px;border-left:1px solid #ddd;border-bottom:1px solid #ddd;'>$name</td>
+                <td style='padding:5px;border-left:1px solid #ddd;border-bottom:1px solid #ddd;'>$fname $lname</td>
             </tr>
             <tr>
                 <th style='padding:5px;text-align:left;border-bottom:1px solid #ddd;'>Phone Number</th>
@@ -175,7 +177,7 @@ mail($to,$subject,$message,$headers);
             
             <div class="row">
                 <div class="col-12 col-sm-6 mt-3 pe-sm-5 text-center text-sm-end text-sm-start ">
-                    <span class="fw-bolder">Name:</span> <?php echo $name ?>        
+                    <span class="fw-bolder">Name:</span> <?php echo $fname . " " . $lname?>        
                 </div>
                 <div class="col-12 col-sm-6 mt-3 ps-sm-5 text-center text-sm-start ">
                     <span class="fw-bolder">Phone:</span> <?php echo $phone ?>        
