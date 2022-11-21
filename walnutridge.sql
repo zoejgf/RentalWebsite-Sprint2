@@ -47,13 +47,14 @@ create table reservation (
 create table extras (
     extras_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name varchar(30),
-    price decimal(10,2)
+    price decimal(10,2),
+    image_url varchar(30)
 );
 
 create table ordered_extras (
     ordered_extras_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     reservation_id int NOT NULL,
-        CONSTRAINT fk_reservation FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id),
+        CONSTRAINT fk_ordered_extras_reservation FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id),
     extras_id int NOT NULL,
         CONSTRAINT fk_extras FOREIGN KEY (extras_id) REFERENCES extras(extras_id)
 );
@@ -61,6 +62,6 @@ create table ordered_extras (
 create table notes (
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     reservation_id int NOT NULL,
-        CONSTRAINT fk_reservation FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id),
+        CONSTRAINT fk_notes_reservation FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id),
     note_text varchar(5000)     /* less than 64k for TEXT type */
 );

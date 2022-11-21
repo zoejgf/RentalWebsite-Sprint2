@@ -302,6 +302,69 @@
         return (boolean)$avail;     // returns true if 1 or more packages avail, false otherwise
     }
 
+    /*
+     * Return a list of all extras offered.  The column 'available' holds true or false, indicating whether
+     * that extra is available on that date.
+     */
+    function getExtrasStatus($date) {
+        global $cnxn;                       // from imported file db.php
+
+        $sql = "SELECT 
+                extras.extras_id AS id, 
+                extras.name AS name, 
+                extras.price AS price,
+                extras.image_url AS url,
+                reservation.reservation_id AS resID,
+                reservation.reservation_date AS date,
+                'false' AS available
+            FROM extras
+            INNER JOIN ordered_extras ON extras.extras_id = ordered_extras.extras_id
+            INNER JOIN reservation ON ordered_extras.reservation_id = reservation.reservation_id
+            WHERE 
+                reservation.reservation_date >= ('2022-12-31' - INTERVAL 2 DAY) AND
+                reservation.reservation_date <= ('2022-12-31' + INTERVAL 2 DAY)
+            UNION 
+            SELECT 
+                extras.extras_id AS id, 
+                extras.name AS name, 
+                extras.price AS price,
+                extras.image_url AS url,
+                '' AS resID,
+                '' AS date,
+                'true' AS available
+            FROM extras
+            INNER JOIN ordered_extras ON extras.extras_id = ordered_extras.extras_id
+            INNER JOIN reservation ON ordered_extras.reservation_id = reservation.reservation_id
+            WHERE extras.extras_id NOT IN (
+                SELECT 
+                    extras.extras_id
+                FROM extras
+                INNER JOIN ordered_extras ON extras.extras_id = ordered_extras.extras_id
+                INNER JOIN reservation ON ordered_extras.reservation_id = reservation.reservation_id
+                WHERE 
+                    reservation.reservation_date >= ('2022-12-31' - INTERVAL 2 DAY) AND
+                    reservation.reservation_date <= ('2022-12-31' + INTERVAL 2 DAY)
+                )
+                
+            ORDER BY id;";
+
+        $result = mysqli_query($cnxn, $sql);
+        
+        return $result;
+
+        /*
+        while ($row = mysqli_fetch_assoc($result)) {
+            $id = $row['id'];
+            $name = $row['name'];
+            $price = $row['price'];
+            $url = $row['url'];
+            $resID = $row['resID'];
+            $resDate = $row['date'];
+            $available = $row['available'];
+        } */ 
+        
+    }
+
 
     /*
      * dateAvailability($date)
