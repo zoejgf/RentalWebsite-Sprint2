@@ -179,6 +179,71 @@
         return "";
     }
 
+    function getSetPackageName($set, $package) {
+        $return = array();
+
+        if ($set == "1") {
+            $return['setName'] = "Layered Arch Package, ";
+            if ($package == "1") {
+                $return['packageName'] = "Layered Arch Full Set Rental";
+            } elseif ($package == "2") {
+                $return['packageName'] = "Layered Arch Pick 6 Rental";
+            } elseif ($package == "3") {
+                $return['packageName'] = "Layered Arch Pick 4 Rental";
+            }
+        }
+        
+        if ($set == "2") {
+            $return['setName'] = "Modern Round Package, ";
+            if ($package == "1") {
+                $return['packageName'] = "Modern Round Full Set Rental";
+            } elseif ($package == "2") {
+                $return['packageName'] = "Modern Round Pick 6 Rental";
+            } elseif ($package == "3") {
+                $return['packageName'] = "Modern Round Pick 4 Rental";
+            }
+        }
+
+        if ($set == "3") {
+            $return['setName'] = "Vintage Mirror Package, ";
+            if ($package == "1") {
+                $return['packageName'] = "Vintage Mirror Platinum Package";
+            } elseif ($package == "2") {
+                $return['packageName'] = "Vintage Mirror Gold Package";
+            } elseif ($package == "3") {
+                $return['packageName'] = "Vintage Mirror Pick 6 Package";
+            } elseif ($package == "4") {
+                $return['packageName'] = "Vintage Mirror Pick 4 Package";
+            }
+        }            
+
+        if ($set == "4") {
+            $return['setName'] = "Dark Walnut Package, ";
+            if ($package == "1") {
+                $return['packageName'] = "Dark Walnut Full Set Rental";
+            } elseif ($package == "2") {
+                $return['packageName'] = "Dark Walnut No Seating Rental";
+            } elseif ($package == "3") {
+                $return['packageName'] = "Dark Walnut Pick 4 Rental";
+            }
+        }
+
+        if ($set == "5") {
+            $return['setName'] = "Rustic Wood Package, ";
+            if ($package == "1") {
+                $return['packageName'] = "Rustic Wood Full Set";
+            } elseif ($package == "2") {
+                $return['packageName'] = "Rustic Wood No Seating";
+            } elseif ($package == "3") {
+                $return['packageName'] = "Rustic Wood Pick 4";
+            }
+        }
+
+        return $return;
+    }
+
+
+
            /* 
         Date retrieved to this point, with some keys below.
             $month - selected month for wedding rental

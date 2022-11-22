@@ -186,7 +186,7 @@
     /*
      * For a given Reservation ID, add the reserved exras for that reservation.
      */
-    function addReservationExras($reservationID, $extras) {
+    function addReservationExtras($reservationID, $extras) {
         //insert into ordered_extras (reservation_id, extras_id) values (1,2)
         global $cnxn; 
 
