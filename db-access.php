@@ -314,9 +314,11 @@
                 extras.name AS name, 
                 extras.price AS price,
                 extras.image_url AS url,
+                extras.form_value AS form_value,
+                extras.form_id AS form_id,
                 reservation.reservation_id AS resID,
                 reservation.reservation_date AS date,
-                'false' AS available
+                0 AS available
             FROM extras
             INNER JOIN ordered_extras ON extras.extras_id = ordered_extras.extras_id
             INNER JOIN reservation ON ordered_extras.reservation_id = reservation.reservation_id
@@ -329,9 +331,11 @@
                 extras.name AS name, 
                 extras.price AS price,
                 extras.image_url AS url,
+                extras.form_value AS form_value,
+                extras.form_id AS form_id,
                 '' AS resID,
                 '' AS date,
-                'true' AS available
+                1 AS available
             FROM extras
             INNER JOIN ordered_extras ON extras.extras_id = ordered_extras.extras_id
             INNER JOIN reservation ON ordered_extras.reservation_id = reservation.reservation_id
@@ -358,6 +362,8 @@
             $name = $row['name'];
             $price = $row['price'];
             $url = $row['url'];
+            $formValue = $row['form_value'];
+            $formID = $row['form_id'];
             $resID = $row['resID'];
             $resDate = $row['date'];
             $available = $row['available'];

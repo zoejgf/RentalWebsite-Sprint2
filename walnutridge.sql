@@ -48,7 +48,9 @@ create table extras (
     extras_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name varchar(30),
     price decimal(10,2),
-    image_url varchar(30)
+    image_url varchar(30),
+    form_value varchar(15),
+    form_id varchar(15)
 );
 
 create table ordered_extras (

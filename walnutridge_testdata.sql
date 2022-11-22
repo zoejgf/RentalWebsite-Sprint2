@@ -39,18 +39,16 @@ create table extras (
 */
 delete from extras;
 
-insert into extras (name, price, image_url) values ('Modern Sign', 275, 'somesign.jpg');
-insert into extras (name, price, image_url) values ('Small Modern Sign', 40, 'anothersign.jpg');
-insert into extras (name, price, image_url) values ('Medium Modern Sign', 60, '3rdsign.jpg');
-insert into extras (name, price, image_url) values ('Large Modern Sign', 80, 'morejpegs.jpg');
-insert into extras (name, price, image_url) values ('Aisle Runner', 99,'aislerunner.jpg');
-insert into extras (name, price, image_url) values ('TypeWriter', 99,'typewriter.jpg');
-insert into extras (name, price, image_url) values ('Delivery', 0, 'delivery.jpg');
-insert into extras (name, price, image_url) values ('Couch', 99, 'couch.jpg');
-insert into extras (name, price, image_url) values ('Antique', 4, 'antique.jpg');
-insert into extras (name, price, image_url) values ('Wine', 20, 'wine.jpg');
-insert into extras (name, price, image_url) values ('Clear Jars', 30, 'clear_jars.jpg');
-insert into extras (name, price, image_url) values ('Blue Jars', 30, 'blue_jars.jpg');
+insert into extras (name, price, image_url, form_value, form_id) 
+    values ('Clear Antique Ball Jars', 30, 'walnut-ridge-images/da-7.jpg', 'clearJars', 'clearBall');
+insert into extras (name, price, image_url, form_value, form_id) 
+    values ('Blue Antique Ball Jars', 30, 'walnut-ridge-images/da-6.jpg', 'blueJars', 'blueBall');
+insert into extras (name, price, image_url, form_value, form_id) 
+    values ('Vintage Couch', 99, 'walnut-ridge-images/da-1.jpg', 'couch', 'vintageCouch');
+insert into extras (name, price, image_url, form_value, form_id) 
+    values ('Antique Gallon Jugs', 4, 'walnut-ridge-images/da-8.jpg', 'antique', 'antiqueJugs');
+insert into extras (name, price, image_url, form_value, form_id) 
+    values ('XL Wine Jugs', 20, 'walnut-ridge-images/da-4.jpg', 'wine', 'wineJugs');
 
 /*
 create table reservation (
@@ -94,11 +92,10 @@ create table ordered_extras (
 
 insert into ordered_extras (reservation_id, extras_id) values (1,2);
 insert into ordered_extras (reservation_id, extras_id) values (1,4);
-insert into ordered_extras (reservation_id, extras_id) values (1,5);
 insert into ordered_extras (reservation_id, extras_id) values (2,3);
-insert into ordered_extras (reservation_id, extras_id) values (2,6);
-insert into ordered_extras (reservation_id, extras_id) values (2,8);
+insert into ordered_extras (reservation_id, extras_id) values (2,1);
 insert into ordered_extras (reservation_id, extras_id) values (3,1);
+insert into ordered_extras (reservation_id, extras_id) values (3,5);
 
 /* insert into ordered_extras (reservation_id, extras_id) values (); */
 

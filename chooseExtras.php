@@ -175,7 +175,39 @@
 
             ?>
             <div class="container text-center">
-                <?php if ($month != "2") { // If February, do not show the vintage couch ?>
+
+            <?php 
+
+            $results = getExtrasStatus($date);
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                $id = $row['id'];
+                $name = $row['name'];
+                $price = $row['price'];
+                $url = $row['url'];
+                $formValue = $row['form_value'];
+                $formID = $row['form_id'];
+                $resID = $row['resID'];
+                $resDate = $row['date'];
+                $available = $row['available'];
+
+                /* NOTE - Can check $available and NOT show unavailable extras, or show them, but disable their inputs */
+                ?>
+                <div class="form-check form-check-inline p-3" id="<?php echo $formID ?>">
+                    <input class="form-check-input" type="checkbox" name="extras[]" 
+                        value="<?php echo $formValue ?>" id="<?php echo $formID ?>" <?php if (!$available) { echo "disabled";  } ?> >
+                    <label class="form-check-label" for="<?php echo $formID ?>">
+                    $name
+                    <img src="<?php echo $url ?>" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
+                    $<?php echo $price ?> add on
+                    </label>
+                </div>
+                <?php //} // end if-statement
+            } // end while-statement
+
+            ?>
+                
+            <?php /* ?>
                 <div class="form-check form-check-inline p-3" id="vintageCouch">
                     <input class="form-check-input" type="checkbox" name="extras[]" value="couch" id="vintageCouch">
                     <label class="form-check-label" for="vintageCouch">
@@ -183,9 +215,8 @@
                     <img src="walnut-ridge-images/da-1.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                     $99 add on
                     </label>
-                </div> <?php } ?>
+                </div>
                 
-                <?php if ($month != "3") { // If March, do not show the jugs ?>
                 <div class="form-check form-check-inline p-3" id="antiqueJugs">
                     <input class="form-check-input" type="checkbox" name="extras[]" value="antique" id="antiqueJugs">
                     <label class="form-check-label" for="antiqueJugs">
@@ -202,10 +233,9 @@
                     <img src="walnut-ridge-images/da-4.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                     $20 each
                     </label>
-                </div> <?php } ?>
+                </div>
                 <br>
                 
-                <?php if ($month != "4") { // jars not available in April ?>
                 <div class="form-check form-check-inline p-3" id="clearBall">
                     <input class="form-check-input" type="checkbox" name="extras[]" value="clearJars" id="clearBall">
                     <label class="form-check-label" for="clearBall">
@@ -221,10 +251,10 @@
                     <img src="walnut-ridge-images/da-6.jpg" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                     $30/25 Jars (Assorted)
                     </label>
-                </div> <?php } ?>
+                </div>
             </div>
+            <?php */ ?>
 
-            <?php if ($month != "5") { // delivery not available in May ?>
             <div class="container text-center">
                 <div class="form-check form-check-inline p-3" id="delivery">
                     <input type="checkbox" name="extras[]" value="delivery" class="btn-check" id="btn-check" autocomplete="off">
@@ -233,8 +263,7 @@
                         Add Delivery
                     </label>
                 </div>
-            </div><?php } ?>
-
+            </div>
             
 
             <div id="upgradeOffer">
