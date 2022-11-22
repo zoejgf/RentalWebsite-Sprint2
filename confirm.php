@@ -5,6 +5,7 @@
         error_reporting(E_ALL);
 
         // Import separate functions file
+        require __DIR__ . '/db-access.php';
         require __DIR__ . '/pkg-mgmt.php';
 
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
@@ -47,6 +48,23 @@
 
         // Values passed in by reference, changed within function
         processPackageNamesPrices($packageName, $packagePrice, $totalPrice, $set, $package);
+
+        $customerID = customerExists($fname, $email, $phone);
+        $names = getSetPackageName($set, $package);
+        
+        if($customerID == 0)
+        {
+            $customerID = addCustomer($fname, $lname, $email, $phone);
+            $reservationID = addReservation($customerID, $names['setName'], $names['packageName'], $date);
+            addReservationExtras($reservationID, $_POST['extras']);
+            
+        } else {
+            $reservationID = addReservation($customerID, $names['setName'], $names['packageName'], $date);
+            addReservationExtras($reservationID, $_POST['extras']);
+        }
+        
+        
+        
         // Always set content-type when sending HTML email
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -70,7 +88,7 @@ if (!empty($_POST['checks'])) {
             // values for extras - delivery/?, couch/99, antique/4-ea, wine/20-ea, clearJars/30, blueJars/30
             if (!empty($_POST['extras'])) {
                 foreach($_POST['extras'] as $EXTRA) {
-                    $addOns .= returnExtraName($EXTRA) . ", ";
+                    $addOns .= returnExtraNameFromID($EXTRA) . ", ";
                     //$addOns .= returnExtraPrice($EXTRA, $totalPrice);
                 }
             }
@@ -176,6 +194,12 @@ mail($to,$subject,$message,$headers);
         <div class="container" style="width:70%">
             
             <div class="row">
+                <class="col-12">
+                    <h3>Thank You - Your reservation has been confirmed.</h3>
+                </class>
+            </div>            
+            
+            <div class="row">
                 <div class="col-12 col-sm-6 mt-3 pe-sm-5 text-center text-sm-end text-sm-start ">
                     <span class="fw-bolder">Name:</span> <?php echo $fname . " " . $lname?>        
                 </div>
@@ -206,9 +230,9 @@ mail($to,$subject,$message,$headers);
                     // values for extras - delivery/?, couch/99, antique/4-ea, wine/20-ea, clearJars/30, blueJars/30
                     if (!empty($_POST['extras'])) {
                         foreach($_POST['extras'] as $EXTRA) { ?>
-                        <div class="col-5 text-end h6"> <?php echo returnExtraName($EXTRA); ?></div>
+                        <div class="col-5 text-end h6"> <?php echo returnExtraNameFromID($EXTRA); ?></div>
                         <div class="col-2"></div>
-                        <div class="col-5 h6"><?php echo "$" . returnExtraPrice($EXTRA, $totalPrice); ?></div>
+                        <div class="col-5 h6"><?php echo "$" . returnExtraPriceByID($EXTRA, $totalPrice); ?></div>
                         <?php
                         }
                     }

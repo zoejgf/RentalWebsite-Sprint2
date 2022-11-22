@@ -126,6 +126,7 @@
         }
     }
 
+    // TODO: Delete this function?  Was used by reserve.php
     function returnExtraPrice($e, &$totalPrice) {
         $returnPrice = 0;
         if ($e == "delivery") {
@@ -152,7 +153,7 @@
         return $returnPrice;
     }
 
-
+    // TODO: Delete this function?  Was used by reserve.php
     function returnExtraName($e) {
         if ($e == "delivery") return "Rental Delivery";
         if ($e == "couch") return "Vintage Couch";
@@ -161,6 +162,42 @@
         if ($e == "clearJars") return "Clear Antique Ball Jars";
         if ($e == "blueJars") return "Blue Antique Ball Jars";
     }
+    
+    function returnExtraNameFromID($e) {
+        if ($e == "delivery") return "Rental Delivery";
+        if ($e == 3) return "Vintage Couch";
+        if ($e == 4) return "Antique Gallon Jugs (/ea)";
+        if ($e == 5) return "XL Wine Jugs (/ea)";
+        if ($e == 1) return "Clear Antique Ball Jars";
+        if ($e == 2) return "Blue Antique Ball Jars";
+    }
+    
+    function returnExtraPriceByID($e, &$totalPrice) {
+        $returnPrice = 0;
+        if ($e == "delivery") {
+            $returnPrice = 0;
+        }
+        if ($e == 3) {
+            $returnPrice = 99;
+        }
+        if ($e == 4) {
+            $returnPrice = 4; //    return "4 x qty";
+        }
+        if ($e == 5) {
+            $returnPrice = 20; //    return "20 x qty";
+        } 
+        if ($e == 1) { 
+            $returnPrice = 30;
+        }
+        if ($e == 2) { 
+            $returnPrice = 30;
+        }
+
+        //global $totalPrice;
+        $totalPrice += $returnPrice;
+        return $returnPrice;
+    }
+    
 
 
     function getSetName($set) {

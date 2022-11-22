@@ -387,9 +387,9 @@
                         // values for extras - delivery/?, couch/99, antique/4-ea, wine/20-ea, clearJars/30, blueJars/30
                         if (!empty($_POST['extras'])) {
                             foreach($_POST['extras'] as $EXTRA) { ?>
-                            <div class="col-5 text-end h6"> <?php echo returnExtraName($EXTRA); ?></div>
+                            <div class="col-5 text-end h6"> <?php echo returnExtraNameFromID($EXTRA); ?></div>
                             <div class="col-2"></div>
-                            <div class="col-5 h6"><?php echo "$" . returnExtraPrice($EXTRA, $totalPrice); ?></div>
+                            <div class="col-5 h6"><?php echo "$" . returnExtraPriceByID($EXTRA, $totalPrice); ?></div>
                             <?php
                             }
                         }

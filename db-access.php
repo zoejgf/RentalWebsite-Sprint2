@@ -191,6 +191,7 @@
         global $cnxn; 
 
         foreach ($extras as &$extra) {
+            //echo "$extra <br>";
             $sql = "insert into ordered_extras 
             (reservation_id, extras_id) values ($reservationID,$extra)";
         
@@ -323,8 +324,8 @@
             INNER JOIN ordered_extras ON extras.extras_id = ordered_extras.extras_id
             INNER JOIN reservation ON ordered_extras.reservation_id = reservation.reservation_id
             WHERE 
-                reservation.reservation_date >= ('2022-12-31' - INTERVAL 2 DAY) AND
-                reservation.reservation_date <= ('2022-12-31' + INTERVAL 2 DAY)
+                reservation.reservation_date >= ('$date' - INTERVAL 2 DAY) AND
+                reservation.reservation_date <= ('$date' + INTERVAL 2 DAY)
             UNION 
             SELECT 
                 extras.extras_id AS id, 
@@ -346,8 +347,8 @@
                 INNER JOIN ordered_extras ON extras.extras_id = ordered_extras.extras_id
                 INNER JOIN reservation ON ordered_extras.reservation_id = reservation.reservation_id
                 WHERE 
-                    reservation.reservation_date >= ('2022-12-31' - INTERVAL 2 DAY) AND
-                    reservation.reservation_date <= ('2022-12-31' + INTERVAL 2 DAY)
+                    reservation.reservation_date >= ('$date' - INTERVAL 2 DAY) AND
+                    reservation.reservation_date <= ('$date' + INTERVAL 2 DAY)
                 )
                 
             ORDER BY id;";

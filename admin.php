@@ -1,5 +1,30 @@
+<?php
+    session_start();
+        
+        if(isset($_POST['submit_pass']) && $_POST['pass']){
+            $pass=$_POST['pass'];
+            if($pass=="red123")
+            { 
+                $_SESSION['password']=$pass;
+                
+            }
+             else
+             {
+                $error="Incorrect Password";
+             }
+        }
+        
+        if(isset($_POST['page_logout']))
+        {
+         unset($_SESSION['password']);
+        }
+?>
+
 <!DOCTYPE html> 
 <html lang="en-US">
+    <!--password protected page-->
+    
+        
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +46,13 @@
     </head>
     <body>
         <?php
+        if($_SESSION['password']=="red123")
+        {
+            
+        ?>
+          
+          <?php
+        
         
          // DISPLAY CODE ERRORS!
         ini_set('display_errors', 1);
@@ -153,6 +185,35 @@
                 </table> 
     
        <?php } ?>
+       
+        
+        
+        <form method="post" action="" id="logout_form">
+            <input type="submit" name="page_logout" value="LOGOUT">
+        </form>
+        <?php
+        
+        }
+        else
+        {
+            ?>
+            <form method="post" action="" id="login_form" style="text-align:center">
+              <h1>LOGIN TO PROCEED</h1>
+              <p>Password: </p>
+              <input type="password" name="pass" placeholder="*******">
+              <input type="submit" name="submit_pass" value="LOG IN">
+             
+             </form>
+            
+            <?php
+            
+        }
+        ?>
+        
+        
+        
+        
+        
         
     </body>
 </html>

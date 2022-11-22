@@ -196,7 +196,7 @@
                 ?>
                 <div class="form-check form-check-inline p-3" id="<?php echo $formID ?>">
                     <input class="form-check-input" type="checkbox" name="extras[]" 
-                        value="<?php echo $formValue ?>" id="<?php echo $formID ?>" <?php if (!$available) { echo "disabled";  } ?> >
+                        value="<?php echo $id ?>" id="<?php echo $formID ?>" <?php if (!$available) { echo "disabled";  } ?> >
                     <label class="form-check-label" for="<?php echo $formID ?>">
                     <?php echo $name; ?>
                     <img src="<?php echo $url ?>" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">

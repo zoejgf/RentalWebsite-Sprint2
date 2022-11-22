@@ -502,3 +502,12 @@ li.breadcrumb-item::before {
 div.currentPack {
     padding-bottom: 30px;
 }
+
+td a {
+    text-decoration: none;
+}
+
+/*login form styling*/
+form#login_form {
+    text-align: center;
+}
