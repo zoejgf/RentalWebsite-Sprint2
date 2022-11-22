@@ -5,6 +5,7 @@
         error_reporting(E_ALL);
 
         require __DIR__ . '/pkg-upgrades.php';
+        require __DIR__ . '/db-access.php';
 
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
         
@@ -178,7 +179,7 @@
 
             <?php 
 
-            $results = getExtrasStatus($date);
+            $result = getExtrasStatus($date);
 
             while ($row = mysqli_fetch_assoc($result)) {
                 $id = $row['id'];
@@ -197,7 +198,7 @@
                     <input class="form-check-input" type="checkbox" name="extras[]" 
                         value="<?php echo $formValue ?>" id="<?php echo $formID ?>" <?php if (!$available) { echo "disabled";  } ?> >
                     <label class="form-check-label" for="<?php echo $formID ?>">
-                    $name
+                    <?php echo $name; ?>
                     <img src="<?php echo $url ?>" style="width:100px;height:150px;object-fit:cover;padding:15px 0 15px 0;">
                     $<?php echo $price ?> add on
                     </label>
