@@ -41,7 +41,8 @@ create table reservation (
         CONSTRAINT fk_customer FOREIGN KEY (reservation_customer) REFERENCES customers(customer_id),
     reservation_set varchar(30),
     reservation_package varchar(30),
-    reservation_date DATETIME
+    reservation_date DATETIME,
+    status varchar(20) DEFAULT 'unconfirmed'
 );
 
 create table extras (

@@ -6,7 +6,6 @@
             if($pass=="red123")
             { 
                 $_SESSION['password']=$pass;
-                
             }
              else
              {
@@ -61,7 +60,7 @@
         
         require "db-access.php";
         
-        if (count($_GET) > 0 && (isset($_GET['reservation_id']))) {
+        if (count($_GET) > 0 && (isset($_GET['reservation_id']))) { // DISPLAY RESERVATION DETAILS
             
             $result = reservationDetails($_GET['reservation_id']);
 
@@ -121,15 +120,6 @@
                     </a>
                 </div>
                 
-                <!--while ($extrasRow = mysqli_fetch_assoc($extrasResult)) {-->
-                <!--    $reservationID = $extrasRow['reservation_id'];-->
-                <!--    $extraName = $extrasRow['extra_name'];-->
-                <!--    $extraPrice = $extrasRow['extra_price'];-->
-                    
-                <!--    echo "<div class=\"row\">";-->
-                <!--    echo "<p>$reservationID, $set, $package, $date, $extraName, $extraPrice</p>";-->
-                <!--    echo "</div>";-->
-                <!--}-->
            <?php }
             
             // DISPLAY RESERVATION NOTES
@@ -137,7 +127,7 @@
             
             // DISPLAY TEXTAREA INPUT FOR ADDITIONAL RESERVATION NOTES
             
-        } else {
+        } else {            // DISPLAY RESERVATION LIST IN ASCENDING ORDER
         
                 $results = queryReservationsAsc();
                 
@@ -165,6 +155,7 @@
                             <th scope='col'>Last Name</th>
                             <th scope='col'>Phone Number</th>
                             <th scope='col'>Email</th>
+                            <th scope='col'>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -179,12 +170,13 @@
                             <td><?php echo $row['lname']; ?></td>
                             <td><?php echo $row['phone']; ?></td>
                             <td><?php echo $row['email']; ?></td>
+                            <td><?php echo $row['status']; ?></td>
                         </tr>
-                        <?php } ?>
+                        <?php }     // WHILE LOOP ?>
                     </tbody>
                 </table> 
     
-       <?php } ?>
+       <?php }              // END RESERVATIONS LIST ?>
        
         
         
@@ -193,9 +185,9 @@
         </form>
         <?php
         
-        }
+        } // END IF-STATEMENT SESSION CONTAINS CORRECT PASSWORD
         else
-        {
+        { // PRESENT LOGIN PAGE
             ?>
             <form method="post" action="" id="login_form" style="text-align:center">
               <h1>LOGIN TO PROCEED</h1>
@@ -209,11 +201,6 @@
             
         }
         ?>
-        
-        
-        
-        
-        
         
     </body>
 </html>

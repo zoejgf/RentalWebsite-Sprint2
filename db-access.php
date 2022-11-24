@@ -16,7 +16,8 @@
             customers.first_name AS fname, 
             customers.last_name AS lname, 
             customers.email AS email, 
-            customers.phone AS phone 
+            customers.phone AS phone,
+            customers.status AS status
         FROM reservation 
             INNER JOIN customers ON 
             reservation.reservation_customer = customers.customer_id
@@ -35,6 +36,7 @@
             $last = $row['lname'];
             $phone = $row['phone'];
             $email = $row['email'];
+            $status = $row['status'];
             
             echo "<p>$reservationID, $set, $package, $date, $customerID, $first, $last, $phone, $email</p>";
         }
@@ -54,7 +56,8 @@
             customers.first_name AS fname, 
             customers.last_name AS lname, 
             customers.email AS email, 
-            customers.phone AS phone 
+            customers.phone AS phone,
+            customers.status AS status
         FROM reservation 
             INNER JOIN customers ON 
             reservation.reservation_customer = customers.customer_id
