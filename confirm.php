@@ -51,18 +51,18 @@
 
         $customerID = customerExists($fname, $email, $phone);
         $names = getSetPackageName($set, $package);
+        $relationship = '';     // TODO: Take in customers relationship to the wedding (i.e. Bride, Planner, etc.)
         
         if($customerID == 0)
         {
             $customerID = addCustomer($fname, $lname, $email, $phone);
-            $reservationID = addReservation($customerID, $names['setName'], $names['packageName'], $date);
+            $reservationID = addReservation($customerID, $names['setName'], $names['packageName'], $date, $relationship);
             addReservationExtras($reservationID, $_POST['extras']);
             
         } else {
-            $reservationID = addReservation($customerID, $names['setName'], $names['packageName'], $date);
+            $reservationID = addReservation($customerID, $names['setName'], $names['packageName'], $date, $relationship);
             addReservationExtras($reservationID, $_POST['extras']);
         }
-        
         
         
         // Always set content-type when sending HTML email

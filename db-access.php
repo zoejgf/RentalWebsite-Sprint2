@@ -11,17 +11,23 @@
         $sql = "SELECT reservation.reservation_id AS reservation_id, 
             reservation.reservation_set AS 'set', 
             reservation.reservation_package AS package, 
-            reservation.reservation_date AS date, 
+            reservation.reservation_date AS date,
+            reservation.status AS status,
             customers.customer_id AS customer_id, 
             customers.first_name AS fname, 
             customers.last_name AS lname, 
             customers.email AS email, 
             customers.phone AS phone,
-            customers.status AS status
+            COUNT(reservation_customers.customer) AS numberCustomers
+            
         FROM reservation 
-            INNER JOIN customers ON 
-            reservation.reservation_customer = customers.customer_id
-            ORDER BY date ASC";
+        
+            INNER JOIN reservation_customers ON reservation.reservation_id = reservation_customers.reservation
+            INNER JOIN customers ON reservation_customers.customer = customers.customer_id
+            
+            GROUP BY reservation_customers.reservation
+            
+            ORDER BY reservation_id ASC";
         
         $result = mysqli_query($cnxn, $sql);
         return $result;
@@ -51,17 +57,23 @@
         $sql = "SELECT reservation.reservation_id AS reservation_id, 
             reservation.reservation_set AS 'set', 
             reservation.reservation_package AS package, 
-            reservation.reservation_date AS date, 
+            reservation.reservation_date AS date,
+            reservation.status AS status,
             customers.customer_id AS customer_id, 
             customers.first_name AS fname, 
             customers.last_name AS lname, 
             customers.email AS email, 
             customers.phone AS phone,
-            customers.status AS status
+            COUNT(reservation_customers.customer) AS numberCustomers
+            
         FROM reservation 
-            INNER JOIN customers ON 
-            reservation.reservation_customer = customers.customer_id
-            ORDER BY date DESC";
+        
+            INNER JOIN reservation_customers ON reservation.reservation_id = reservation_customers.reservation
+            INNER JOIN customers ON reservation_customers.customer = customers.customer_id
+            
+            GROUP BY reservation_customers.reservation
+            
+            ORDER BY reservation_id DESC;";
         
         $result = mysqli_query($cnxn, $sql);
         return $result;
@@ -90,30 +102,20 @@
         $sql = "SELECT reservation.reservation_id AS reservation_id, 
             reservation.reservation_set AS 'set', 
             reservation.reservation_package AS 'package', 
-            reservation.reservation_date AS 'date',
-            customers.customer_id AS customer_id, 
-            customers.first_name AS fname, 
-            customers.last_name AS lname, 
-            customers.email AS email, 
-            customers.phone AS phone 
+            reservation.reservation_date AS 'date'
         FROM reservation
-        INNER JOIN customers ON 
-            reservation.reservation_customer = customers.customer_id
+        INNER JOIN reservation_customers ON reservation.reservation_id = reservation_customers.reservation
         WHERE
             reservation.reservation_id = $reservationID;";
                 
+            // customers.first_name AS fname, 
+            // customers.last_name AS lname, 
+            // customers.email AS email, 
+            // customers.phone AS phone 
+            // INNER JOIN customers ON customers.customer_id = reservation_customers.customer
+                
         $result = mysqli_query($cnxn, $sql);
         return $result;
-
-        /*
-        if ($row = mysqli_fetch_assoc($result)) {
-            $reservationID = $row['reservation_id'];
-            $set = $row['set'];
-            $package = $row['package'];
-            $date = $row['date'];
-            
-            echo "<p>$reservationID, $set, $package, $date</p>";
-        } */       
     }
     
     
@@ -163,27 +165,59 @@
 
     //addCustomer('Jane', 'Smith', 'jane@hotmail.com', '555-555-5432');   // Test function addCustomer()
 
+    function getCustomersByReservation($reservationID) {
+        global $cnxn;                       // from imported file db.php
+        $sql = "SELECT
+            customers.customer_id AS customer_id, 
+            customers.first_name AS fname, 
+            customers.last_name AS lname, 
+            customers.email AS email, 
+            customers.phone AS phone,
+            reservation_customers.relationship AS relationship
+            FROM customers        
+                INNER JOIN reservation_customers ON customers.customer_id = reservation_customers.customer
+            WHERE reservation_customers.reservation = $reservationID";
+                
+        $result = mysqli_query($cnxn, $sql);
+        return $result;
+
+        /*
+        while ($row = mysqli_fetch_assoc($result)) {
+            $customerID = $row['customer_id'];
+            fname, lname, email, phone
+            
+            echo "<p>$reservationID, $set, $package, $date, $extraName, $extraPrice</p>";
+        } */       
+    }
+
+
     /*
-     * Add a Resrvation to the database given customerID, reservationSet, reservationPackage, and Date
-     * returns ID of reservation just created, or 0 on SQL error.
+     * Add a Resrvation to the database given customerID, reservationSet, reservationPackage, Date,
+     * and relationship.  Returns ID of reservation just created, or 0 on SQL error.
+     *
+     * Adds to the reservation and reservation_customers table
      */
     function addReservation($customerID, $reservationSet, 
-        $reservationPackage, $reservationDate) {
+        $reservationPackage, $reservationDate, $relationship) {
         global $cnxn; 
 
-        $sql = "insert into reservation (reservation_customer, 
-            reservation_set, reservation_package, reservation_date)
-        values 
-            ($customerID, '$reservationSet', 
-            '$reservationPackage', '$reservationDate')";
+        $sql = "insert into reservation (reservation_set, reservation_package, reservation_date)
+        values ('$reservationSet', '$reservationPackage', '$reservationDate')";
         
         $result = mysqli_query($cnxn, $sql);
+        
+        $reservationID = 0;
+        
         if ($result) {
-            $last_id = mysqli_insert_id($cnxn);
-            return $last_id;
-        } else {
-            return 0;
+            $reservationID = mysqli_insert_id($cnxn);
         }
+        
+        $sql = "insert into reservation_customers (customer, reservation, relationship)
+        values ($customerID, $reservationID, '$relationship')";
+        
+        $result = mysqli_query($cnxn, $sql);
+        
+        return $reservationID;
     }
 
     /*
@@ -236,8 +270,8 @@
      */
     function getReservationNotes($reservationID) {
         global $cnxn;                       // from imported file db.php
-        $sql = "SELECT id, note_text FROM
-            notes WHERE reservation_id = $reservationID";
+        $sql = "SELECT id, note_text, note_date FROM
+            notes WHERE reservation_id = $reservationID ORDER BY note_date ASC";
                 
         $result = mysqli_query($cnxn, $sql);
         return $result;
@@ -246,7 +280,7 @@
         while ($row = mysqli_fetch_assoc($result)) {
             $id = $row['id'];
             $noteText = $row['note_text'];
-            
+            $noteDate = $row['note_date'];
             echo "<p>$id, $noteText</p>";
         } */ 
     }

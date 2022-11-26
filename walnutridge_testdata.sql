@@ -29,6 +29,13 @@ insert into customers (first_name, last_name, email, phone) values (
     'suzie@email.com',
     '425-555-4444');
     
+
+insert into customers (first_name, last_name, email, phone) values (
+    'Sally',
+    'Smith',
+    'sally@email.com',
+    '425-555-5555');
+    
     
 /*
 create table extras (
@@ -61,23 +68,58 @@ create table reservation (
 );
 */
 
-insert into reservation (reservation_customer, reservation_set, reservation_package, reservation_date)
-    values (1, 'Layered Arch Package', 'Pick 6 Rental', '2022-12-31');
+insert into reservation (reservation_set, reservation_package, reservation_date)
+    values ('Layered Arch Package', 'Pick 6 Rental', '2022-12-31');
 
-insert into reservation (reservation_customer, reservation_set, reservation_package, reservation_date)
-    values (1, 'Modern Round Package', 'Pick 4 Rental', '2022-12-30');
+insert into reservation (reservation_set, reservation_package, reservation_date)
+    values ('Modern Round Package', 'Pick 4 Rental', '2022-12-30');
 
-insert into reservation (reservation_customer, reservation_set, reservation_package, reservation_date)
-    values (2, 'Vintage Mirror Package', 'Platinum Package', '2023-03-24');
+insert into reservation (reservation_set, reservation_package, reservation_date)
+    values ('Vintage Mirror Package', 'Platinum Package', '2023-03-24');
 
-insert into reservation (reservation_customer, reservation_set, reservation_package, reservation_date)
-    values (3, 'Rustic Wood Package', 'Rustic Wood Full Set', '2023-05-27');
+insert into reservation (reservation_set, reservation_package, reservation_date)
+    values ('Rustic Wood Package', 'Rustic Wood Full Set', '2023-05-27');
 
-insert into reservation (reservation_customer, reservation_set, reservation_package, reservation_date)
-    values (4, 'Dark Walnut Package', 'Pick 4 Rental', '2022-06-12');
+insert into reservation (reservation_set, reservation_package, reservation_date)
+    values ('Dark Walnut Package', 'Pick 4 Rental', '2022-06-12');
     
-insert into reservation (reservation_customer, reservation_set, reservation_package, reservation_date)
-    values (1, 'Vintage Mirror Package', 'Gold Package Rental', '2022-12-31');    
+insert into reservation (reservation_set, reservation_package, reservation_date)
+    values ('Vintage Mirror Package', 'Gold Package Rental', '2022-12-31');    
+
+
+/*
+
+create table reservation_customers (
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    customer int NOT NULL,
+        CONSTRAINT fk_rc_customer FOREIGN KEY (customer) REFERENCES customers(customer_id),
+    reservation int NOT NULL,
+        CONSTRAINT fk_rc_reservation FOREIGN KEY (reservation) REFERENCES reservation(reservation_id),
+    relationship VARCHAR(30)
+);
+*/
+
+insert into reservation_customers (customer, reservation, relationship) values
+    (1, 1, 'Wedding Planner');
+
+insert into reservation_customers (customer, reservation, relationship) values
+    (1, 2, 'Wedding Planner');    
+
+insert into reservation_customers (customer, reservation, relationship) values
+    (2, 3, 'Bride');
+
+insert into reservation_customers (customer, reservation, relationship) values
+    (3, 4, 'Groom');
+
+insert into reservation_customers (customer, reservation, relationship) values
+    (4, 5, 'Bride');
+
+insert into reservation_customers (customer, reservation, relationship) values
+    (1, 6, 'Wedding Planner');
+
+insert into reservation_customers (customer, reservation, relationship) values
+    (5, 1, 'Bride');
+
 
 /*
 

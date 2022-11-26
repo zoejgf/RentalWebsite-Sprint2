@@ -68,34 +68,63 @@
                 $reservationID = $row['reservation_id'];
                 $set = $row['set'];
                 $package = $row['package'];
-                $date = $row['date'];
-                $customer_id = $row['customer_id'];
+                $date = $row['date'];/*
                 $fname = $row['fname'];
                 $lname = $row['lname'];
                 $email = $row['email'];
-                $phone = $row['phone'];
+                $phone = $row['phone'];*/
                 
                 // DISPLAY RESERVATION DATA
                 //echo "Set: " . $set . ", Package: " . $package;
                 ?>
             
                 <div class="container pt-3 text-center">
-                    <h3>Customer Info: </h3>
-                    <p class="d-inline"><?php echo "$fname $lname" ?></p>
-                    <p class="d-inline"><?php echo $email?></p>
-                    <p class="d-inline"><?php echo $phone ?></p>
+                    <h3 class="admin">Customer(s) Info: </h3>
+                    <?php $customerResults = getCustomersByReservation($reservationID); ?>
+                    
+                    
+                    <table class="table mx-auto">
+                    <?php while ($extrasRow = mysqli_fetch_assoc($customerResults)) { 
+                    
+                    /*
+                        customers.customer_id AS customer_id, 
+                        customers.first_name AS fname, 
+                        customers.last_name AS lname, 
+                        customers.email AS email, 
+                        customers.phone AS phone                            
+                    */ ?>
+                    
+                        <tr>
+                            <td><?php echo $extrasRow['fname'] . " " . $extrasRow['lname']; ?></td>
+                            <td><?php echo $extrasRow['email']; ?></td>
+                            <td><?php echo $extrasRow['phone']; ?></td>
+                            <td><?php echo $extrasRow['relationship']; ?></td>
+                        </tr>
+                        
+                    <?php } ?>
+                        
+                    </table>
+                    
                 </div>
                 <hr class="mx-auto">
                 <?php
                 
                 $extrasResult = reservationExtras($_GET['reservation_id']);?>
                 
-                <table class='table table-striped'>
+                <h3 class="admin">Reservation Details </h3>
+                
+                <div class="container pt-3 text-center">
+                    <p class="d-inline"><?php echo "$set" ?></p>
+                    <p class="d-inline"><?php echo "$package" ?></p>
+                    <p class="d-inline"><?php echo "$date" ?></p>
+                </div>
+                
+                <table class='table table-striped w-50 mx-auto'>
                     <thead>
-                        <tr class='text-center'>
+                        <tr class='text-center'><?php /*
                             <th scope='col'>Set</th>
                             <th scope='col'>Package</th>
-                            <th scope='col'>Date</th>
+                            <th scope='col'>Date</th> */ ?>
                             <th scope='col'>Product</th>
                             <th scope='col'>Price</th>
                         </tr>
@@ -105,25 +134,47 @@
                             $extraName = $extrasRow['extra_name'];
                             $extraPrice = $extrasRow['extra_price'];?>
                         <tr class='text-center'>
-                            <td><?php echo $set; ?></td>
-                            <td><?php echo $package; ?></td>
-                            <td><?php echo $date; ?></td>
                             <td><?php echo $extraName; ?></td>
                             <td><?php echo $extraPrice; ?></td>
                         </tr>
-                        <?php } ?>
+                        <?php } // 104 ?>
                     </tbody>
                 </table> 
+                
+                <h3 class="admin">Notes </h3>
+
+                <?php
+
+                $noteResults = getReservationNotes($reservationID);
+                if (mysqli_num_rows($noteResults) > 0) {
+                    
+                    ?>
+                    <table class="table table-striped mx-auto w-50">
+                        <thead>
+                            <tr><th>Note Date</th><th>Note</th></tr>
+                        </thead>
+                        <tbody>
+                            <?php             
+                            while ($row = mysqli_fetch_assoc($noteResults)) {
+                                //$id = $row['id'];
+                                ?>
+                                <tr><td><?php echo $row['note_date']; ?></td><td><?php echo $row['note_text']; ?></td></tr><?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                    <?php } // 121 ?>
+
                 <div class="container pt-3">
                     <a href="admin.php">
                     <i class="fa-solid fa-backward fa-xl"> Back</i>
                     </a>
                 </div>
                 
-           <?php }
+           <?php  }
             
             // DISPLAY RESERVATION NOTES
-            
+            // $noteResults
             
             // DISPLAY TEXTAREA INPUT FOR ADDITIONAL RESERVATION NOTES
             
@@ -131,16 +182,6 @@
         
                 $results = queryReservationsAsc();
                 
-                // while ($row = mysqli_fetch_assoc($result)) {
-                //     $reservationID = $row['reservation_id'];
-                //     $set = $row['set'];
-                //     $package = $row['package'];
-                //     $date = $row['date'];
-                //     $customerID = $row['customer_id'];
-                //     $first = $row['fname'];
-                //     $last = $row['lname'];
-                //     $phone = $row['phone'];
-                //     $email = $row['email'];
                 //     ?>
                 <!--//echo "<p>$reservationID, $set, $package, $date, $customerID, $first, $last, $phone, $email</p>";-->
                 <table class='table table-striped'>
@@ -156,10 +197,18 @@
                             <th scope='col'>Phone Number</th>
                             <th scope='col'>Email</th>
                             <th scope='col'>Status</th>
+                            <th scope='col'>Customers</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while($row = mysqli_fetch_assoc($results)) { ?>
+                        <?php while($row = mysqli_fetch_assoc($results))
+                                    
+                        // reservation.reservation_id AS reservation_id, 
+                        
+                        // reservation.status AS status,
+                        // COUNT(reservation_customers.customer) AS numberCustomers
+                        
+                        { ?>
                         <tr class='text-center'>
                             <td><a href="admin.php?reservation_id=<?php echo $row['reservation_id']; ?>">ID: <?php echo $row['reservation_id']; ?></a></td>
                             <td><?php echo $row['set']; ?></td>
@@ -171,6 +220,7 @@
                             <td><?php echo $row['phone']; ?></td>
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['status']; ?></td>
+                            <td><?php echo $row['numberCustomers']; ?></td>
                         </tr>
                         <?php }     // WHILE LOOP ?>
                     </tbody>

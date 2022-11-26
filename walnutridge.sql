@@ -20,6 +20,7 @@ user: redgreen_php
 pw: redtomatoes
 */
 
+drop table if exists reservation_customers;
 drop table if exists ordered_extras;
 drop table if exists reservation;
 drop table if exists extras;
@@ -34,15 +35,23 @@ create table customers (
     phone varchar(20)
 );
 
-
 create table reservation (
     reservation_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    reservation_customer int NOT NULL,
-        CONSTRAINT fk_customer FOREIGN KEY (reservation_customer) REFERENCES customers(customer_id),
+    /*reservation_customer int NOT NULL,
+        CONSTRAINT fk_customer FOREIGN KEY (reservation_customer) REFERENCES customers(customer_id),*/
     reservation_set varchar(30),
     reservation_package varchar(30),
-    reservation_date DATETIME,
+    reservation_date DATE,
     status varchar(20) DEFAULT 'unconfirmed'
+);
+
+create table reservation_customers (
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    customer int NOT NULL,
+        CONSTRAINT fk_rc_customer FOREIGN KEY (customer) REFERENCES customers(customer_id),
+    reservation int NOT NULL,
+        CONSTRAINT fk_rc_reservation FOREIGN KEY (reservation) REFERENCES reservation(reservation_id),
+    relationship VARCHAR(30)
 );
 
 create table extras (
@@ -66,5 +75,6 @@ create table notes (
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     reservation_id int NOT NULL,
         CONSTRAINT fk_notes_reservation FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id),
-    note_text varchar(5000)     /* less than 64k for TEXT type */
+    note_text varchar(5000),     /* less than 64k for TEXT type */
+    note_date DATE default now()
 );
