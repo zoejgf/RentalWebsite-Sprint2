@@ -4,8 +4,7 @@
 
 - Admin Page
     - reservation status - unconfirmed (default), confirmed, and cancelled
-        - (Paul) Update: Done.  ToDO: Add ability to manage/change this status on admin.php
-        - (Paul) I can add the column to the table for this, anyone want to take the rest of it on?  I can also ensure that 'unconfirmed' is the default value on reservation creation
+        - (Paul) db column added for status, default is 'unconfirmed'.  Currently there is no means of changing that, has to be added.
     - results searchable or sortable
     - make results divided/shown by week or divided/shown by set
     - add a dashboard of visual metrics that gives insightful feedback about past/future set/extras reservations
@@ -27,9 +26,9 @@
 
 - Implement a change/improvement based on Laurens Feedback
     - allow for multiple contacts/people to be associated with a single reservation
-        - (Paul) Added db table, fixed db-access.php methods that found (no guarantee!)
-        - ToDo: Add ability to manage the customer/reservation relationship on the admin.php page.
-        - (Paul) Would have to add these extra people to our customers table, but to associate more than one customer per reservation, would have to create a 3rd table maybe titled ReservationCustomers.  It would simply contain a list of reservation IDs with associated customers.  We would probably have to have a page that Lauren could add/link additional customers to the same reservation?
+        - (Paul) This has been done, table added to allow a many-many relationship between customers and reservations.  The table simply contains a list of reservation IDs with associated customers.  Updated all queries/pages I could see that would be effected (PLEASE TEST!).  
+        - TODO: Add a means of adding people to the reservation, currently one is added at checkout, and others can only be added right now through PHPMyAdmin.
+         
     - (more ideas will be added here or you can implement your own)
 
 
