@@ -4,7 +4,8 @@
 
 - Admin Page
     - reservation status - unconfirmed (default), confirmed, and cancelled
-        - (Paul) db column added for status, default is 'unconfirmed'.  Currently there is no means of changing that, has to be added.
+        - (Paul) db column added for status, default is 'unconfirmed'.  
+        - TODO: Currently there is no means of changing that, has to be added.
     - results searchable or sortable
     - make results divided/shown by week or divided/shown by set
     - add a dashboard of visual metrics that gives insightful feedback about past/future set/extras reservations
