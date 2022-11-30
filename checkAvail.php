@@ -1,10 +1,19 @@
+<?php 
+
+    session_start(); // use current or existing session
+    
+    // destroy the session
+    session_destroy(); 
+    
+?>
+
 <!DOCTYPE html> 
 <html lang="en-US">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title></title>
+        <title>Walnut Ridge Wedding Rentals - Choose your Set</title>
     
         <link href="style.css" rel="stylesheet" type="text/css"/>
 

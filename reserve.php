@@ -4,7 +4,8 @@
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
 
-
+        session_start();
+        
         // Import separate functions file
         require __DIR__ . '/pkg-mgmt.php';
 
@@ -273,7 +274,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title></title>
+        <title>Walnut Ridge Wedding Rentals - Add Contact information</title>
     
         <link href="style.css" rel="stylesheet" type="text/css"/>
 
@@ -373,14 +374,14 @@
                     </div>
                     <div class="col-2"></div>
                     <div class="col-5 mt-3 h6">
-                        <?php echo "\$$packagePrice"; ?>
+                        <?php echo "\$" . number_format($packagePrice,2,'.',','); ?>
                     </div>
                     <?php
                         if (!empty($_POST['checks'])) {
                             foreach($_POST['checks'] as $CHECK) { ?>
                             <div class="col-5 text-end h6"><?php echo returnAddOnText($CHECK)?></div>
                             <div class="col-2"></div>
-                            <div class="col-5 h6"><?php echo "$" . returnAddOnPrice($CHECK)?></div>
+                            <div class="col-5 h6"><?php echo "$" . number_format(returnAddOnPrice($CHECK), 2, '.', ',') ?></div>
                                 <?php
                             } 
                         }
@@ -389,7 +390,7 @@
                             foreach($_POST['extras'] as $EXTRA) { ?>
                             <div class="col-5 text-end h6"> <?php echo returnExtraNameFromID($EXTRA); ?></div>
                             <div class="col-2"></div>
-                            <div class="col-5 h6"><?php echo "$" . returnExtraPriceByID($EXTRA, $totalPrice); ?></div>
+                            <div class="col-5 h6"><?php echo "$" . number_format(returnExtraPriceByID($EXTRA, $totalPrice),2,'.',','); ?></div>
                             <?php
                             }
                         }
@@ -399,7 +400,7 @@
                     </div>
                     <div class="col-2"></div>
                     <div class="col-5 mt-3 h6 fw-bolder">
-                        <?php echo "\$$totalPrice"; ?>
+                        <?php echo "\$" . number_format($totalPrice, 2, '.', ','); ?>
                     </div>
 
                 </div>

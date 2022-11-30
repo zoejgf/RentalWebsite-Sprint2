@@ -3,7 +3,7 @@
         
         if(isset($_POST['submit_pass']) && $_POST['pass']){
             $pass=$_POST['pass'];
-            if($pass=="red123")
+            if($pass=="password")
             { 
                 $_SESSION['password']=$pass;
             }
@@ -45,7 +45,7 @@
     </head>
     <body>
         <?php
-        if($_SESSION['password']=="red123")
+        if(isset($_SESSION['password']))    // =="password"
         {
             
         ?>

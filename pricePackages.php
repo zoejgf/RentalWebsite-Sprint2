@@ -4,9 +4,12 @@
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
         // -----------------------------------
-
-        require __DIR__ . '/db-access.php';
-        require __DIR__ . '/pkg-mgmt.php';
+        require './db-access.php';
+        require './pkg-mgmt.php';
+        //require 'db-access.php';
+        //require 'pkg-mgmt.php';
+        
+        session_start();
 
         $responseText = "";
 
@@ -116,7 +119,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title></title>
+        <title>Walnut Ridge Wedding Rentals - Choose your Package</title>
     
         <link href="style.css" rel="stylesheet" type="text/css"/>
 

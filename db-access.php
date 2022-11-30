@@ -192,7 +192,7 @@
 
 
     /*
-     * Add a Resrvation to the database given customerID, reservationSet, reservationPackage, Date,
+     * Add a Reservation to the database given customerID, reservationSet, reservationPackage, Date,
      * and relationship.  Returns ID of reservation just created, or 0 on SQL error.
      *
      * Adds to the reservation and reservation_customers table
@@ -204,6 +204,8 @@
         $sql = "insert into reservation (reservation_set, reservation_package, reservation_date)
         values ('$reservationSet', '$reservationPackage', '$reservationDate')";
         
+	// echo $sql;
+        
         $result = mysqli_query($cnxn, $sql);
         
         $reservationID = 0;
@@ -212,10 +214,12 @@
             $reservationID = mysqli_insert_id($cnxn);
         }
         
-        $sql = "insert into reservation_customers (customer, reservation, relationship)
-        values ($customerID, $reservationID, '$relationship')";
-        
-        $result = mysqli_query($cnxn, $sql);
+        if ($reservationID != 0) {
+	        $sql = "insert into reservation_customers (customer, reservation, relationship)
+	        values ($customerID, $reservationID, '$relationship')";
+	        
+	        $result = mysqli_query($cnxn, $sql);
+        }
         
         return $reservationID;
     }
@@ -226,13 +230,15 @@
     function addReservationExtras($reservationID, $extras) {
         //insert into ordered_extras (reservation_id, extras_id) values (1,2)
         global $cnxn; 
-
-        foreach ($extras as &$extra) {
-            //echo "$extra <br>";
-            $sql = "insert into ordered_extras 
-            (reservation_id, extras_id) values ($reservationID,$extra)";
         
-            $result = mysqli_query($cnxn, $sql);
+        if ($extras) {	
+	        foreach ($extras as &$extra) {
+	            //echo "$extra <br>";
+	            $sql = "insert into ordered_extras 
+	            (reservation_id, extras_id) values ($reservationID,$extra)";
+	        
+	            $result = mysqli_query($cnxn, $sql);
+	        }
         }
     }
 
@@ -346,8 +352,9 @@
      */
     function getExtrasStatus($date) {
         global $cnxn;                       // from imported file db.php
-
-        $sql = "SELECT 
+        
+        /* top select queries extras w/ existing reservations on this date */
+        $sql = "SELECT
                 extras.extras_id AS id, 
                 extras.name AS name, 
                 extras.price AS price,
@@ -375,8 +382,8 @@
                 '' AS date,
                 1 AS available
             FROM extras
-            INNER JOIN ordered_extras ON extras.extras_id = ordered_extras.extras_id
-            INNER JOIN reservation ON ordered_extras.reservation_id = reservation.reservation_id
+            LEFT JOIN ordered_extras ON extras.extras_id = ordered_extras.extras_id
+            LEFT JOIN reservation ON ordered_extras.reservation_id = reservation.reservation_id
             WHERE extras.extras_id NOT IN (
                 SELECT 
                     extras.extras_id

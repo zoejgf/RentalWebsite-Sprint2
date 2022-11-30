@@ -6,6 +6,8 @@
 
         require __DIR__ . '/pkg-upgrades.php';
         require __DIR__ . '/db-access.php';
+        
+        session_start();
 
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
         
@@ -91,7 +93,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title></title>
+        <title>Walnut Ridge Wedding Rentals - Choose your Extras</title>
     
         <link href="style.css" rel="stylesheet" type="text/css"/>
 

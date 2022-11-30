@@ -78,18 +78,18 @@
             }
 
             if ($set == "3") {
-                $packageName = "Vintage Mirror Package, ";
+                $packageName = "Vintage Mirrors, ";
                 if ($package == "1") {
-                    $packageName = "Vintage Mirror Platinum Package";
+                    $packageName .= "Platinum Package";
                     $packagePrice = 849.0;
                 } elseif ($package == "2") {
-                    $packageName = "Vintage Mirror Gold Package";
+                    $packageName .= "Gold Package";
                     $packagePrice = 799.0;
                 } elseif ($package == "3") {
-                    $packageName = "Vintage Mirror Pick 6 Package";
+                    $packageName .= "Pick 6 Package";
                     $packagePrice = 649.0;
                 } elseif ($package == "4") {
-                    $packageName = "Vintage Mirror Pick 4 Package";
+                    $packageName .= "Pick 4 Package";
                     $packagePrice = 599.0;
                 }
             }            
@@ -97,13 +97,13 @@
             if ($set == "4") {
                 $packageName = "Dark Walnut Package, ";
                 if ($package == "1") {
-                    $packageName = "Dark Walnut Full Set Rental";
+                    $packageName .= "Full Set Rental";
                     $packagePrice = 299.0;
                 } elseif ($package == "2") {
-                    $packageName = "Dark Walnut No Seating Rental";
+                    $packageName .= "No Seating Rental";
                     $packagePrice = 245.0;
                 } elseif ($package == "3") {
-                    $packageName = "Dark Walnut Pick 4 Rental";
+                    $packageName .= "Pick 4 Rental";
                     $packagePrice = 199.0;
                 }
             }
@@ -111,13 +111,13 @@
             if ($set == "5") {
                 $packageName = "Rustic Wood Package, ";
                 if ($package == "1") {
-                    $packageName = "Rustic Wood Full Set";
+                    $packageName .= "Full Set";
                     $packagePrice = 299.0;
                 } elseif ($package == "2") {
-                    $packageName = "Rustic Wood No Seating";
+                    $packageName .= "No Seating";
                     $packagePrice = 245.0;
                 } elseif ($package == "3") {
-                    $packageName = "Rustic Wood Pick 4";
+                    $packageName .= "Pick 4";
                     $packagePrice = 199.0;
                 }
             }
@@ -147,6 +147,9 @@
         if ($e == "blueJars") { 
             $returnPrice = 30;
         }
+        if ($e == "arbor") {
+            $returnPrice = 350;
+        }
 
         //global $totalPrice;
         $totalPrice += $returnPrice;
@@ -161,6 +164,7 @@
         if ($e == "wine") return "XL Wine Jugs (/ea)";
         if ($e == "clearJars") return "Clear Antique Ball Jars";
         if ($e == "blueJars") return "Blue Antique Ball Jars";
+        if ($e == "arbor") return "Hexagon Arbor";
     }
     
     function returnExtraNameFromID($e) {
@@ -170,6 +174,7 @@
         if ($e == 5) return "XL Wine Jugs (/ea)";
         if ($e == 1) return "Clear Antique Ball Jars";
         if ($e == 2) return "Blue Antique Ball Jars";
+        if ($e == 6) return "Hexagon Arbor";
     }
     
     function returnExtraPriceByID($e, &$totalPrice) {
@@ -191,6 +196,9 @@
         }
         if ($e == 2) { 
             $returnPrice = 30;
+        }
+        if ($e == 6) {
+            $returnPrice = 350;
         }
 
         //global $totalPrice;
@@ -220,7 +228,7 @@
         $return = array();
 
         if ($set == "1") {
-            $return['setName'] = "Layered Arch Package, ";
+            $return['setName'] = "Layered Arch Package";
             if ($package == "1") {
                 $return['packageName'] = "Layered Arch Full Set Rental";
             } elseif ($package == "2") {
@@ -231,7 +239,7 @@
         }
         
         if ($set == "2") {
-            $return['setName'] = "Modern Round Package, ";
+            $return['setName'] = "Modern Round Package";
             if ($package == "1") {
                 $return['packageName'] = "Modern Round Full Set Rental";
             } elseif ($package == "2") {
@@ -242,7 +250,7 @@
         }
 
         if ($set == "3") {
-            $return['setName'] = "Vintage Mirror Package, ";
+            $return['setName'] = "Vintage Mirror Package";
             if ($package == "1") {
                 $return['packageName'] = "Vintage Mirror Platinum Package";
             } elseif ($package == "2") {
@@ -255,7 +263,7 @@
         }            
 
         if ($set == "4") {
-            $return['setName'] = "Dark Walnut Package, ";
+            $return['setName'] = "Dark Walnut Package";
             if ($package == "1") {
                 $return['packageName'] = "Dark Walnut Full Set Rental";
             } elseif ($package == "2") {
@@ -266,7 +274,7 @@
         }
 
         if ($set == "5") {
-            $return['setName'] = "Rustic Wood Package, ";
+            $return['setName'] = "Rustic Wood Package";
             if ($package == "1") {
                 $return['packageName'] = "Rustic Wood Full Set";
             } elseif ($package == "2") {
