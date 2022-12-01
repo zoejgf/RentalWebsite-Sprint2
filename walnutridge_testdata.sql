@@ -45,7 +45,7 @@ create table extras (
 );
 */
 delete from extras;
-
+/*
 insert into extras (name, price, image_url, form_value, form_id) 
     values ('Clear Antique Ball Jars', 30, 'walnut-ridge-images/da-7.jpg', 'clearJars', 'clearBall');
 insert into extras (name, price, image_url, form_value, form_id) 
@@ -56,7 +56,7 @@ insert into extras (name, price, image_url, form_value, form_id)
     values ('Antique Gallon Jugs', 4, 'walnut-ridge-images/da-8.jpg', 'antique', 'antiqueJugs');
 insert into extras (name, price, image_url, form_value, form_id) 
     values ('XL Wine Jugs', 20, 'walnut-ridge-images/da-4.jpg', 'wine', 'wineJugs');
-
+*/
 /*
 create table reservation (
     reservation_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
