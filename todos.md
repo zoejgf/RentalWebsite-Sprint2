@@ -27,7 +27,7 @@
 
 - Implement a change/improvement based on Laurens Feedback
     - allow for multiple contacts/people to be associated with a single reservation
-        - (Paul) DONE - table added to allow a many-many relationship between customers and reservations.  The table simply contains a list of reservation IDs with associated customers.  Updated all queries/pages I could see that would be effected (PLEASE TEST!).  
+        - (Paul) DONE - table added to allow a many-many relationship between customers and reservations.  The table simply contains a list of reservation IDs with associated customers.
         - TODO: Add a means of adding people to the reservation, currently one is added at checkout, and others can only be added right now through PHPMyAdmin.
          
     - (more ideas will be added here or you can implement your own)
