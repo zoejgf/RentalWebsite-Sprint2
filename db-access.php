@@ -224,6 +224,25 @@
         return $reservationID;
     }
 
+    /* 
+     * Used by the admin page, add a customer to an existing reservation.  The customer must 
+     * already be entered into the customers table.  If this is a new customer for this
+     * reservation, they can be added w/ the function addCustomer($first, $last, $email, $phone)
+     * function.  This function operates by simply inserting a row matching the new(?) customer
+     * to the reservation inside the reservation_customers table.  The function
+     * function customerExists($fname, $email, $phone) can also be used to determine if the 
+     * customer is already present inside the database.  If so, the customerID is returned,
+     * otherwise a 0 is returned.
+     */
+    function addCustomerToReservation($reservationID, $customerID) {
+        global $cnxn;
+
+        $sql = "insert into 'reservation_customers' (customer, reservation) 
+            values ('$customerID', '$reservationID')";
+    
+        $result = mysqli_query($cnxn, $sql);
+    }
+
     /*
      * For a given Reservation ID, add the reserved exras for that reservation.
      */
