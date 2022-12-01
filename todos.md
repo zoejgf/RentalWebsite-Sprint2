@@ -2,6 +2,10 @@
 
 ## Tylers' List, "choose one from each category"
 
+- Tyler, from the ToDo List, "Make sure your forms validate input on the HTML forms AND validates data before making changes to the Database"
+    - validate / run a sanity check on form data prior to insertion?
+    - escape data in inserts?
+
 - Admin Page
     - reservation status - unconfirmed (default), confirmed, and cancelled
         - (Paul) DONE - db column added for status, default is 'unconfirmed'.  
@@ -31,7 +35,6 @@
         - TODO: Add a means of adding people to the reservation, currently one is added at checkout, and others can only be added right now through PHPMyAdmin.
          
     - (more ideas will be added here or you can implement your own)
-
 
 
 
