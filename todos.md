@@ -16,7 +16,7 @@
     - Add security or a Session to the admin page to make the login process more secure/stable
         - (Jazmin) DONE
     - Use cookies to remember the user's choices on the form
-    - Use cookieds or sesions in another effective or creative way
+    - Use cookieds or sessions in another effective or creative way
 
 - Implement a change/improvement based on Feedback from Usability Testing
     - SQL Injection, should fix that 
