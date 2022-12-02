@@ -1,15 +1,15 @@
 <?php
         // DISPLAY CODE ERRORS!
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
+        //ini_set('display_errors', 1);
+        //ini_set('display_startup_errors', 1);
+        //error_reporting(E_ALL);
         
         session_start();
         
-        if (isset($_SESSION['confirmed'])) {
-            
-            // TODO: Display page stating reservation has been previously added. 
-            
+        // TODO - Renable session checking, disabled for debugging SQL connection issues
+        //if (isset($_SESSION['confirmed'])) {
+        if (false) {
+                        
             ?>
                         
             <!DOCTYPE html>
@@ -100,6 +100,36 @@
                 $email = $_POST["email"];
                 $phone = $_POST["phone"];
                 
+                // ERROR CHECK - Empty Values?
+                $error = false;
+                $return = "reserve.php?";
+                $errorMsgs = array();
+                
+                if (strlen($fname) < 2) {
+                    $error = true;
+                    array_push($errorMsgs, "Please include your First Name");
+                } 
+                $return .= "fname=$fname";
+                
+                if (strlen($lname) < 2) {
+                    $error = true;
+                    array_push($errorMsgs, "Please include your Last Name");
+                } 
+                $return .= "&lname=$lname";
+                
+                if (strlen($phone) < 10) {
+                    $error = true;
+                    array_push($errorMsgs, "Please include a valid Phone Number");
+                } 
+                $return .= "&phone=$phone";
+                
+                if (strlen($email) < 6) {
+                    $error = true;
+                    array_push($errorMsgs, "Please include your Email Address");
+                } 
+                $return .= "&email=$email";
+                
+                
                 // ERROR CHECK - PACKAGE PRESENT?  IF NOT, REDIRECT BACK
                 if (!isset($_POST["package"])) {
                     header("Location: pricePackages.php?date=$date&set=$set");   // redirect back to pricePackages, date = 1 indicates error
@@ -112,13 +142,41 @@
     
                     $package = $_POST["package"];
                 }
+
+                
+                // We have an error from empty/missing values, add date/set/package, and return
+                if ($error) {
+                    $return .= "&set=$set";
+                    $return .= "&package=$package";
+                    $return .= "&date=$date";
+
+                    if (isset($errorMsgs)) {
+                        if (!empty($errorMsgs)) {
+                            $return .= buildGetArray('errorMsgs', $errorMsgs);
+                        }
+                    }
+
+                    // include options and extras
+                    if (isset($_POST['extras'])) {
+                        $return .= buildGetArray('extras', $_POST['extras']);
+                    }
+                    
+                    if (isset($_POST['checks'])) {
+                        $return .= buildGetArray('checks', $_POST['checks']);
+                    }
+
+                    header("Location: $return");
+                    exit;   // ensure we execute no more code after redirect
+                            // was populating database w/ erroneous data
+                }
     
             }  elseif (count($_GET) > 0) {
                 // Not Used
             } else {
+                // We have no form data at all, how did we get here
                 header("Location: checkAvail.php");
             }
-    
+            
             $totalPrice = 0;
     
             // Values passed in by reference, changed within function
@@ -151,11 +209,9 @@
                 } else {
                     $error = "Internal system error, reservation was not saved.  Please try again, or contact us for help.";
                 }
-            }
-            
+            }          
             
             //  SEND CONFIRMATION EMAIL ----------------------------------------------
-            
             
             // Always set content-type when sending HTML email
             $headers = "MIME-Version: 1.0" . "\r\n";
@@ -169,7 +225,6 @@
             
             //start email layout
             $addOns = "";
-    
     
             if (!empty($_POST['checks'])) {
                     foreach($_POST['checks'] as $CHECK) {
@@ -221,11 +276,9 @@
             
             //sending email
             mail($to,$subject,$message,$headers);
-        
+            
         ?>
         
-        
-
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
@@ -260,15 +313,14 @@
         <!------ Previously selected information will be shown FROM php ------>
         
         <?php
-            if (isset($error)) { ?>
+            if (isset($error) && $error) { ?>
                 <div class="container" style="width:70%">
             
             <div class="row">
                 <class="col-12">
                     <h3><?php echo $error ?></h3>
                 </class>
-            </div>            
-            
+            </div>
                 
         <?php
             } else {        // if-error-else block

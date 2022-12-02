@@ -1,7 +1,7 @@
 <?php
     
-    // require __DIR__ . '/db.php';      // Dev Version
-    require '/home/redgreen/db.php';     // Live Version
+    require __DIR__ . '/db.php';      // Dev Version
+    // require '/home/redgreen/db.php';     // Live Version
     
     /*
      * This returns an array of rows containing invidual reservations
@@ -146,8 +146,36 @@
     /*
      * Add a Customer to the database given firstname, lastname, email, and phone
      * All values are Strings.  Returns the ID of the customer just added.
+     * Converting to prepared statement
      */
     function addCustomer($first, $last, $email, $phone) {
+
+        global $cnxn;
+
+        $sql = "insert into customers (first_name, last_name, email, phone) 
+            values (?, ?, ?, ?)";
+
+        $stmt = mysqli_prepare($cnxn, $sql);
+
+        mysqli_stmt_bind_param($stmt,"ssss", $first, $last, $email, $phone);
+        mysqli_stmt_execute($stmt);
+
+        $returnID = 0;
+
+        if(mysqli_stmt_affected_rows($stmt) > 0) {
+            $returnID = mysqli_insert_id($cnxn);
+        }
+
+        //mysqli_stmt_close($stmt);
+        //mysqli_close($cnxn);
+
+        //echo "AddCustomer(), Returning New CustomerID: " . $returnID . "<br>\n";
+
+        return $returnID;
+
+        
+        /* below code works */
+        /*
         global $cnxn; 
 
         $sql = "insert into customers (first_name, last_name, email, phone) 
@@ -161,6 +189,7 @@
         } else {
             return 0;
         }
+        */
     }
 
     //addCustomer('Jane', 'Smith', 'jane@hotmail.com', '555-555-5432');   // Test function addCustomer()
@@ -199,12 +228,36 @@
      */
     function addReservation($customerID, $reservationSet, 
         $reservationPackage, $reservationDate, $relationship) {
+
+        global $cnxn;
+
+        $sql = "insert into reservation (reservation_set, reservation_package, reservation_date)
+        values (?, ?, ?)";
+
+        $stmt = mysqli_prepare($cnxn, $sql);
+
+        mysqli_stmt_bind_param($stmt,"sss", $reservationSet, $reservationPackage, $reservationDate);
+        mysqli_stmt_execute($stmt);
+
+        $returnID = 0;
+        if(mysqli_stmt_affected_rows($stmt) > 0) {
+            $returnID = mysqli_insert_id($cnxn);
+        }
+
+        //mysqli_stmt_close($stmt);
+        //mysqli_close($cnxn);
+
+        //echo "addReservation(), returned id: " . $returnID . "<br>\n";
+
+        return $returnID;
+    
+        
+        /* below code works */
+        /*
         global $cnxn; 
 
         $sql = "insert into reservation (reservation_set, reservation_package, reservation_date)
         values ('$reservationSet', '$reservationPackage', '$reservationDate')";
-        
-	// echo $sql;
         
         $result = mysqli_query($cnxn, $sql);
         
@@ -222,6 +275,7 @@
         }
         
         return $reservationID;
+        */
     }
 
     /* 
@@ -234,11 +288,11 @@
      * customer is already present inside the database.  If so, the customerID is returned,
      * otherwise a 0 is returned.
      */
-    function addCustomerToReservation($reservationID, $customerID) {
+    function addCustomerToReservation($reservationID, $customerID, $relationship) {
         global $cnxn;
 
-        $sql = "insert into 'reservation_customers' (customer, reservation) 
-            values ('$customerID', '$reservationID')";
+        $sql = "insert into 'reservation_customers' (customer, reservation, relationship) 
+            values ('$customerID', '$reservationID', '$relationship')";
     
         $result = mysqli_query($cnxn, $sql);
     }
@@ -248,6 +302,41 @@
      */
     function addReservationExtras($reservationID, $extras) {
         //insert into ordered_extras (reservation_id, extras_id) values (1,2)
+        
+        global $cnxn;
+
+        $sql = "insert into ordered_extras 
+        (reservation_id, extras_id) values (?, ?)";
+
+        //$stmt = mysqli_prepare($cnxn, $sql);
+        $stmt = $cnxn->prepare($sql);
+        $stmt->bind_param("ss", $reservationID, $extra);
+        //mysqli_stmt_bind_param($stmt,"ss", $reservationID, $extra);
+
+        if ($extras) {	
+	        foreach ($extras as $extra) {
+                //echo "reservationID / extraID: " . $reservationID . "/" . $extra . "<br>\n";
+	            //echo "$extra <br>";
+                // executing with $reservationID and new value of $extra
+                //mysqli_stmt_execute($stmt);
+                $stmt->execute();
+                //echo "Just added to db, reservationID / extraID: " . $reservationID . "/" . $extra . "<br>\n";
+	        }
+        }        
+        /*
+        $returnID = 0;
+        if(mysqli_stmt_affected_rows($stmt) > 0) {
+            $returnID = mysqli_insert_id($cnxn);
+        }
+        */
+        //mysqli_stmt_close($stmt);
+        //mysqli_close($cnxn);
+
+        
+        
+        
+        /* below works - converting to prepared statements though */
+        /*
         global $cnxn; 
         
         if ($extras) {	
@@ -259,24 +348,36 @@
 	            $result = mysqli_query($cnxn, $sql);
 	        }
         }
+        */
     }
 
-    /* If a customer exists, return their customer_id, otherwise return 0 */
+    /* If a customer exists, return their customer_id, otherwise return 0 
+     * Converting to prepared statement
+     * i - integer, d - descimal, s - string, b - blob, sent in packets
+    */
     function customerExists($fname, $email, $phone) {
+        
         global $cnxn;
 
-        $sql = "SELECT customer_id FROM customers WHERE 
-            first_name='$fname' AND (email='$email' OR phone='$phone')";
+        $sql = "SELECT max(customer_id) AS customer_id FROM customers WHERE 
+            first_name=? AND (email=? OR phone=?)";
 
-        $result = mysqli_query($cnxn, $sql);
-
-        //return $result;
-        if ($row = mysqli_fetch_assoc($result)) {
-            $customer_id = $row['customer_id'];
-            return $customer_id;
-        }
+        $stmt = $cnxn->prepare($sql);
+        $stmt->bind_param("sss", $fname, $email, $phone);
         
-        return 0;
+        $stmt->execute();
+
+        $customerID = 0;
+
+        $stmt->bind_result($customer_id);
+
+        if ($stmt->fetch()) {
+            $customerID = $customer_id;
+        }
+
+        //echo "customerExists(), returning customerID: " . $customerID . "<br>\n";
+
+        return $customerID;
     }
 
     /*

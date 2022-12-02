@@ -1,5 +1,20 @@
 <?php
 
+    /* 
+     * Return a String value that can be appended to a GET
+     * query for transmission of an Array to another page.
+     * i.e. calling buildGetArray('checks',$arrayOfCheckValues)
+     * could return string '&checks[]=1&checks[]=2&checks[]=3'
+     */
+    function buildGetArray($valueName, $array) {
+        $items = ''; 
+        foreach($array as $item) {
+            $items .= ('&'. $valueName . '[]=' . $item);
+        }
+        
+        return $items;
+    }
+
 
     /*
         * Add Ons from pricePackages.php

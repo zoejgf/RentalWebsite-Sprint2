@@ -160,7 +160,7 @@
         </div>
         <!-- end breadcrumb code -->
 
-        <form method="post" action="reserve.php">
+        <form method="POST" action="reserve.php">
 
             <?php
                 //name="checks[]"
