@@ -36,9 +36,7 @@
             }
 
         } elseif (count($_GET) > 0) {
-            // TODO - add error-correcting message-code here, present below.
-            //$errorMsg = $_GET['errorMsg'];
-            //echo $errorMsg . "<br><br>";
+            
             $date = $_GET['date'];
             $set = $_GET['set'];
             $package = $_GET['package'];

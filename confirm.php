@@ -6,9 +6,9 @@
         
         session_start();
         
-        // TODO - Renable session checking, disabled for debugging SQL connection issues
-        //if (isset($_SESSION['confirmed'])) {
-        if (false) {
+        // Was commented out to debug SQL connection issues
+        if (isset($_SESSION['confirmed'])) {
+        //if (false) {
                         
             ?>
                         
