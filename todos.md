@@ -4,7 +4,9 @@
 
 - Tyler, from the ToDo List, "Make sure your forms validate input on the HTML forms AND validates data before making changes to the Database"
     - validate / run a sanity check on form data prior to insertion?
+        - DONE
     - escape data in inserts?
+        - DONE / used prepared statements
 
 - Admin Page
     - reservation status - unconfirmed (default), confirmed, and cancelled
@@ -24,7 +26,7 @@
 
 - Implement a change/improvement based on Feedback from Usability Testing
     - SQL Injection, should fix that 
-        - (Paul) I can try ... 
+        - (Paul) DONE
     - Make checkbox items 'more clickable'
     - Fix bug where user can click back button, and keep submitting reservations.
         - (Paul) DONE
