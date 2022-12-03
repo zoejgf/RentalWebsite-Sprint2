@@ -80,6 +80,11 @@
             
                 <div class="container pt-3 text-center">
                     <h3 class="admin">Customer(s) Info: </h3>
+
+                    <form method="post" action="addCustomer.php" id="add_customer" style="text-align: right">
+                        <input type="submit" name="add_customer" value="Add Customer">
+                    </form>
+                    
                     <?php $customerResults = getCustomersByReservation($reservationID); ?>
                     
                     
