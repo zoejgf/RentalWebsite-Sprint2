@@ -21,13 +21,13 @@
 - Maintaining State using Cookies or Sessions
     - Add security or a Session to the admin page to make the login process more secure/stable
         - (Jazmin) DONE
-    - Use cookies to remember the user's choices on the form
-    - Use cookieds or sessions in another effective or creative way
+    - Use cookies to remember the user's choices on the form (Jack) DONE
+    - Use cookieds or sessions in another effective or creative way (Jack) DONE
 
 - Implement a change/improvement based on Feedback from Usability Testing
     - SQL Injection, should fix that 
         - (Paul) DONE
-    - Make checkbox items 'more clickable'
+    - Make checkbox items 'more clickable' (Jack) DONE
     - Fix bug where user can click back button, and keep submitting reservations.
         - (Paul) DONE
 
