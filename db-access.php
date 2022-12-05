@@ -1,7 +1,15 @@
 <?php
+
+    /*
+     * For mysqli bind_param, type specification vars
+     * i = int
+     * d = float
+     * s = string
+     * b = blob
+    */
     
-    require __DIR__ . '/db.php';      // Dev Version
-    // require '/home/redgreen/db.php';     // Live Version
+    //require __DIR__ . '/db.php';      // Dev Version
+    require '/home/redgreen/db.php';     // Live Version
     
     /*
      * This returns an array of rows containing invidual reservations
@@ -102,7 +110,8 @@
         $sql = "SELECT reservation.reservation_id AS reservation_id, 
             reservation.reservation_set AS 'set', 
             reservation.reservation_package AS 'package', 
-            reservation.reservation_date AS 'date'
+            reservation.reservation_date AS 'date',
+            reservation.status AS 'status'
         FROM reservation
         INNER JOIN reservation_customers ON reservation.reservation_id = reservation_customers.reservation
         WHERE
@@ -116,6 +125,28 @@
                 
         $result = mysqli_query($cnxn, $sql);
         return $result;
+    }
+    
+    /*
+     * Update the reservation status to the new given status value
+     * possible values are 'confirmed', 'unconfirmed', and 'cancelled'
+     */
+    function updateReservationStatus($reservationID, $reservationStatus) {
+        
+        // Proceed only if legal status value, otherwise fail silently
+        
+        if ($reservationStatus == 'confirmed' || $reservationStatus == 'unconfirmed' || $reservationStatus == 'cancelled') {
+            
+            global $cnxn;
+            
+            $sql = "update reservation set status=? where reservation_id=?";
+    
+            $stmt = mysqli_prepare($cnxn, $sql);
+    
+            mysqli_stmt_bind_param($stmt,"si", $reservationStatus, $reservationID);
+            mysqli_stmt_execute($stmt);
+        }
+        
     }
     
     
@@ -384,10 +415,16 @@
      * Add a note for a given reservationID reservation
     */
     function addReservationNote($reservationID, $note) {
-        $sql = "insert into notes (reservation_id, note_text) values ($reservationID, $note)";
+        
         global $cnxn;
-    
-        $result = mysqli_query($cnxn, $sql);
+        
+        $sql = "insert into notes (reservation_id, note_text) values (?, ?)";
+        
+        $stmt = mysqli_prepare($cnxn, $sql);
+
+        mysqli_stmt_bind_param($stmt,"is", $reservationID, $note);
+        
+        mysqli_stmt_execute($stmt);
     }
 
     
@@ -397,7 +434,7 @@
     function getReservationNotes($reservationID) {
         global $cnxn;                       // from imported file db.php
         $sql = "SELECT id, note_text, note_date FROM
-            notes WHERE reservation_id = $reservationID ORDER BY note_date ASC";
+            notes WHERE reservation_id = $reservationID ORDER BY note_date DESC";
                 
         $result = mysqli_query($cnxn, $sql);
         return $result;
