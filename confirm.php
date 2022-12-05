@@ -66,14 +66,11 @@
                     </div>
                 </body>
             </html>
-                        
-                        
+            
             <?php
             
         } else {
-            
-            $_SESSION['confirmed'] = true;
-            
+                        
             // Import separate functions file
             require __DIR__ . '/db-access.php';
             require __DIR__ . '/pkg-mgmt.php';
@@ -99,6 +96,7 @@
                 $lname = $_POST['lname'];
                 $email = $_POST["email"];
                 $phone = $_POST["phone"];
+                $relationship = $_POST["relationship"];
                 
                 // ERROR CHECK - Empty Values?
                 $error = false;
@@ -128,7 +126,7 @@
                     array_push($errorMsgs, "Please include your Email Address");
                 } 
                 $return .= "&email=$email";
-                
+              
                 
                 // ERROR CHECK - PACKAGE PRESENT?  IF NOT, REDIRECT BACK
                 if (!isset($_POST["package"])) {
@@ -146,6 +144,11 @@
                 
                 // We have an error from empty/missing values, add date/set/package, and return
                 if ($error) {
+                    // TODO: Verify relationship functionality
+                    if (isset($relationship)) {
+                        $return .= "&relationship=$relationship";
+                    }
+
                     $return .= "&set=$set";
                     $return .= "&package=$package";
                     $return .= "&date=$date";
@@ -184,8 +187,9 @@
     
             $customerID = customerExists($fname, $email, $phone);
             $names = getSetPackageName($set, $package);
-            $relationship = '';     // TODO: Take in customers relationship to the wedding (i.e. Bride, Planner, etc.)
-            
+            //$relationship = '';     // TODO: Take in customers relationship to the wedding (i.e. Bride, Planner, etc.)
+            //echo "Relationship: $relationship";
+
             if (!isset($_POST['extras'])) {
                 $_POST['extras'] = null;
             }
@@ -209,7 +213,11 @@
                 } else {
                     $error = "Internal system error, reservation was not saved.  Please try again, or contact us for help.";
                 }
-            }          
+            }        
+            
+            // TODO: Confirm w/ testing this is the better place to put this tag
+            $_SESSION['confirmed'] = true;
+            ini_set( "session.gc_maxlifetime", 300);    // Set session timeout for 5 minutes
             
             //  SEND CONFIRMATION EMAIL ----------------------------------------------
             
@@ -276,6 +284,21 @@
             
             //sending email
             mail($to,$subject,$message,$headers);
+            
+            //save choices via cookies
+            setCookie('user1', $_POST['fname']);
+            setCookie('user2', $_POST['lname']);
+            setCookie('userset', $_POST['set']);
+            setCookie('userpack', $_POST['package']);
+            setCookie('userdate', $_POST['date']);
+            
+            //send message
+            if(isset($_COOKIE['user1']))
+            {
+            echo 'Thanks for booking with us, '.$_COOKIE['user1'];
+            echo ' ! ';
+            echo 'Reminder, your delivery is on: '.$_COOKIE['userdate'];
+            }
             
         ?>
         

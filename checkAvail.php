@@ -5,6 +5,14 @@
     // destroy the session
     session_destroy(); 
     
+    if(isset($_COOKIE['user1']))
+            {
+            echo 'Thanks for booking with us, '.$_COOKIE['user1'];
+            echo ' ! ';
+            echo 'Reminder, your delivery is on: '.$_COOKIE['userdate'];
+            }
+
+    
 ?>
 
 <!DOCTYPE html> 
@@ -178,6 +186,8 @@
             </nav>
         </div>
         <!-- end breadcrumb code -->
+        
+    
 
         <div class="container text-center pt-4">
             <h1>Check Availability</h1>

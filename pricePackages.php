@@ -10,6 +10,14 @@
         //require 'pkg-mgmt.php';
         
         session_start();
+        
+        if(isset($_COOKIE['user1']))
+            {
+            echo 'Thanks for booking with us, '.$_COOKIE['user1'];
+            echo ' ! ';
+            echo 'Reminder, your delivery is on: '.$_COOKIE['userdate'];
+            }
+            
 
         $responseText = "";
 

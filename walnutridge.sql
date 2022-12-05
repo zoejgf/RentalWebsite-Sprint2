@@ -76,7 +76,7 @@ create table notes (
     reservation_id int NOT NULL,
         CONSTRAINT fk_notes_reservation FOREIGN KEY (reservation_id) REFERENCES reservation(reservation_id),
     note_text varchar(5000),     /* less than 64k for TEXT type */
-    note_date DATE default now()
+    note_date DATETIME default now()
 );
 
 /* Adding extras to the database (NOTE: is form_value used?)

@@ -98,7 +98,7 @@ CREATE TABLE `notes` (
   `id` int(11) NOT NULL,
   `reservation_id` int(11) NOT NULL,
   `note_text` varchar(5000) DEFAULT NULL,
-  `note_date` date DEFAULT current_timestamp()
+  `note_date` datetime DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

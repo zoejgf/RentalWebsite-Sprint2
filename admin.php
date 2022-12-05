@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ini_set( "session.gc_maxlifetime", 1800);    // Set session timeout for 30 minutes
     
     if(isset($_POST['submit_pass']) && $_POST['pass']) {
         $pass=$_POST['pass'];
@@ -96,40 +97,59 @@
                 // DISPLAY RESERVATION DATA
                 //echo "Set: " . $set . ", Package: " . $package;
                 ?>
-                <div class="row w-75 mx-auto">
-                    <div class="col-6 ps-0 pt-0">
-                        <a href="admin.php">Back to Admin Page</a>
-                    </div>  
-                </div>
-                <div class="container pt-3 text-center">
-                    <h3 class="admin">Customer(s) Info: </h3>
+                    <div class="row w-75 mx-auto">
+                        <div class="col-12 col-md-3 ps-0 pt-1">
+                            <a href="admin.php">Back to Admin Page</a>
+                        </div>
+                        
+                        <h3 class="col-12 col-md-6 admin inline">Customer(s) Info: </h3>
+                        
+                        <div class="col-3"></div>
+                    </div>
+                
+                
+                <!--
+                    <div class="row w-75 mx-auto">
+                        <div class="col-6">
+                            <a href="admin.php">Back to Admin Page</a>
+                        </div>  
+                    </div>
+                    
+                -->
+                
+                <!-- <div class="container pt-3 text-center">  -->
+                   <!-- <h3 class="admin">Customer(s) Info: </h3> -->
 
                     
                     <?php $customerResults = getCustomersByReservation($reservationID); ?>
                     
-                    
-                    <?php while ($extrasRow = mysqli_fetch_assoc($customerResults)) { 
-                    
-                    /*
-                        customers.customer_id AS customer_id, 
-                        customers.first_name AS fname, 
-                        customers.last_name AS lname, 
-                        customers.email AS email, 
-                        customers.phone AS phone                            
-                    */ ?>
-                        <div class="text-center">
-                            <p class="d-inline"><?php echo $extrasRow['fname'] . " " . $extrasRow['lname']; ?></p>
-                            <p class="d-inline"><?php echo $extrasRow['email']; ?></p>
-                            <p class="d-inline"><?php echo $extrasRow['phone']; ?></p>
-                            <p class="d-inline"><?php echo $extrasRow['relationship']; ?></p>
-                        </div>
-                        <form method="post" action="addCustomer.php" id="add_customer" style="padding:15px;text-align: center">
-                            <input type="submit" name="add_customer" value="Add Customer">
-                        </form>
+                    <table class="mx-auto w-75">
+                        <tr>
+                            <th class="text-start">Name</th>
+                            <th class="text-start">Email</th>
+                            <th class="text-start">Phone</th>
+                            <th class="text-start">Relationship</th>
+                        </tr>
+                    <?php while ($extrasRow = mysqli_fetch_assoc($customerResults)) {   ?>
                         
+                        <tr>
+                            <td class="text-start"><?php echo $extrasRow['fname'] . " " . $extrasRow['lname']; ?></td>
+                            <td class="text-start"><?php echo $extrasRow['email']; ?></td>
+                            <td class="text-start"><?php echo $extrasRow['phone']; ?></td>
+                            <td class="text-start"><?php echo $extrasRow['relationship']; ?></td>
+                        </tr>                   
+                    
                     <?php } ?>
                     
-                </div>
+                    </table> 
+                    
+                    <form method="post" action="addCustomer.php" id="add_customer" style="padding:15px;text-align: center">
+                        <input type="hidden" name="reservation_id" value="<?php echo $reservationID ?>">
+                        <input type="submit" name="add_customer" value="Add Customer">
+                    </form>
+                        
+                    
+                <!-- </div> -->
                 <hr class="mx-auto">
                 <?php
                 
@@ -218,7 +238,19 @@
             // $noteResults
             
             // DISPLAY TEXTAREA INPUT FOR ADDITIONAL RESERVATION NOTES
-            
+        ?>
+        <div class="row w-75 mx-auto mt-5">
+            <div class="col-6 ps-0 pt-3">
+                <a href="admin.php">Back to Admin Page</a>
+            </div>
+            <div class="col-6 position-relative">
+                <form method="post" action="" id="logout_form" class="text-center p-4">
+                <input class="position-absolute top-25 end-0" type="submit" name="page_logout" value="LOGOUT">
+                </form>    
+            </div>
+        </div>
+        
+        <?php  
         } else {      // -----------------------------------------------------------------------------------  NO RESERVATION_ID PARAMS, DISPLAY RESERVATIONS LIST ASC ORDER
         
     
@@ -275,16 +307,9 @@
                     <?php }     // WHILE LOOP ?>
                 </tbody>
             </table> 
-    
-       <?php }              // END RESERVATIONS LIST ?>
-       
-        
-        <?php // Display 'Back to Admin Page' && Logout options ?>
+            
         
         <div class="row w-75 mx-auto mt-5">
-            <div class="col-6 ps-0 pt-3">
-                <a href="admin.php">Back to Admin Page</a>
-            </div>
             <div class="col-6 position-relative">
                 <form method="post" action="" id="logout_form" class="text-center p-4">
                 <input class="position-absolute top-25 end-0" type="submit" name="page_logout" value="LOGOUT">
@@ -292,6 +317,12 @@
             </div>
             
         </div>
+    
+       <?php }              // END RESERVATIONS LIST ?>
+       
+        
+        <?php // Display 'Back to Admin Page' && Logout options ?>
+        
         
         <?php
         

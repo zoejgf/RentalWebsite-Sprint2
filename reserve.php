@@ -6,6 +6,13 @@
 
         session_start();
         
+        if(isset($_COOKIE['user1']))
+            {
+            echo 'Thanks for booking with us, '.$_COOKIE['user1'];
+            echo ' ! ';
+            echo 'Reminder, your delivery is on: '.$_COOKIE['userdate'];
+            }
+        
         // Import separate functions file
         require __DIR__ . '/pkg-mgmt.php';
 
@@ -142,7 +149,7 @@
             <form class="px-4 mt-3 g-3" method="post" action="confirm.php">
                 <?php // If we have an error message, display
                     if (isset($_GET['errorMsgs'])) {
-                        if (!empty($_GET['errorMsgs']))
+                        if (!empty($_GET['errorMsgs'])) {
                         ?>
 
                 <div class="row">
@@ -158,15 +165,17 @@
                         </div>
                     </div>
                 </div>
-                    <?php  }
+                    <?php  } }
                 ?>
                 <?php
                     //name="checks[]"
                     // https://makitweb.com/get-checked-checkboxes-value-with-php/
                     $checks;    // can be from POST or GET (returning w/ error message)
                     if (!empty($_POST['checks'])) {
+                        //echo "Have checks from POST";
                         $checks = $_POST['checks'];
                     } else if (!empty($_GET['checks'])) {
+                        //echo "Have checks from GET";
                         $checks = $_GET['checks'];
                     }
                     if (!empty($checks)) {
@@ -205,8 +214,8 @@
                         <?php echo "\$" . number_format($packagePrice,2,'.',','); ?>
                     </div>
                     <?php
-                        if (!empty($_POST['checks'])) {
-                            foreach($_POST['checks'] as $CHECK) { ?>
+                        if (!empty($checks)) {
+                            foreach($checks as $CHECK) { ?>
                             <div class="col-5 text-end h6"><?php echo returnAddOnText($CHECK)?></div>
                             <div class="col-2"></div>
                             <div class="col-5 h6"><?php echo "$" . number_format(returnAddOnPrice($CHECK), 2, '.', ',') ?></div>
@@ -214,8 +223,8 @@
                             } 
                         }
                         // values for extras - delivery/?, couch/99, antique/4-ea, wine/20-ea, clearJars/30, blueJars/30
-                        if (!empty($_POST['extras'])) {
-                            foreach($_POST['extras'] as $EXTRA) { ?>
+                        if (!empty($extras)) {
+                            foreach($extras as $EXTRA) { ?>
                             <div class="col-5 text-end h6"> <?php echo returnExtraNameFromID($EXTRA); ?></div>
                             <div class="col-2"></div>
                             <div class="col-5 h6"><?php echo "$" . number_format(returnExtraPriceByID($EXTRA, $totalPrice),2,'.',','); ?></div>
@@ -250,6 +259,13 @@
                         <label for="phone" class="form-label">Phone</label>
                         <input class="form-control" type="tel" id="phone" name="phone"
                             <?php if (!empty($phone)) echo "value=\"$phone\""; ?>>
+                    </div>
+
+                    <?php // TODO: Confirm relationship functionality ?>
+                    <div class="col-6 col-md-6 mt-3">
+                        <label for="relationship" class="form-label">Relationship (i.e. Bride)</label>
+                        <input class="form-control" type="text" id="relationship" name="relationship"
+                            <?php if (!empty($relationship)) echo "value=\"$relationship\""; ?>>
                     </div>
 
                     <div class="col-12 mt-3">

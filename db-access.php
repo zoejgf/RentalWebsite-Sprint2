@@ -280,6 +280,21 @@
 
         //echo "addReservation(), returned id: " . $returnID . "<br>\n";
 
+
+        if ($returnID != 0) {
+            addCustomerToReservation($returnID, $customerID, $relationship);
+            /*
+	        $sql = "insert into reservation_customers (customer, reservation, relationship)
+	        values ($customerID, $returnID, '$relationship')";
+
+            $stmt = mysqli_prepare($cnxn, $sql);
+
+            mysqli_stmt_bind_param($stmt,"iis", $reservationSet, $reservationPackage, $reservationDate);
+            mysqli_stmt_execute($stmt);
+            */
+            
+        }
+
         return $returnID;
     
         
@@ -320,12 +335,26 @@
      * otherwise a 0 is returned.
      */
     function addCustomerToReservation($reservationID, $customerID, $relationship) {
+        
         global $cnxn;
 
-        $sql = "insert into 'reservation_customers' (customer, reservation, relationship) 
+        $sql = "insert into reservation_customers (customer, reservation, relationship)
+	        values (?, ?, ?)";
+
+        $stmt = mysqli_prepare($cnxn, $sql);
+
+        mysqli_stmt_bind_param($stmt,"iis", $customerID, $reservationID, $relationship);
+        mysqli_stmt_execute($stmt);
+
+        /*
+        
+        global $cnxn;
+
+        $sql = "insert into reservation_customers (customer, reservation, relationship) 
             values ('$customerID', '$reservationID', '$relationship')";
     
         $result = mysqli_query($cnxn, $sql);
+        */
     }
 
     /*
