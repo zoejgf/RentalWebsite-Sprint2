@@ -5,14 +5,14 @@
         error_reporting(E_ALL);
 
         session_start();
-        
+        /*
         if(isset($_COOKIE['user1']))
             {
             echo 'Thanks for booking with us, '.$_COOKIE['user1'];
             echo ' ! ';
             echo 'Reminder, your delivery is on: '.$_COOKIE['userdate'];
             }
-        
+        */
         // Import separate functions file
         require __DIR__ . '/pkg-mgmt.php';
 

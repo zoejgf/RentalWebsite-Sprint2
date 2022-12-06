@@ -83,6 +83,7 @@ create table notes (
  * 1. insert item into db (live or below), must have a form_value and form_id value
  * 2. 
  */
+ /*
 insert into extras (name, price, image_url, form_value, form_id) 
     values ('Clear Antique Ball Jars', 30, 'walnut-ridge-images/da-7.jpg', 'clearJars', 'clearBall');
 insert into extras (name, price, image_url, form_value, form_id) 
@@ -95,3 +96,4 @@ insert into extras (name, price, image_url, form_value, form_id)
     values ('XL Wine Jugs', 20, 'walnut-ridge-images/da-4.jpg', 'wine', 'wineJugs');
 insert into extras (name, price, image_url, form_value, form_id) 
     values ('Hexagon Arbor', 350, 'walnut-ridge-images/IMG_5617.jpg', 'arbor', 'arbor');
+*/

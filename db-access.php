@@ -10,7 +10,104 @@
     
     //require __DIR__ . '/db.php';      // Dev Version
     require '/home/redgreen/db.php';     // Live Version
+
+    /*
+     * Returns an array of rows containing individual reservations,
+     * ordered by date in descending order.
+     */
+    function queryReservationsDateDesc() {
+        global $cnxn;                       // from imported file db.php
+        $sql = "SELECT reservation.reservation_id AS reservation_id, 
+            reservation.reservation_set AS 'set', 
+            reservation.reservation_package AS package, 
+            reservation.reservation_date AS date,
+            reservation.status AS status,
+            customers.customer_id AS customer_id, 
+            customers.first_name AS fname, 
+            customers.last_name AS lname, 
+            customers.email AS email, 
+            customers.phone AS phone,
+            COUNT(reservation_customers.customer) AS numberCustomers
+            
+        FROM reservation 
+        
+            INNER JOIN reservation_customers ON reservation.reservation_id = reservation_customers.reservation
+            INNER JOIN customers ON reservation_customers.customer = customers.customer_id
+            
+            GROUP BY reservation_customers.reservation
+            
+            ORDER BY reservation.reservation_date DESC";
+        
+        $result = mysqli_query($cnxn, $sql);
+        return $result;
+    }
+
+    /*
+     * Returns an array of rows containing individual reservations,
+     * ordered by date in ascending order.
+     */
+    function queryReservationsDateAsc() {
+        global $cnxn;                       // from imported file db.php
+        $sql = "SELECT reservation.reservation_id AS reservation_id, 
+            reservation.reservation_set AS 'set', 
+            reservation.reservation_package AS package, 
+            reservation.reservation_date AS date,
+            reservation.status AS status,
+            customers.customer_id AS customer_id, 
+            customers.first_name AS fname, 
+            customers.last_name AS lname, 
+            customers.email AS email, 
+            customers.phone AS phone,
+            COUNT(reservation_customers.customer) AS numberCustomers
+            
+        FROM reservation 
+        
+            INNER JOIN reservation_customers ON reservation.reservation_id = reservation_customers.reservation
+            INNER JOIN customers ON reservation_customers.customer = customers.customer_id
+            
+            GROUP BY reservation_customers.reservation
+            
+            ORDER BY reservation.reservation_date ASC";
+        
+        $result = mysqli_query($cnxn, $sql);
+        return $result;
+    }
     
+
+    /*
+     * Returns an array of rows containing individual reservations,
+     * ordered by date in ascending order.
+     */
+    function queryReservationsThreeWeeks() {
+        global $cnxn;                       // from imported file db.php
+        $sql = "SELECT reservation.reservation_id AS reservation_id, 
+            reservation.reservation_set AS 'set', 
+            reservation.reservation_package AS package, 
+            reservation.reservation_date AS date,
+            reservation.status AS status,
+            customers.customer_id AS customer_id, 
+            customers.first_name AS fname, 
+            customers.last_name AS lname, 
+            customers.email AS email, 
+            customers.phone AS phone,
+            COUNT(reservation_customers.customer) AS numberCustomers
+            
+        FROM reservation 
+        
+            INNER JOIN reservation_customers ON reservation.reservation_id = reservation_customers.reservation
+            INNER JOIN customers ON reservation_customers.customer = customers.customer_id
+            
+            WHERE reservation.reservation_date < (DATE_ADD(CURDATE(), INTERVAL 21 DAY))
+
+            GROUP BY reservation_customers.reservation
+            
+            ORDER BY reservation.reservation_date ASC
+            ";
+        
+        $result = mysqli_query($cnxn, $sql);
+        return $result;
+    }
+
     /*
      * This returns an array of rows containing invidual reservations
      */

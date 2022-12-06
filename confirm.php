@@ -293,11 +293,23 @@
             setCookie('userdate', $_POST['date']);
             
             //send message
+            /*
             if(isset($_COOKIE['user1']))
             {
             echo 'Thanks for booking with us, '.$_COOKIE['user1'];
             echo ' ! ';
             echo 'Reminder, your delivery is on: '.$_COOKIE['userdate'];
+            } */
+            
+            if(isset($_COOKIE['user1']))
+            {
+                $_POST['fname'] = $_POST['user1'];
+            
+            }
+            if(isset($_COOKIE['user2']))
+            {
+                $_POST['lname'] = $_POST['user2'];
+            
             }
             
         ?>

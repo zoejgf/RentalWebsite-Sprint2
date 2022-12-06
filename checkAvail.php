@@ -4,15 +4,26 @@
     
     // destroy the session
     session_destroy(); 
-    
+    /*
     if(isset($_COOKIE['user1']))
             {
             echo 'Thanks for booking with us, '.$_COOKIE['user1'];
             echo ' ! ';
             echo 'Reminder, your delivery is on: '.$_COOKIE['userdate'];
             }
-
-    
+    */
+      if(isset($_COOKIE['userdate']))
+            {
+                $_POST["date"] = $_POST['userdate'];
+            
+            }
+            
+            
+            if(isset($_COOKIE['userset']))
+            {
+                $set = $_POST['userset'];
+            
+            }
 ?>
 
 <!DOCTYPE html> 

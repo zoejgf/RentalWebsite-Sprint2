@@ -8,14 +8,14 @@
         require __DIR__ . '/db-access.php';
         
         session_start();
-        
+        /*
         if(isset($_COOKIE['user1']))
             {
             echo 'Thanks for booking with us, '.$_COOKIE['user1'];
             echo ' ! ';
             echo 'Reminder, your delivery is on: '.$_COOKIE['userdate'];
             }
-
+        */
 
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
         

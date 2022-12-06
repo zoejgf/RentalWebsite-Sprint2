@@ -1,3 +1,5 @@
+
+
 -- phpMyAdmin SQL Dump
 -- version 4.9.7
 -- https://www.phpmyadmin.net/
@@ -27,6 +29,17 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `customers`
 --
+
+/* Added by Paul 12-6-22 */
+
+drop table if exists reservation_customers;
+drop table if exists ordered_extras;
+drop table if exists reservation;
+drop table if exists extras;
+drop table if exists customers;
+drop table if exists notes;
+/* End drop-table section by Paul */
+
 
 CREATE TABLE `customers` (
   `customer_id` int(11) NOT NULL,

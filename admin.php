@@ -253,11 +253,36 @@
         <?php  
         } else {      // -----------------------------------------------------------------------------------  NO RESERVATION_ID PARAMS, DISPLAY RESERVATIONS LIST ASC ORDER
         
-    
-            $results = queryReservationsAsc();
+            $results = array();
+
+            if (isset($_GET['sort_asc'])) {
+                $results = queryReservationsAsc();
+            } else if (isset($_GET['sort_date_asc'])) {
+                $results = queryReservationsDateAsc();
+            } else if (isset($_GET['sort_date_desc'])) {
+                $results = queryReservationsDateDesc();
+            } else if (isset($_GET['three_weeks'])) {
+                $results = queryReservationsThreeWeeks();
+            }
+             else {
+                $results = queryReservationsDesc();
+            }
+            ?>
             
-            //     ?>
-            <!--//echo "<p>$reservationID, $set, $package, $date, $customerID, $first, $last, $phone, $email</p>";-->
+            <div class="row">
+                <div class="col-12 ps-4">
+                    <div class="h4">View reservations by:</div>
+                </div>
+
+                <div class="col-12">
+                    <span class="ps-3"><a href="admin.php">Reservation ID Descending</a></span>
+                    <span class="ps-4"><a href="admin.php?sort_asc=1">Reservation ID Ascending</a></span>
+                    <span class="ps-4"><a href="admin.php?sort_date_asc=1">Date Ascending</a></span>
+                    <span class="ps-4"><a href="admin.php?sort_date_desc=1">Date Descending</a></span>
+                    <span class="ps-4"><a href="admin.php?three_weeks=1">Next Three Weeks</a></span>
+                </div>
+            </div>
+            
             <table class='table table-striped'>
                 <thead>
                     <tr class='text-center'>

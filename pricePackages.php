@@ -10,15 +10,15 @@
         //require 'pkg-mgmt.php';
         
         session_start();
-        
+        /*
         if(isset($_COOKIE['user1']))
             {
             echo 'Thanks for booking with us, '.$_COOKIE['user1'];
             echo ' ! ';
             echo 'Reminder, your delivery is on: '.$_COOKIE['userdate'];
             }
-            
-
+          */  
+        
         $responseText = "";
 
         date_default_timezone_set("America/Los_Angeles");   // Set time zone, was printing incorrect current time
@@ -864,8 +864,12 @@
 
                         <input type="hidden" name="set" value="<?php echo $setStr ?>">
                         <input type="hidden" name="date" value="<?php echo $dateStr ?>">    
+                        
 
                     </div>
+                    
+      
+
 
                     <div class="container text-center">
                         <div class="form-check form-check-inline p-3" id="extrasCheck">
